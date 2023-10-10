@@ -1,0 +1,647 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:scrollbars="none"
+    tools:context=".activities.user.manage.hotels.rooms.RoomActivity">
+
+    <RelativeLayout
+        android:id="@+id/relativeLayoutRoom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:animateLayoutChanges="true">
+
+        <TextView
+            android:id="@+id/tvRoomHeading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="28dp"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:text="Configure Room"
+            android:textColor="@color/grey_regular"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/btnManageRoomsTypes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/tvRoomHeading"
+            android:layout_alignBottom="@id/tvRoomHeading"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="15dp"
+            android:text="Manage Rooms Types"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:visibility="visible" />
+
+        <TextView
+            android:id="@+id/tvRoomCoverImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvRoomHeading"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="30dp"
+            android:paddingTop="3dp"
+            android:paddingBottom="3dp"
+            android:text="Room Image"
+            android:textColor="@color/grey_regular"
+            android:textSize="18sp" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardViewRoomCover"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_below="@id/tvRoomCoverImage"
+            android:layout_marginTop="15dp"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="0dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/imgViewRoomImage"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/hotel1" />
+
+                <ImageView
+                    android:id="@+id/imgViewSelectCoverImage"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginTop="6dp"
+                    android:layout_marginRight="7dp"
+                    android:background="@drawable/gallery"
+                    android:padding="5dp"
+                    android:visibility="visible" />
+
+            </RelativeLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/tvRoomInformation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/cardViewRoomCover"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="30dp"
+            android:paddingTop="3dp"
+            android:paddingBottom="3dp"
+            android:text="Room Information"
+            android:textColor="@color/grey_regular"
+            android:textSize="18sp" />
+
+        <RelativeLayout
+            android:id="@+id/relativeLayoutRegisterHotel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvRoomInformation"
+            android:layout_marginTop="15dp">
+
+            <EditText
+                android:id="@+id/txtRoomCode"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="@drawable/edit_text_bg_light_rad_10"
+                android:enabled="false"
+                android:inputType="text"
+                android:maxLines="1"
+                android:paddingStart="50dp"
+                android:paddingEnd="15dp"
+                android:singleLine="true"
+                android:text="Fetching Registration Code..."
+                android:textColor="@color/grey_regular" />
+
+            <ImageView
+                android:id="@+id/imgViewRegistrationCode"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignStart="@id/txtRoomCode"
+                android:layout_alignTop="@id/txtRoomCode"
+                android:layout_alignBottom="@id/txtRoomCode"
+                android:layout_marginStart="10dp"
+                android:alpha="0.9"
+                android:src="@drawable/logbook" />
+
+            <TextView
+                android:id="@+id/tvRoomType"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_below="@id/txtRoomCode"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="7dp"
+                android:background="@drawable/edit_text_bg_light_rad_10"
+                android:gravity="center_vertical"
+                android:hint="Select Room Type"
+                android:inputType="text"
+                android:maxLines="1"
+                android:paddingStart="50dp"
+                android:paddingEnd="15dp"
+                android:singleLine="true"
+                android:textColor="@color/grey_regular"
+                android:textSize="19sp" />
+
+            <EditText
+                android:id="@+id/txtRoomTypeCode"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone" />
+
+            <ImageView
+                android:id="@+id/imgViewRoomType"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignStart="@id/tvRoomType"
+                android:layout_alignTop="@id/tvRoomType"
+                android:layout_alignBottom="@id/tvRoomType"
+                android:layout_marginStart="10dp"
+                android:alpha="0.9"
+                android:src="@drawable/hotel" />
+
+            <EditText
+                android:id="@+id/txtRoomDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvRoomType"
+                android:layout_marginTop="7dp"
+                android:background="@drawable/edit_text_bg_light_rad_10"
+                android:hint="Enter Room Description"
+                android:inputType="textMultiLine"
+                android:paddingStart="50dp"
+                android:paddingTop="8dp"
+                android:paddingEnd="15dp"
+                android:paddingBottom="8dp"
+                android:textColor="@color/grey_regular" />
+
+            <ImageView
+                android:id="@+id/imgViewRoomDescription"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignStart="@id/txtRoomDescription"
+                android:layout_alignTop="@id/txtRoomDescription"
+                android:layout_alignBottom="@id/txtRoomDescription"
+                android:layout_marginStart="10dp"
+                android:alpha="0.9"
+                android:src="@drawable/address" />
+
+            <EditText
+                android:id="@+id/txtRoomPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_below="@id/txtRoomDescription"
+                android:layout_marginTop="7dp"
+                android:background="@drawable/edit_text_bg_light_rad_10"
+                android:hint="Room Price"
+                android:inputType="numberDecimal"
+                android:maxLines="1"
+                android:minWidth="160dp"
+                android:paddingStart="50dp"
+                android:paddingEnd="15dp"
+                android:singleLine="true"
+                android:textColor="@color/grey_regular" />
+
+            <TextView
+                android:id="@+id/tvCurrency"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_below="@id/txtRoomDescription"
+                android:layout_marginStart="7dp"
+                android:layout_marginTop="7dp"
+                android:layout_toEndOf="@id/txtRoomPrice"
+                android:background="@drawable/edit_text_bg_light_rad_10"
+                android:gravity="center_vertical"
+                android:hint="Currency Unit"
+                android:maxLines="1"
+                android:paddingStart="15dp"
+                android:paddingEnd="15dp"
+                android:singleLine="true"
+                android:textColor="@color/grey_regular"
+                android:textSize="19sp" />
+
+            <ImageView
+                android:id="@+id/imgViewRoomPrice"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignStart="@id/txtRoomPrice"
+                android:layout_alignTop="@id/txtRoomPrice"
+                android:layout_alignBottom="@id/txtRoomPrice"
+                android:layout_marginStart="10dp"
+                android:alpha="0.9"
+                android:padding="1dp"
+                android:src="@drawable/dollar" />
+
+            <TextView
+                android:id="@+id/tvNoOfAdults"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/txtRoomPrice"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="7dp"
+                android:background="@drawable/edit_text_bg_light_rad_10"
+                android:hint="No. Adults"
+                android:inputType="text"
+                android:minWidth="160dp"
+                android:paddingStart="50dp"
+                android:paddingTop="8dp"
+                android:paddingEnd="15dp"
+                android:paddingBottom="8dp"
+                android:textColor="@color/grey_regular"
+                android:textSize="19sp" />
+
+            <ImageView
+                android:id="@+id/imgViewNoOfAdults"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignStart="@id/tvNoOfAdults"
+                android:layout_alignTop="@id/tvNoOfAdults"
+                android:layout_alignBottom="@id/tvNoOfAdults"
+                android:layout_marginStart="10dp"
+                android:alpha="0.9"
+                android:src="@drawable/address" />
+
+            <TextView
+                android:id="@+id/tvNoOfChildren"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/txtRoomPrice"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="7dp"
+                android:layout_marginTop="7dp"
+                android:layout_toEndOf="@id/tvNoOfAdults"
+                android:background="@drawable/edit_text_bg_light_rad_10"
+                android:hint="No. Children"
+                android:inputType="text"
+                android:paddingStart="50dp"
+                android:paddingTop="8dp"
+                android:paddingEnd="15dp"
+                android:paddingBottom="8dp"
+                android:textColor="@color/grey_regular"
+                android:textSize="19sp" />
+
+            <ImageView
+                android:id="@+id/imgViewNoOfChildren"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignStart="@id/tvNoOfChildren"
+                android:layout_alignTop="@id/tvNoOfChildren"
+                android:layout_alignBottom="@id/tvNoOfChildren"
+                android:layout_marginStart="10dp"
+                android:alpha="0.9"
+                android:src="@drawable/address" />
+
+            <LinearLayout
+                android:id="@+id/linearLytNoOfRoomsAvailable"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvNoOfAdults"
+                android:layout_marginTop="7dp"
+                android:background="@drawable/edit_text_bg_light_rad_10"
+                android:orientation="horizontal"
+                android:paddingLeft="10dp">
+
+                <ImageView
+                    android:id="@+id/imgViewNoOfRoomsAvailable"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:alpha="0.9"
+                    android:src="@drawable/address" />
+
+                <EditText
+                    android:id="@+id/txtNoOfTotalRooms"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="7dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:background="@drawable/edit_text_bg_light_rad_10_no_stroke"
+                    android:enabled="false"
+                    android:hint="No. Total Rooms"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:textAlignment="viewStart"
+                    android:textColor="@color/grey_regular" />
+
+                <Button
+                    android:id="@+id/btnReduceRoomCount"
+                    android:layout_width="50dp"
+                    android:layout_height="35dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="3dp"
+                    android:padding="0dp"
+                    android:text="-"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:visibility="visible" />
+
+                <Button
+                    android:id="@+id/btnIncreaseRoomCount"
+                    android:layout_width="50dp"
+                    android:layout_height="35dp"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="3dp"
+                    android:padding="0dp"
+                    android:text="+"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:visibility="visible" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linearLytRoomAmenities"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/linearLytNoOfRoomsAvailable"
+                android:layout_marginTop="7dp"
+                android:background="@drawable/edit_text_bg_light_rad_10"
+                android:orientation="vertical"
+                android:paddingTop="7dp"
+                android:paddingBottom="7dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/imgViewAmenities"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginStart="10dp"
+                        android:alpha="0.6"
+                        android:padding="4dp"
+                        android:src="@drawable/amenities" />
+
+                    <TextView
+                        android:id="@+id/tvRoomAmenities"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:paddingTop="3dp"
+                        android:paddingBottom="3dp"
+                        android:text="Select Amenities"
+                        android:textColor="@color/grey_regular"
+                        android:textSize="18sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="7dp"
+                    android:orientation="horizontal">
+
+                    <CheckBox
+                        android:id="@+id/chkFreeWIFI"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Free Wi-Fi"
+                        android:textColor="@color/grey_regular"
+                        android:textSize="16sp" />
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="5dp"
+                        android:alpha="0.5"
+                        android:src="@drawable/wifi" />
+
+                    <CheckBox
+                        android:id="@+id/chkAirConditioned"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="15dp"
+                        android:text="Air Conditioned"
+                        android:textColor="@color/grey_regular"
+                        android:textSize="16sp" />
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="5dp"
+                        android:alpha="0.5"
+                        android:src="@drawable/air_conditioner" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="7dp"
+                    android:orientation="horizontal">
+
+                    <CheckBox
+                        android:id="@+id/chkFreeBreakfast"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Free Breakfast"
+                        android:textColor="@color/grey_regular"
+                        android:textSize="16sp" />
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="5dp"
+                        android:alpha="0.5"
+                        android:src="@drawable/breakfast" />
+
+                    <CheckBox
+                        android:id="@+id/chkTeaCoffee"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="15dp"
+                        android:text="Tea Coffee"
+                        android:textColor="@color/grey_regular"
+                        android:textSize="16sp" />
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="5dp"
+                        android:alpha="0.5"
+                        android:src="@drawable/teacoffee" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="7dp"
+                    android:orientation="horizontal">
+
+                    <CheckBox
+                        android:id="@+id/chkBar"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Bar"
+                        android:textColor="@color/grey_regular"
+                        android:textSize="16sp" />
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="5dp"
+                        android:alpha="0.5"
+                        android:src="@drawable/bar" />
+
+                    <CheckBox
+                        android:id="@+id/chkRoomService"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="15dp"
+                        android:text="Room Service"
+                        android:textColor="@color/grey_regular"
+                        android:textSize="16sp" />
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="5dp"
+                        android:alpha="0.5"
+                        android:src="@drawable/room_service" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="7dp"
+                    android:orientation="horizontal">
+
+                    <CheckBox
+                        android:id="@+id/chkTelevision"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="T/V"
+                        android:textColor="@color/grey_regular"
+                        android:textSize="16sp" />
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="5dp"
+                        android:alpha="0.5"
+                        android:src="@drawable/television" />
+
+                    <CheckBox
+                        android:id="@+id/chkPool"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="15dp"
+                        android:text="Pool"
+                        android:textColor="@color/grey_regular"
+                        android:textSize="16sp" />
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="5dp"
+                        android:alpha="0.5"
+                        android:src="@drawable/pool" />
+
+                    <CheckBox
+                        android:id="@+id/chkSpa"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="15dp"
+                        android:text="Spa"
+                        android:textColor="@color/grey_regular"
+                        android:textSize="16sp" />
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="5dp"
+                        android:alpha="0.5"
+                        android:src="@drawable/spa" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="7dp"
+                    android:orientation="horizontal">
+
+                    <CheckBox
+                        android:id="@+id/chkParking"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Parking"
+                        android:textColor="@color/grey_regular"
+                        android:textSize="16sp" />
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="5dp"
+                        android:alpha="0.5"
+                        android:src="@drawable/parking" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/linearLytRoomAmenities"
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="20dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btnSaveRoom"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/button_bg_light_active_rad_10"
+                    android:text="Register Room"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</ScrollView>

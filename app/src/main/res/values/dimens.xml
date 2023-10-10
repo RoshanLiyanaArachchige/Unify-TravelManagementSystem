@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="recycler_view_grid_space_left_right">4dp</dimen>
+    <dimen name="recycler_view_grid_space_bottom">8dp</dimen>
+</resources>

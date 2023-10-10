@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <color name="background">#2e2a38</color>
+    <color name="green">#38c96d</color>
+    <color name="red">#eb4b4b</color>
+
+    <color name="grey_light">#909090</color>
+    <color name="grey_regular">#707070</color>
+    <color name="grey_dark">#404040</color>
+    <color name="grey">#222222</color>
+    <color name="blue">#38068f</color>
+    <color name="purple">#9b0493</color>
+    <color name="royal_red_01">#ff004a</color>
+    <color name="royal_red_02">#ff7131</color>
+    <color name="royal_green_01">#10e773</color>
+    <color name="royal_green_02">#07aebd</color>
+    <color name="royal_yellow_01">#ffd21e</color>
+    <color name="royal_yellow_02">#ff652f</color>
+    <color name="royal_purple_01">#a45dff</color>
+    <color name="royal_purple_02">#4b6dff</color>
+    <color name="royal_blue">#0075ff</color>
+    <color name="royal_green">#08eb73</color>
+    <color name="royal_yellow">#ffd619</color>
+    <color name="royal_red">#ff004a</color>
+    <color name="royal_grey">#848284</color>
+    <color name="royal_black">#313542</color>
+
+    <color name="background_dialog">#f7f7f7</color>
+    <color name="text">#a3a3a3</color>
+
+    <color name="transparent">#00000000</color>
+
+    <color name="black_01">#10000000</color>
+
+    <color name="mapview_background_color">@color/black_01</color>
+    <color name="mapview_border_color">@color/black_01</color>
+
+</resources>

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "229829563122",
+    "project_id": "unifylk",
+    "storage_bucket": "unifylk.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:229829563122:android:e472cd4b5ff936dc45766b",
+        "android_client_info": {
+          "package_name": "com.rlabdevs.unifymobile"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "229829563122-r01uu3qi8ggh1165vb90e1cdi9cbjpo3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDf7XRvOm-MOg9qJYZnoQYDFpaSGGLjE-8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "229829563122-r01uu3qi8ggh1165vb90e1cdi9cbjpo3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

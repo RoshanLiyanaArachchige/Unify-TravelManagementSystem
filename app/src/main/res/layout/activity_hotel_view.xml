@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:scrollbars="none"
+    tools:context=".activities.hotels.HotelViewActivity">
+
+    <RelativeLayout
+        android:id="@+id/relativeLayoutHotel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:animateLayoutChanges="true">
+
+        <TextView
+            android:id="@+id/tvHotelName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="28dp"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:text="Galle Face Hotel"
+            android:textColor="@color/grey_regular"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardViewHotelCover"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_below="@id/tvHotelName"
+            android:layout_marginTop="15dp"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="0dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/imgViewHotelImage"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/hotel1" />
+
+            </RelativeLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/tvHotelInformation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/cardViewHotelCover"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="30dp"
+            android:paddingTop="3dp"
+            android:paddingBottom="3dp"
+            android:text="Hotel Information"
+            android:textColor="@color/grey_regular"
+            android:textSize="18sp" />
+
+        <RelativeLayout
+            android:id="@+id/relativeLayoutHotelInfo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvHotelInformation"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/card_bg_light_rad_10"
+            android:padding="10dp">
+
+            <EditText
+                android:id="@+id/txtHotelLocation"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="@drawable/edit_text_bg_light_rad_10_no_stroke"
+                android:enabled="false"
+                android:hint="Hotel Location"
+                android:inputType="text"
+                android:maxLines="1"
+                android:paddingStart="50dp"
+                android:paddingEnd="15dp"
+                android:singleLine="true"
+                android:textColor="@color/grey_regular" />
+
+            <ImageView
+                android:id="@+id/imgViewAddress"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignStart="@id/txtHotelLocation"
+                android:layout_alignTop="@id/txtHotelLocation"
+                android:layout_alignBottom="@id/txtHotelLocation"
+                android:layout_marginStart="10dp"
+                android:alpha="0.9"
+                android:src="@drawable/address" />
+
+            <TextView
+                android:id="@+id/tvHotelClass"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_below="@id/txtHotelLocation"
+                android:layout_marginTop="7dp"
+                android:background="@drawable/edit_text_bg_light_rad_10_no_stroke"
+                android:enabled="false"
+                android:gravity="center_vertical"
+                android:hint="Hotel Class"
+                android:inputType="text"
+                android:maxLines="1"
+                android:paddingStart="50dp"
+                android:paddingEnd="15dp"
+                android:singleLine="true"
+                android:textColor="@color/grey_regular"
+                android:textSize="19sp" />
+
+            <ImageView
+                android:id="@+id/imgViewHotelClass"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignStart="@id/tvHotelClass"
+                android:layout_alignTop="@id/tvHotelClass"
+                android:layout_alignBottom="@id/tvHotelClass"
+                android:layout_marginStart="10dp"
+                android:alpha="0.9"
+                android:padding="3dp"
+                android:src="@drawable/hotel_class2" />
+
+            <EditText
+                android:id="@+id/txtTelephoneNo"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_below="@id/tvHotelClass"
+                android:layout_marginTop="7dp"
+                android:background="@drawable/edit_text_bg_light_rad_10_no_stroke"
+                android:enabled="false"
+                android:hint="Telephone No"
+                android:inputType="phone"
+                android:maxLines="1"
+                android:paddingStart="50dp"
+                android:paddingEnd="15dp"
+                android:singleLine="true"
+                android:textColor="@color/grey_regular" />
+
+            <ImageView
+                android:id="@+id/imgViewTelephoneNo"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignStart="@id/txtTelephoneNo"
+                android:layout_alignTop="@id/txtTelephoneNo"
+                android:layout_alignBottom="@id/txtTelephoneNo"
+                android:layout_marginStart="10dp"
+                android:alpha="0.9"
+                android:src="@drawable/phone_message" />
+
+            <EditText
+                android:id="@+id/txtCheckInOut"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_below="@id/txtTelephoneNo"
+                android:layout_marginTop="7dp"
+                android:background="@drawable/edit_text_bg_light_rad_10_no_stroke"
+                android:enabled="false"
+                android:hint="Check In/Out"
+                android:inputType="phone"
+                android:maxLines="1"
+                android:paddingStart="50dp"
+                android:paddingEnd="15dp"
+                android:singleLine="true"
+                android:textColor="@color/grey_regular" />
+
+            <ImageView
+                android:id="@+id/imgViewCheckInOut"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignStart="@id/txtCheckInOut"
+                android:layout_alignTop="@id/txtCheckInOut"
+                android:layout_alignBottom="@id/txtCheckInOut"
+                android:layout_marginStart="10dp"
+                android:alpha="0.9"
+                android:src="@drawable/phone_message" />
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/tvAvailableRooms"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/relativeLayoutHotelInfo"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="15dp"
+            android:paddingTop="3dp"
+            android:paddingBottom="3dp"
+            android:text="Available Rooms"
+            android:textColor="@color/grey_regular"
+            android:textSize="18sp" />
+
+        <com.github.ybq.android.spinkit.SpinKitView
+            android:id="@+id/spinKitProgress"
+            style="@style/SpinKitView.ThreeBounce"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_below="@id/tvAvailableRooms"
+            android:visibility="gone"
+            app:SpinKit_Color="@color/grey_regular" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewHotelRooms"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/spinKitProgress"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp" />
+
+    </RelativeLayout>
+
+</ScrollView>

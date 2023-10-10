@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="175dp"
+    android:background="@drawable/bg_dialog_light"
+    android:gravity="center"
+    android:padding="20dp"
+    android:layout_marginLeft="20dp"
+    android:layout_marginRight="20dp">
+
+    <TextView
+        android:id="@+id/tvProgressHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:text="Connecting to server..."
+        android:textColor="@color/grey_regular"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvProgressHeader"
+        android:layout_marginTop="30dp"
+        android:gravity="center_horizontal">
+
+        <com.github.ybq.android.spinkit.SpinKitView xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/spinKitProgress"
+            style="@style/SpinKitView.Wave"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            app:SpinKit_Color="@color/grey_regular" />
+
+        <TextView
+            android:id="@+id/tvProgressBody"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/spinKitProgress"
+            android:layout_alignBottom="@id/spinKitProgress"
+            android:layout_marginStart="15dp"
+            android:layout_toEndOf="@id/spinKitProgress"
+            android:gravity="center_vertical"
+            android:text="Please wait !"
+            android:textColor="@color/grey_regular"
+            android:textSize="16sp" />
+
+    </RelativeLayout>
+
+</RelativeLayout>

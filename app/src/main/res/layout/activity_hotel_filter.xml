@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/relativeLayoutHotelFilter"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:animateLayoutChanges="true"
+    android:background="@color/white"
+    android:paddingLeft="30dp"
+    android:paddingRight="30dp"
+    tools:context=".activities.hotels.HotelFilterActivity">
+
+    <TextView
+        android:id="@+id/tvHotelHeading"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="Hotels"
+        android:textColor="@color/grey_regular"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <RelativeLayout
+        android:id="@+id/relativeLayoutHotelFilters"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvHotelHeading"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="15dp"
+        android:animateLayoutChanges="true"
+        android:background="@drawable/card_bg_light_rad_10"
+        android:paddingLeft="15dp"
+        android:paddingTop="15dp"
+        android:paddingRight="15dp"
+        android:paddingBottom="15dp">
+
+        <ImageView
+            android:id="@+id/imgViewShowHideFilters"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:background="@drawable/expand" />
+
+        <TextView
+            android:id="@+id/tvFiltersHeading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:layout_toStartOf="@id/imgViewShowHideFilters"
+            android:gravity="center_vertical"
+            android:text="Filters"
+            android:textColor="@color/grey_regular"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <GridLayout
+            android:id="@+id/gridLayoutHotelFilters"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvFiltersHeading"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="15dp"
+            android:columnCount="2"
+            android:visibility="visible">
+
+            <TextView
+                android:id="@+id/tvLocation"
+                android:layout_width="wrap_content"
+                android:layout_height="27dp"
+                android:layout_marginEnd="15dp"
+                android:gravity="center_vertical"
+                android:text="Location"
+                android:textColor="@color/grey_regular"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/tvLocationName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="26dp"
+                    android:background="@drawable/edit_text_bg_light_rad_10"
+                    android:ellipsize="end"
+                    android:gravity="center_vertical"
+                    android:hint="Select hotel location"
+                    android:marqueeRepeatLimit="marquee_forever"
+                    android:maxLines="1"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="30dp"
+                    android:singleLine="true"
+                    android:textColor="@color/grey_regular"
+                    android:textSize="14sp" />
+
+                <ImageView
+                    android:id="@+id/imgViewSelectLocation"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@id/tvLocationName"
+                    android:layout_alignEnd="@id/tvLocationName"
+                    android:layout_alignBottom="@id/tvLocationName"
+                    android:padding="9dp"
+                    android:src="@drawable/spinner_selector" />
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/tvBudget"
+                android:layout_width="wrap_content"
+                android:layout_height="27dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="15dp"
+                android:gravity="center_vertical"
+                android:text="Budget"
+                android:textColor="@color/grey_regular"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/tvBudgetRange"
+                    android:layout_width="wrap_content"
+                    android:layout_height="26dp"
+                    android:layout_marginTop="12dp"
+                    android:background="@drawable/edit_text_bg_light_rad_10"
+                    android:ellipsize="end"
+                    android:gravity="center_vertical"
+                    android:hint="Select your budget"
+                    android:marqueeRepeatLimit="marquee_forever"
+                    android:maxLines="1"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="30dp"
+                    android:singleLine="true"
+                    android:textColor="@color/grey_regular"
+                    android:textSize="14sp" />
+
+                <ImageView
+                    android:id="@+id/imgViewSelectBudget"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@id/tvBudgetRange"
+                    android:layout_alignEnd="@id/tvBudgetRange"
+                    android:layout_alignBottom="@id/tvBudgetRange"
+                    android:padding="9dp"
+                    android:src="@drawable/spinner_selector" />
+
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/tvClass"
+                android:layout_width="wrap_content"
+                android:layout_height="27dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="15dp"
+                android:gravity="center_vertical"
+                android:text="Class"
+                android:textColor="@color/grey_regular"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/tvClassValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="26dp"
+                    android:layout_marginTop="12dp"
+                    android:background="@drawable/edit_text_bg_light_rad_10"
+                    android:ellipsize="end"
+                    android:gravity="center_vertical"
+                    android:hint="Select hotel class"
+                    android:marqueeRepeatLimit="marquee_forever"
+                    android:maxLines="1"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="30dp"
+                    android:singleLine="true"
+                    android:textColor="@color/grey_regular"
+                    android:textSize="14sp" />
+
+                <ImageView
+                    android:id="@+id/imgViewSelectClass"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@id/tvClassValue"
+                    android:layout_alignEnd="@id/tvClassValue"
+                    android:layout_alignBottom="@id/tvClassValue"
+                    android:padding="9dp"
+                    android:src="@drawable/spinner_selector" />
+
+            </RelativeLayout>
+
+        </GridLayout>
+
+    </RelativeLayout>
+
+    <com.github.ybq.android.spinkit.SpinKitView
+        android:id="@+id/spinKitProgress"
+        style="@style/SpinKitView.ThreeBounce"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_below="@id/relativeLayoutHotelFilters"
+        android:visibility="gone"
+        app:SpinKit_Color="@color/grey_regular" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewHotels"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/spinKitProgress"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="15dp" />
+
+</RelativeLayout>

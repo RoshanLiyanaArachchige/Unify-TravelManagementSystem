@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/relativeLayoutRoomTypes"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:animateLayoutChanges="true"
+    android:background="@color/white"
+    android:paddingLeft="30dp"
+    android:paddingRight="30dp"
+    tools:context=".activities.user.manage.hotels.rooms.RoomTypesActivity">
+
+    <TextView
+        android:id="@+id/tvRoomsTypesHeading"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:paddingTop="3dp"
+        android:paddingBottom="3dp"
+        android:text="Manage Rooms Types"
+        android:textColor="@color/grey_regular"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <ImageView
+        android:id="@+id/imgViewAddNewRoom"
+        android:layout_width="35dp"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/tvRoomsTypesHeading"
+        android:layout_alignEnd="@id/tvRoomsTypesHeading"
+        android:layout_alignBottom="@id/tvRoomsTypesHeading"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/plus"
+        android:visibility="visible" />
+
+    <RelativeLayout
+        android:id="@+id/relativeLytNewRoomType"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvRoomsTypesHeading"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/card_bg_light_rad_10"
+        android:orientation="vertical"
+        android:padding="20dp"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/tvRoomTypeID"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"/>
+
+        <EditText
+            android:id="@+id/txtRoomTypeCode"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@drawable/edit_text_bg_light_rad_10"
+            android:enabled="false"
+            android:inputType="text"
+            android:maxLines="1"
+            android:paddingStart="50dp"
+            android:paddingEnd="15dp"
+            android:singleLine="true"
+            android:text="Fetching Room Type Code..."
+            android:textColor="@color/grey_regular" />
+
+        <ImageView
+            android:id="@+id/imgViewRoomTypeCode"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignStart="@id/txtRoomTypeCode"
+            android:layout_alignTop="@id/txtRoomTypeCode"
+            android:layout_alignBottom="@id/txtRoomTypeCode"
+            android:layout_marginStart="10dp"
+            android:alpha="0.9"
+            android:src="@drawable/logbook" />
+
+        <EditText
+            android:id="@+id/txtRoomType"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_below="@id/txtRoomTypeCode"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="7dp"
+            android:background="@drawable/edit_text_bg_light_rad_10"
+            android:hint="Enter Room Type"
+            android:inputType="text"
+            android:maxLines="1"
+            android:paddingStart="50dp"
+            android:paddingEnd="15dp"
+            android:singleLine="true"
+            android:textColor="@color/grey_regular" />
+
+        <ImageView
+            android:id="@+id/imgViewRoomType"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignStart="@id/txtRoomType"
+            android:layout_alignTop="@id/txtRoomType"
+            android:layout_alignBottom="@id/txtRoomType"
+            android:layout_marginStart="10dp"
+            android:alpha="0.9"
+            android:src="@drawable/hotel" />
+
+        <ImageView
+            android:id="@+id/imgViewRoomTypeStatus"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignStart="@id/tvStatus"
+            android:layout_alignTop="@id/tvStatus"
+            android:layout_alignBottom="@id/tvStatus"
+            android:layout_marginStart="10dp"
+            android:alpha="0.8"
+            android:elevation="8dp"
+            android:padding="2dp"
+            android:rotation="90"
+            android:src="@drawable/status" />
+
+        <TextView
+            android:id="@+id/tvStatus"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_below="@id/txtRoomType"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="7dp"
+            android:background="@drawable/edit_text_bg_light_rad_10"
+            android:gravity="center_vertical"
+            android:hint="Select Status"
+            android:maxLines="1"
+            android:paddingStart="50dp"
+            android:paddingEnd="15dp"
+            android:singleLine="true"
+            android:textColor="@color/grey_regular"
+            android:textSize="19sp" />
+
+        <EditText
+            android:id="@+id/txtStatusCode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone" />
+
+        <Button
+            android:id="@+id/btnSaveRoomType"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_below="@id/tvStatus"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="10dp"
+            android:text="Save"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="14sp" />
+
+    </RelativeLayout>
+
+    <com.github.ybq.android.spinkit.SpinKitView
+        android:id="@+id/spinKitProgress"
+        style="@style/SpinKitView.ThreeBounce"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_below="@id/relativeLytNewRoomType"
+        android:layout_marginTop="15dp"
+        android:visibility="gone"
+        app:SpinKit_Color="@color/grey_regular" />
+
+    <TextView
+        android:id="@+id/tvNoAddRoomsTypes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/spinKitProgress"
+        android:layout_marginTop="50dp"
+        android:text="Sorry, currently you don't have room types to manage. If you want to add new click here"
+        android:textAlignment="center"
+        android:textColor="@color/grey_regular"
+        android:textSize="16sp"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/tvRoomTypesList"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvNoAddRoomsTypes"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="30dp"
+        android:paddingTop="3dp"
+        android:paddingBottom="3dp"
+        android:text="Room Types List"
+        android:textColor="@color/grey_regular"
+        android:textSize="18sp" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewRoomTypes"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/tvRoomTypesList"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="15dp" />
+
+</RelativeLayout>

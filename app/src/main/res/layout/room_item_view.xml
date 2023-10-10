@@ -1,0 +1,358 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="10dp"
+    android:layout_marginBottom="8dp"
+    android:background="@drawable/card_bg_light_rad_10">
+
+    <ImageView
+        android:id="@+id/imgViewRoom"
+        android:layout_width="110dp"
+        android:layout_height="75dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginBottom="3dp"
+        android:layout_marginEnd="10dp"
+        android:scaleType="fitXY"
+        android:background="@drawable/card_bg_light_rad_10"/>
+
+    <LinearLayout
+        android:id="@+id/linearLytImageProgress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/imgViewRoom"
+        android:layout_alignBottom="@id/imgViewRoom"
+        android:layout_alignStart="@id/imgViewRoom"
+        android:layout_alignEnd="@id/imgViewRoom"
+        android:orientation="vertical">
+
+        <com.github.ybq.android.spinkit.SpinKitView
+            android:id="@+id/spinKitProgress"
+            style="@style/SpinKitView.Large.Pulse"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="visible"
+            app:SpinKit_Color="@color/grey_regular" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tvRoomCode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"/>
+
+    <TextView
+        android:id="@+id/tvRoomType"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/imgViewRoom"
+        android:text="Deluxe Room"
+        android:textColor="@color/grey_dark"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tvRoomPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvRoomCapacity"
+        android:layout_toRightOf="@id/imgViewRoom"
+        android:text="LKR 25000"
+        android:textColor="@color/royal_red"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/tvPerNight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvRoomCapacity"
+        android:layout_alignParentEnd="true"
+        android:layout_marginLeft="7dp"
+        android:layout_toRightOf="@id/tvRoomPrice"
+        android:text="per night"
+        android:textColor="@color/grey_regular"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/tvRoomCapacity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvRoomType"
+        android:layout_toEndOf="@id/imgViewRoom"
+        android:text="Max: 2 adults &amp; 1 children"
+        android:textColor="@color/royal_blue"
+        android:textSize="14sp" />
+
+    <LinearLayout
+        android:id="@+id/lnrLytAmenities"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/imgViewRoom"
+        android:layout_below="@id/tvRoomPrice"
+        android:layout_marginTop="2dp"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:id="@+id/lnrLytFreeWIFI"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:visibility="gone">
+
+            <ImageView
+                android:layout_width="17dp"
+                android:layout_height="15dp"
+                android:alpha="0.4"
+                android:src="@drawable/wifi" />
+
+            <TextView
+                android:id="@+id/tvFreeWIFI"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:text="Free Wi-Fi "
+                android:textColor="@color/grey_light"
+                android:textSize="12sp"
+                android:visibility="gone" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/lnrLytAirConditioner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:orientation="horizontal"
+            android:visibility="gone">
+
+            <ImageView
+                android:layout_width="14dp"
+                android:layout_height="15dp"
+                android:alpha="0.4"
+                android:src="@drawable/air_conditioner" />
+
+            <TextView
+                android:id="@+id/tvAirConditioner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:text="Air Conditioner "
+                android:textColor="@color/grey_light"
+                android:textSize="12sp"
+                android:visibility="gone" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/lnrLytBreakfast"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:orientation="horizontal"
+            android:visibility="gone">
+
+            <ImageView
+                android:layout_width="17dp"
+                android:layout_height="15dp"
+                android:alpha="0.4"
+                android:src="@drawable/breakfast" />
+
+            <TextView
+                android:id="@+id/tvFreeBreakfast"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:text="Free Breakfast "
+                android:textColor="@color/grey_light"
+                android:textSize="12sp"
+                android:visibility="gone" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/lnrLytTeaCoffee"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:orientation="horizontal"
+            android:visibility="gone">
+
+            <ImageView
+                android:layout_width="17dp"
+                android:layout_height="15dp"
+                android:alpha="0.4"
+                android:src="@drawable/teacoffee" />
+
+            <TextView
+                android:id="@+id/tvFreeTeaCoffee"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:text="Tea Coffee "
+                android:textColor="@color/grey_light"
+                android:textSize="12sp"
+                android:visibility="gone" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/lnrLytBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:orientation="horizontal"
+            android:visibility="gone">
+
+            <ImageView
+                android:layout_width="14dp"
+                android:layout_height="15dp"
+                android:alpha="0.4"
+                android:src="@drawable/bar" />
+
+            <TextView
+                android:id="@+id/tvBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:text="Bar "
+                android:textColor="@color/grey_light"
+                android:textSize="12sp"
+                android:visibility="gone" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/lnrLytRoomService"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:orientation="horizontal"
+            android:visibility="gone">
+
+            <ImageView
+                android:layout_width="18dp"
+                android:layout_height="15dp"
+                android:alpha="0.4"
+                android:src="@drawable/room_service" />
+
+            <TextView
+                android:id="@+id/tvRoomService"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:text="Room Service "
+                android:textColor="@color/grey_light"
+                android:textSize="12sp"
+                android:visibility="gone" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/lnrLytTelevision"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:orientation="horizontal"
+            android:visibility="gone">
+
+            <ImageView
+                android:layout_width="13dp"
+                android:layout_height="15dp"
+                android:alpha="0.4"
+                android:src="@drawable/television" />
+
+            <TextView
+                android:id="@+id/tvTelevision"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:text="Television "
+                android:textColor="@color/grey_light"
+                android:textSize="12sp"
+                android:visibility="gone" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/lnrLytPool"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:orientation="horizontal"
+            android:visibility="gone">
+
+            <ImageView
+                android:layout_width="14dp"
+                android:layout_height="15dp"
+                android:alpha="0.4"
+                android:src="@drawable/pool" />
+
+            <TextView
+                android:id="@+id/tvPool"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:text="Pool "
+                android:textColor="@color/grey_light"
+                android:textSize="12sp"
+                android:visibility="gone" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/lnrLytParking"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:orientation="horizontal"
+            android:visibility="gone">
+
+            <ImageView
+                android:layout_width="14dp"
+                android:layout_height="15dp"
+                android:alpha="0.4"
+                android:src="@drawable/parking" />
+
+            <TextView
+                android:id="@+id/tvParking"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:text="Parking "
+                android:textColor="@color/grey_light"
+                android:textSize="12sp"
+                android:visibility="gone" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/lnrLytSPA"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:orientation="horizontal"
+            android:visibility="gone">
+
+            <ImageView
+                android:layout_width="14dp"
+                android:layout_height="15dp"
+                android:alpha="0.4"
+                android:src="@drawable/spa" />
+
+            <TextView
+                android:id="@+id/tvSPA"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:text="SPA "
+                android:textColor="@color/grey_light"
+                android:textSize="12sp"
+                android:visibility="gone" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>

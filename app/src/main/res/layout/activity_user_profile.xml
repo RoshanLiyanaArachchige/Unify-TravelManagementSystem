@@ -1,0 +1,332 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".activities.account.UserProfileActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:paddingLeft="25dp"
+            android:paddingRight="25dp">
+
+            <TextView
+                android:id="@+id/tvUserProfileTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Register"
+                android:textAlignment="center"
+                android:textSize="36sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvRegisterContinue"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvUserProfileTitle"
+                android:text="Create an account to continue"
+                android:textAlignment="center"
+                android:textSize="20sp" />
+
+            <RelativeLayout
+                android:id="@+id/relativeLayoutRegister"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvRegisterContinue"
+                android:layout_marginTop="50dp">
+
+                <EditText
+                    android:id="@+id/txtUserDetailsCode"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/edit_text_bg_light_rad_10"
+                    android:enabled="false"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:paddingLeft="50dp"
+                    android:paddingRight="15dp"
+                    android:singleLine="true"
+                    android:text="Fetching Registration Code..."
+                    android:textColor="@color/grey_regular" />
+
+                <ImageView
+                    android:id="@+id/imgViewRegistrationCode"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_alignStart="@id/txtUserDetailsCode"
+                    android:layout_alignTop="@id/txtUserDetailsCode"
+                    android:layout_alignBottom="@id/txtUserDetailsCode"
+                    android:layout_marginStart="10dp"
+                    android:alpha="0.9"
+                    android:src="@drawable/logbook" />
+
+                <EditText
+                    android:id="@+id/txtFirstName"
+                    android:layout_width="150dp"
+                    android:layout_height="40dp"
+                    android:layout_below="@id/txtUserDetailsCode"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginTop="7dp"
+                    android:background="@drawable/edit_text_bg_light_rad_10"
+                    android:hint="F. Name"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:paddingLeft="50dp"
+                    android:paddingRight="15dp"
+                    android:singleLine="true"
+                    android:textColor="@color/grey_regular" />
+
+                <ImageView
+                    android:id="@+id/imgViewFirstName"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_alignStart="@id/txtFirstName"
+                    android:layout_alignTop="@id/txtFirstName"
+                    android:layout_alignBottom="@id/txtFirstName"
+                    android:layout_marginStart="10dp"
+                    android:alpha="0.9"
+                    android:src="@drawable/name" />
+
+                <EditText
+                    android:id="@+id/txtLastName"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_below="@id/txtUserDetailsCode"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginStart="7dp"
+                    android:layout_marginTop="7dp"
+                    android:layout_toEndOf="@id/txtFirstName"
+                    android:background="@drawable/edit_text_bg_light_rad_10"
+                    android:hint="Last Name"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:paddingLeft="15dp"
+                    android:paddingRight="15dp"
+                    android:singleLine="true"
+                    android:textColor="@color/grey_regular" />
+
+                <EditText
+                    android:id="@+id/txtAddress"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_below="@id/txtLastName"
+                    android:layout_marginTop="7dp"
+                    android:background="@drawable/edit_text_bg_light_rad_10"
+                    android:hint="Enter Address"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:paddingLeft="50dp"
+                    android:paddingRight="15dp"
+                    android:singleLine="true"
+                    android:textColor="@color/grey_regular" />
+
+                <ImageView
+                    android:id="@+id/imgViewAddress"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_alignStart="@id/txtAddress"
+                    android:layout_alignTop="@id/txtAddress"
+                    android:layout_alignBottom="@id/txtAddress"
+                    android:layout_marginStart="10dp"
+                    android:alpha="0.9"
+                    android:src="@drawable/address" />
+
+                <EditText
+                    android:id="@+id/txtNIC"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_below="@id/txtAddress"
+                    android:layout_marginTop="7dp"
+                    android:background="@drawable/edit_text_bg_light_rad_10"
+                    android:hint="Enter NIC"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:paddingLeft="50dp"
+                    android:paddingRight="15dp"
+                    android:singleLine="true"
+                    android:textColor="@color/grey_regular" />
+
+                <ImageView
+                    android:id="@+id/imgViewNIC"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_alignStart="@id/txtNIC"
+                    android:layout_alignTop="@id/txtNIC"
+                    android:layout_alignBottom="@id/txtNIC"
+                    android:layout_marginStart="10dp"
+                    android:alpha="0.9"
+                    android:src="@drawable/nic" />
+
+                <EditText
+                    android:id="@+id/txtMobilePhone"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_below="@id/txtNIC"
+                    android:layout_marginTop="7dp"
+                    android:background="@drawable/edit_text_bg_light_rad_10"
+                    android:hint="Mobile Number"
+                    android:inputType="phone"
+                    android:maxLines="1"
+                    android:paddingLeft="50dp"
+                    android:paddingRight="15dp"
+                    android:singleLine="true"
+                    android:textColor="@color/grey_regular" />
+
+                <ImageView
+                    android:id="@+id/imgViewMobilePhone"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_alignStart="@id/txtMobilePhone"
+                    android:layout_alignTop="@id/txtMobilePhone"
+                    android:layout_alignBottom="@id/txtMobilePhone"
+                    android:layout_marginStart="10dp"
+                    android:alpha="0.9"
+                    android:src="@drawable/phone_message" />
+
+                <EditText
+                    android:id="@+id/txtEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_below="@id/txtMobilePhone"
+                    android:layout_marginTop="7dp"
+                    android:background="@drawable/edit_text_bg_light_rad_10"
+                    android:hint="Enter Email Address"
+                    android:inputType="textEmailAddress"
+                    android:maxLines="1"
+                    android:paddingLeft="50dp"
+                    android:paddingRight="15dp"
+                    android:singleLine="true"
+                    android:textColor="@color/grey_regular" />
+
+                <ImageView
+                    android:id="@+id/imgViewEmail"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_alignStart="@id/txtEmail"
+                    android:layout_alignTop="@id/txtEmail"
+                    android:layout_alignBottom="@id/txtEmail"
+                    android:layout_marginStart="10dp"
+                    android:alpha="0.9"
+                    android:src="@drawable/email" />
+
+                <EditText
+                    android:id="@+id/txtUsername"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_below="@id/txtEmail"
+                    android:layout_marginTop="7dp"
+                    android:background="@drawable/edit_text_bg_light_rad_10"
+                    android:hint="Enter Username"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:paddingLeft="50dp"
+                    android:paddingRight="15dp"
+                    android:singleLine="true"
+                    android:textColor="@color/grey_regular" />
+
+                <ImageView
+                    android:id="@+id/imgViewIconUser"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_alignStart="@id/txtUsername"
+                    android:layout_alignTop="@id/txtUsername"
+                    android:layout_alignBottom="@id/txtUsername"
+                    android:layout_marginStart="10dp"
+                    android:alpha="0.9"
+                    android:src="@drawable/name" />
+
+                <EditText
+                    android:id="@+id/txtPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_below="@id/txtUsername"
+                    android:layout_marginTop="7dp"
+                    android:background="@drawable/edit_text_bg_light_rad_10"
+                    android:hint="Enter Password"
+                    android:inputType="textPassword"
+                    android:paddingLeft="50dp"
+                    android:paddingRight="50dp"
+                    android:textColor="@color/grey_regular" />
+
+                <ImageView
+                    android:id="@+id/imgViewIconPassword"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_alignStart="@id/txtPassword"
+                    android:layout_alignTop="@id/txtPassword"
+                    android:layout_alignBottom="@id/txtPassword"
+                    android:layout_marginStart="10dp"
+                    android:alpha="0.9"
+                    android:src="@drawable/password_light" />
+
+                <ImageView
+                    android:id="@+id/imgViewIconShowPassword"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@id/txtPassword"
+                    android:layout_alignEnd="@id/txtPassword"
+                    android:layout_alignBottom="@id/txtPassword"
+                    android:layout_marginEnd="10dp"
+                    android:src="@drawable/show_password_light" />
+
+                <Button
+                    android:id="@+id/btnUpdateRegister"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/txtPassword"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginBottom="20dp"
+                    android:background="@drawable/button_bg_light_active_rad_10"
+                    android:text="Register"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:id="@+id/linearLytLogoHaveAccount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/relativeLayoutRegister"
+                android:layout_marginTop="30dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tvHaveAccount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Already have an account?"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvLogin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:text="Login here"
+                    android:textColor="@color/royal_blue"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</ScrollView>

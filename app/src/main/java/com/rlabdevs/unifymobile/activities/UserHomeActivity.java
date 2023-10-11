@@ -12,6 +12,8 @@ import com.rlabdevs.unifymobile.R;
 import com.rlabdevs.unifymobile.activities.account.LoginActivity;
 import com.rlabdevs.unifymobile.activities.explore.ExploreActivity;
 import com.rlabdevs.unifymobile.activities.hotels.HotelFilterActivity;
+import com.rlabdevs.unifymobile.activities.thingstodo.ThingsToDoActivity;
+import com.rlabdevs.unifymobile.activities.thingstodo.ThingsToDoViewActivity;
 import com.rlabdevs.unifymobile.activities.user.MenuActivity;
 import com.rlabdevs.unifymobile.common.Functions;
 import com.rlabdevs.unifymobile.models.CuisineTypeModel;
@@ -21,7 +23,7 @@ import java.util.List;
 
 public class UserHomeActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private CardView cardViewExplore, cardViewHotels;
+    private CardView cardViewExplore, cardViewThingsToDo, cardViewHotels;
     private ImageView imgViewAccount;
 
     public static List<CurrencyModel> currencyList;
@@ -39,10 +41,12 @@ public class UserHomeActivity extends AppCompatActivity implements View.OnClickL
 
     private void InitUI() {
         cardViewExplore = findViewById(R.id.cardViewExplore);
+        cardViewThingsToDo = findViewById(R.id.cardViewThingsToDo);
         cardViewHotels = findViewById(R.id.cardViewHotels);
         imgViewAccount = findViewById(R.id.imgViewAccount);
 
         cardViewExplore.setOnClickListener(this);
+        cardViewThingsToDo.setOnClickListener(this);
         cardViewHotels.setOnClickListener(this);
         imgViewAccount.setOnClickListener(this);
     }
@@ -54,6 +58,11 @@ public class UserHomeActivity extends AppCompatActivity implements View.OnClickL
             case R.id.cardViewExplore:
             {
                 new Functions().StartActivity(UserHomeActivity.this, ExploreActivity.class);
+                break;
+            }
+            case R.id.cardViewThingsToDo:
+            {
+                new Functions().StartActivity(UserHomeActivity.this, ThingsToDoActivity.class);
                 break;
             }
             case R.id.cardViewHotels:

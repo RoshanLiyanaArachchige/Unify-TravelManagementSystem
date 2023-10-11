@@ -14,6 +14,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.UnifyMobile">
         <activity
+            android:name=".activities.directions.GetDirectionsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.thingstodo.ThingsToDoViewActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.thingstodo.ThingsToDoActivity"
+            android:exported="false" />
+        <activity
             android:name=".activities.restaurants.RestaurantViewActivity"
             android:exported="false" />
         <activity

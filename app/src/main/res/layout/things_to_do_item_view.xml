@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="15dp"
+    android:background="@drawable/card_bg_light_rad_10"
+    android:padding="10dp">
+
+    <ImageView
+        android:id="@+id/imgViewThingsToDo"
+        android:layout_width="110dp"
+        android:layout_height="75dp"
+        android:layout_marginEnd="10dp"
+        android:background="@drawable/card_bg_light_rad_10"
+        android:scaleType="centerCrop" />
+
+    <LinearLayout
+        android:id="@+id/linearLytImageProgress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@id/imgViewThingsToDo"
+        android:layout_alignTop="@id/imgViewThingsToDo"
+        android:layout_alignEnd="@id/imgViewThingsToDo"
+        android:layout_alignBottom="@id/imgViewThingsToDo"
+        android:orientation="vertical">
+
+        <com.github.ybq.android.spinkit.SpinKitView
+            android:id="@+id/spinKitProgress"
+            style="@style/SpinKitView.Large.Pulse"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="visible"
+            app:SpinKit_Color="@color/grey_regular" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tvTaskID"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/tvTaskTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
+        android:layout_toEndOf="@id/imgViewThingsToDo"
+        android:maxLines="1"
+        android:singleLine="true"
+        android:text="Galle Dutch Fort"
+        android:textColor="@color/grey_dark"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tvTaskDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvTaskTitle"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="10dp"
+        android:layout_toEndOf="@id/imgViewThingsToDo"
+        android:ellipsize="end"
+        android:maxLines="3"
+        android:text="Built several years ago on a massive piece of land in Galle, the Galle Dutch Fort was used by the Portuguese until the Dutch took over it. The British finally sealed the fort as theirs with a lot of re-building and renovation. The unique blends that led to the standing of this monumental structure are now listed under the UNESCO World Heritage Sites thus deserving a substantial place on the list of places to visit in Galle. The area is so beautiful, that is a favourite amongst couples for a pre-wedding shoot. "
+        android:textColor="@color/grey_regular"
+        android:textSize="14sp" />
+
+</RelativeLayout>

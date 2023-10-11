@@ -146,7 +146,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                                     loginActivity.runOnUiThread(new Runnable() {
                                                         public void run() {
                                                             Functions.HideProgressBar();
-                                                            new Functions().ShowErrorDialog("Invalid password", "Try Again", LoginActivity.this);
+                                                            new Functions().ShowErrorDialog("Invalid credentials", "Try Again", LoginActivity.this);
                                                         }
                                                     });
                                                 }
@@ -155,7 +155,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                             loginActivity.runOnUiThread(new Runnable() {
                                                 public void run() {
                                                     Functions.HideProgressBar();
-                                                    new Functions().ShowErrorDialog("Invalid username", "Try Again", LoginActivity.this);
+                                                    new Functions().ShowErrorDialog("Invalid credentials", "Try Again", LoginActivity.this);
                                                 }
                                             });
                                         }

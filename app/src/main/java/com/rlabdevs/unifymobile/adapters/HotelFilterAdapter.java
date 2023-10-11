@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.github.ybq.android.spinkit.SpinKitView;
 import com.google.gson.Gson;
 import com.rlabdevs.unifymobile.R;
+import com.rlabdevs.unifymobile.activities.UserHomeActivity;
 import com.rlabdevs.unifymobile.activities.hotels.HotelViewActivity;
 import com.rlabdevs.unifymobile.activities.user.manage.hotels.HotelActivity;
 import com.rlabdevs.unifymobile.models.HotelModel;
@@ -45,7 +46,8 @@ public class HotelFilterAdapter extends RecyclerView.Adapter<HotelFilterAdapter.
         HotelModel hotel = hotelList.get(position);
         holder.tvHotelName.setText(hotel.getHotelName());
         holder.tvHotelRating.setText(String.valueOf(hotel.getHotelRating()));
-        holder.tvBudgetHotelClass.setText("LKR" + hotelList.get(position).getBudget() + " ("+ hotel.getHotelClass() + " Star)");
+        String currencySymbol = UserHomeActivity.currencyList.stream().filter(c -> c.getCurrencyCode().equals(hotel.getCurrencyCode())).findFirst().get().getSymbol();
+        holder.tvBudgetHotelClass.setText(hotel.getBudget() + currencySymbol + "+ ("+ hotel.getHotelClass() + " Star)");
         holder.lnrLytFreeWIFI.setVisibility(hotel.isFreeWIFI() ? View.VISIBLE : View.GONE);
         holder.lnrLytAirConditioner.setVisibility(hotel.isAirConditioned() ? View.VISIBLE : View.GONE);
         holder.lnrLytBreakfast.setVisibility(hotel.isFreeBreakfast() ? View.VISIBLE : View.GONE);

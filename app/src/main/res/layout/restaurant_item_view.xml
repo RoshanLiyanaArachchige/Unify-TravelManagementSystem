@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="10dp"
+    android:layout_marginBottom="8dp"
+    android:background="@drawable/card_bg_light_rad_10">
+
+    <ImageView
+        android:id="@+id/imgViewRestaurant"
+        android:layout_width="110dp"
+        android:layout_height="75dp"
+        android:layout_marginEnd="10dp"
+        android:background="@drawable/card_bg_light_rad_10"/>
+
+    <LinearLayout
+        android:id="@+id/linearLytImageProgress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/imgViewRestaurant"
+        android:layout_alignBottom="@id/imgViewRestaurant"
+        android:layout_alignStart="@id/imgViewRestaurant"
+        android:layout_alignEnd="@id/imgViewRestaurant"
+        android:orientation="vertical">
+
+        <com.github.ybq.android.spinkit.SpinKitView
+            android:id="@+id/spinKitProgress"
+            style="@style/SpinKitView.Large.Pulse"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="visible"
+            app:SpinKit_Color="@color/grey_regular" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tvRestaurantCode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"/>
+
+    <TextView
+        android:id="@+id/tvRestaurantName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
+        android:layout_toStartOf="@id/tvRestaurantRating"
+        android:layout_toEndOf="@id/imgViewRestaurant"
+        android:text="Mamas Cafe &amp; Restaurant"
+        android:textColor="@color/grey_dark"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tvRestaurantRating"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:text="(4.5)"
+        android:textColor="@color/royal_red"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/tvBudgetRestaurantClass"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvRestaurantName"
+        android:layout_toEndOf="@id/imgViewRestaurant"
+        android:text="~26,250LKR (5 Star)"
+        android:textColor="@color/royal_blue"
+        android:textSize="14sp" />
+
+    <LinearLayout
+        android:id="@+id/lnrLytAmenities"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/imgViewRestaurant"
+        android:layout_alignBottom="@id/imgViewRestaurant"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:id="@+id/lnrLytFreeWIFI"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:visibility="gone">
+
+            <ImageView
+                android:layout_width="17dp"
+                android:layout_height="15dp"
+                android:alpha="0.4"
+                android:src="@drawable/wifi" />
+
+            <TextView
+                android:id="@+id/tvFreeWIFI"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:text="Free Wi-Fi "
+                android:textColor="@color/grey_light"
+                android:textSize="12sp"
+                android:visibility="gone" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/lnrLytBeverages"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:orientation="horizontal"
+            android:visibility="gone">
+
+            <ImageView
+                android:layout_width="14dp"
+                android:layout_height="15dp"
+                android:alpha="0.4"
+                android:src="@drawable/bar" />
+
+            <TextView
+                android:id="@+id/tvBeverages"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:text="Beverages "
+                android:textColor="@color/grey_light"
+                android:textSize="12sp"
+                android:visibility="gone" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/lnrLytTakeaway"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:orientation="horizontal"
+            android:visibility="gone">
+
+            <ImageView
+                android:layout_width="18dp"
+                android:layout_height="15dp"
+                android:alpha="0.4"
+                android:src="@drawable/takeaway" />
+
+            <TextView
+                android:id="@+id/tvTakeaway"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:text="Takeaway "
+                android:textColor="@color/grey_light"
+                android:textSize="12sp"
+                android:visibility="gone" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/lnrLytParking"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:orientation="horizontal"
+            android:visibility="gone">
+
+            <ImageView
+                android:layout_width="14dp"
+                android:layout_height="15dp"
+                android:alpha="0.4"
+                android:src="@drawable/parking" />
+
+            <TextView
+                android:id="@+id/tvParking"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:text="Parking "
+                android:textColor="@color/grey_light"
+                android:textSize="12sp"
+                android:visibility="gone" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>

@@ -41,11 +41,14 @@ import com.google.firebase.firestore.GeoPoint;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.rlabdevs.unifymobile.R;
+import com.rlabdevs.unifymobile.activities.UserHomeActivity;
 import com.rlabdevs.unifymobile.activities.hotels.HotelFilterActivity;
 import com.rlabdevs.unifymobile.adapters.HotelFilterAdapter;
+import com.rlabdevs.unifymobile.adapters.RestaurantFilterAdapter;
 import com.rlabdevs.unifymobile.common.Constants;
 import com.rlabdevs.unifymobile.common.Functions;
 import com.rlabdevs.unifymobile.models.HotelModel;
+import com.rlabdevs.unifymobile.models.RestaurantModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -62,11 +65,15 @@ public class ExploreActivity extends AppCompatActivity implements OnMapReadyCall
 
     private LatLng currentLatLng;
     private boolean isViewsInitialized = false;
+    private double searchRadius = 0.1;
+    private double minLatitude, maxLatitude, minLongitude, maxLongitude;
 
-    private CollectionReference hotelReference;
-    private List<HotelModel> hotelFilterList;
+    private List<HotelModel> hotelFilterList = new ArrayList<>();
     private HotelFilterAdapter hotelFilterAdapter;
-    private LinearLayoutManager linearLayoutManagerHotels;
+    private List<RestaurantModel> restaurantFilterList = new ArrayList<>();
+    private RestaurantFilterAdapter restaurantFilterAdapter;
+    private CollectionReference hotelReference, restaurantReference;
+    private LinearLayoutManager linearLayoutManagerHotels, linearLayoutManagerRestaurants;
 
 
     @Override
@@ -79,11 +86,8 @@ public class ExploreActivity extends AppCompatActivity implements OnMapReadyCall
         mapViewCurrentLocation.getMapAsync(this);
 
         hotelReference = firestoreDB.collection("Hotels");
+        restaurantReference = firestoreDB.collection("Restaurants");
 
-        initializeExploreNearby();
-    }
-
-    private void initializeExploreNearby() {
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
     }
 
@@ -103,13 +107,6 @@ public class ExploreActivity extends AppCompatActivity implements OnMapReadyCall
     }
 
     private void getFeaturedHotels() {
-        double searchRadius = 0.1;
-
-        double minLatitude = currentLatLng.latitude - searchRadius;
-        double maxLatitude = currentLatLng.latitude + searchRadius;
-        double minLongitude = currentLatLng.longitude - searchRadius;
-        double maxLongitude = currentLatLng.longitude + searchRadius;
-
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -121,7 +118,6 @@ public class ExploreActivity extends AppCompatActivity implements OnMapReadyCall
                             @Override
                             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                                 if (!queryDocumentSnapshots.isEmpty()) {
-                                    hotelFilterList = new ArrayList<>();
                                     List<DocumentSnapshot> documentSnapshotList = queryDocumentSnapshots.getDocuments();
                                     for (DocumentSnapshot documentSnapshot : documentSnapshotList) {
                                         double longitude = documentSnapshot.getDouble("longitude");
@@ -162,6 +158,8 @@ public class ExploreActivity extends AppCompatActivity implements OnMapReadyCall
         }).start();
     }
 
+
+
     private void initFeaturedRestaurants() {
         if (!isViewsInitialized) {
             relativeLayoutRestaurants = findViewById(R.id.relativeLayoutRestaurants);
@@ -173,6 +171,60 @@ public class ExploreActivity extends AppCompatActivity implements OnMapReadyCall
         relativeLayoutRestaurants.setVisibility(View.VISIBLE);
         spinKitProgressRestaurants.setVisibility(View.VISIBLE);
         linearLayoutRestaurantNoResults.setVisibility(View.GONE);
+
+        getFeaturedRestaurants();
+    }
+
+    private void getFeaturedRestaurants() {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                restaurantReference
+                        .whereGreaterThan("latitude", minLatitude)
+                        .whereLessThan("latitude", maxLatitude)
+                        .get()
+                        .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                            @Override
+                            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                                if (!queryDocumentSnapshots.isEmpty()) {
+                                    List<DocumentSnapshot> documentSnapshotList = queryDocumentSnapshots.getDocuments();
+                                    for (DocumentSnapshot documentSnapshot : documentSnapshotList) {
+                                        double longitude = documentSnapshot.getDouble("longitude");
+                                        if(longitude >= minLongitude && longitude <= maxLongitude) {
+                                            restaurantFilterList.add(documentSnapshot.toObject(RestaurantModel.class));
+                                        }
+                                    }
+                                } else {
+                                    linearLayoutRestaurantNoResults.setVisibility(View.VISIBLE);
+                                }
+
+                                runOnUiThread(new Runnable() {
+                                    public void run() {
+                                        spinKitProgressRestaurants.setVisibility(View.GONE);
+
+                                        restaurantFilterAdapter = new RestaurantFilterAdapter(ExploreActivity.this, restaurantFilterList);
+                                        linearLayoutManagerRestaurants = new LinearLayoutManager(ExploreActivity.this);
+                                        recyclerViewRestaurants.setLayoutManager(linearLayoutManagerRestaurants);
+                                        recyclerViewRestaurants.setAdapter(restaurantFilterAdapter);
+
+                                        restaurantFilterAdapter.notifyItemRangeInserted(0, restaurantFilterList.size());
+                                    }
+                                });
+                            }
+                        })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                runOnUiThread(new Runnable() {
+                                    public void run() {
+                                        spinKitProgressRestaurants.setVisibility(View.GONE);
+                                        new Functions().ShowErrorDialog("Error Occurred", "Try Again", ExploreActivity.this);
+                                    }
+                                });
+                            }
+                        });
+            }
+        }).start();
     }
 
     private void loadCurrentLocation() {
@@ -187,7 +239,13 @@ public class ExploreActivity extends AppCompatActivity implements OnMapReadyCall
                             CameraPosition cameraPosition = new CameraPosition.Builder().target(currentLatLng).zoom(16).build();
                             googleMapCurrentLocation.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
 
+                            minLatitude = currentLatLng.latitude - searchRadius;
+                            maxLatitude = currentLatLng.latitude + searchRadius;
+                            minLongitude = currentLatLng.longitude - searchRadius;
+                            maxLongitude = currentLatLng.longitude + searchRadius;
+
                             initFeaturedHotels();
+                            initFeaturedRestaurants();
                         }
                     });
         } else {

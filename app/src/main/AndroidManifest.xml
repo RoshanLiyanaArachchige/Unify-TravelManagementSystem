@@ -14,6 +14,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.UnifyMobile">
         <activity
+            android:name=".activities.restaurants.RestaurantViewActivity"
+            android:exported="false" />
+        <activity
             android:name=".activities.explore.ExploreActivity"
             android:exported="false" />
         <activity
@@ -80,7 +83,6 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyAswX0ABivIoJNQ8y4Mx7tsCOjZvgVBuLA" />
-
     </application>
 
 </manifest>

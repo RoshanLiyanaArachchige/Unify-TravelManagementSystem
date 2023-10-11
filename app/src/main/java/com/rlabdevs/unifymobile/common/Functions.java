@@ -1,5 +1,7 @@
 package com.rlabdevs.unifymobile.common;
 
+import static com.rlabdevs.unifymobile.activities.MainActivity.firestoreDB;
+
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.DialogInterface;
@@ -15,14 +17,26 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.rlabdevs.unifymobile.R;
+import com.rlabdevs.unifymobile.activities.UserHomeActivity;
+import com.rlabdevs.unifymobile.activities.explore.ExploreActivity;
+import com.rlabdevs.unifymobile.adapters.HotelFilterAdapter;
 import com.rlabdevs.unifymobile.adapters.ItemSelectorAdapter;
 import com.rlabdevs.unifymobile.common.enums.CurrencyCode;
 import com.rlabdevs.unifymobile.common.enums.StatusCode;
 import com.rlabdevs.unifymobile.common.enums.UserRole;
+import com.rlabdevs.unifymobile.models.CuisineTypeModel;
+import com.rlabdevs.unifymobile.models.CurrencyModel;
+import com.rlabdevs.unifymobile.models.HotelModel;
 import com.rlabdevs.unifymobile.models.IndexModel;
 import com.rlabdevs.unifymobile.models.SelectorItemModel;
 
@@ -275,6 +289,52 @@ public class Functions implements DialogInterface.OnDismissListener {
             txtPassword.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
         else
             txtPassword.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD | InputType.TYPE_CLASS_TEXT);
+    }
+
+    public static void getCurrencyTypeList() {
+        CollectionReference currencyReference = firestoreDB.collection("Currency");
+
+        currencyReference.get()
+                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                    @Override
+                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                        if (!queryDocumentSnapshots.isEmpty()) {
+                            UserHomeActivity.currencyList = new ArrayList<>();
+                            List<DocumentSnapshot> documentSnapshotList = queryDocumentSnapshots.getDocuments();
+                            for (DocumentSnapshot documentSnapshot : documentSnapshotList) {
+                                UserHomeActivity.currencyList.add(documentSnapshot.toObject(CurrencyModel.class));
+                            }
+                        }
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                    }
+                });
+    }
+
+    public static void getCuisineTypeList() {
+        CollectionReference cuisineTypesReference = firestoreDB.collection("CuisineTypes");
+
+        cuisineTypesReference.get()
+                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                    @Override
+                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                        if (!queryDocumentSnapshots.isEmpty()) {
+                            UserHomeActivity.cuisineTypeList = new ArrayList<>();
+                            List<DocumentSnapshot> documentSnapshotList = queryDocumentSnapshots.getDocuments();
+                            for (DocumentSnapshot documentSnapshot : documentSnapshotList) {
+                                UserHomeActivity.cuisineTypeList.add(documentSnapshot.toObject(CuisineTypeModel.class));
+                            }
+                        }
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                    }
+                });
     }
 
     public static IndexModel GetDocumentIndex(String CollectionName) {

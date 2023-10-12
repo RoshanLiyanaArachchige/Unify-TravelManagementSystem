@@ -2,7 +2,9 @@ package com.rlabdevs.unifymobile.activities.directions;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
@@ -59,6 +61,14 @@ public class GetDirectionsActivity extends AppCompatActivity implements OnMapRea
         desLongitude = getIntent().getDoubleExtra("DesLongitude", 0);
         orgLatitude = getIntent().getDoubleExtra("OrgLatitude", 0);
         orgLongitude = getIntent().getDoubleExtra("OrgLongitude", 0);
+
+        Uri gmmIntentUri = Uri.parse("google.navigation:q=" + desLatitude + "," + desLongitude + "&mode=d");
+        Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+        mapIntent.setPackage("com.google.android.apps.maps");
+        if (mapIntent.resolveActivity(getPackageManager()) != null) {
+            startActivity(mapIntent);
+            finish();
+        }
     }
 
     @Override

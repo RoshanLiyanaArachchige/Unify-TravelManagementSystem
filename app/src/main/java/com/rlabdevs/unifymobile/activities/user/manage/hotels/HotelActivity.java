@@ -43,6 +43,7 @@ import com.rlabdevs.unifymobile.R;
 import com.rlabdevs.unifymobile.activities.MainActivity;
 import com.rlabdevs.unifymobile.activities.UserHomeActivity;
 import com.rlabdevs.unifymobile.activities.account.UserProfileActivity;
+import com.rlabdevs.unifymobile.activities.location.ConfigureLocationActivity;
 import com.rlabdevs.unifymobile.activities.user.MenuActivity;
 import com.rlabdevs.unifymobile.activities.user.manage.hotels.rooms.HotelRoomsActivity;
 import com.rlabdevs.unifymobile.common.Functions;
@@ -67,9 +68,9 @@ public class HotelActivity extends AppCompatActivity implements View.OnClickList
 
     private HotelActivity hotelActivity;
 
-    public static TextView tvHotelClass, tvCurrency, tvHotelLocation, tvCheckIn, tvCheckOut;
+    public static TextView tvHotelClass, tvCurrency, tvHotelLocation, txtCheckIn, txtCheckOut;
     private ImageView imgViewHotelImage, imgViewSelectCoverImage;
-    private EditText txtHotelCode, txtHotelName, txtTelephoneNo, txtBudget;
+    private EditText txtHotelCode, txtHotelName, txtHotelDescription, txtTelephoneNo, txtBudget;
     private CheckBox chkFreeWIFI, chkAirConditioned, chkFreeBreakfast, chkTeaCoffee, chkBar, chkRoomService, chkTelevision, chkPool, chkSpa, chkParking;
     private Button btnSaveHotel, btnManageRooms;
 
@@ -87,7 +88,8 @@ public class HotelActivity extends AppCompatActivity implements View.OnClickList
     private Bitmap hotelCoverBitmap;
 
     public static String currencyCode;
-    private String hotelCode;
+    private String hotelCode, locationCode, locationName;
+    private Double latitude, longitude;
     private boolean isHotelCoverSelected, isHotelCoverUpdated, isSetupRoomsConfirmationDialogVisible;
 
     @Override
@@ -102,13 +104,14 @@ public class HotelActivity extends AppCompatActivity implements View.OnClickList
         imgViewSelectCoverImage = findViewById(R.id.imgViewSelectCoverImage);
         txtHotelCode = findViewById(R.id.txtHotelCode);
         txtHotelName = findViewById(R.id.txtHotelName);
+        txtHotelDescription = findViewById(R.id.txtHotelDescription);
         txtTelephoneNo = findViewById(R.id.txtTelephoneNo);
         txtBudget = findViewById(R.id.txtBudget);
         tvCurrency = findViewById(R.id.tvCurrency);
         tvHotelClass = findViewById(R.id.tvHotelClass);
         tvHotelLocation = findViewById(R.id.tvHotelLocation);
-        tvCheckIn = findViewById(R.id.tvCheckIn);
-        tvCheckOut = findViewById(R.id.tvCheckOut);
+        txtCheckIn = findViewById(R.id.txtCheckIn);
+        txtCheckOut = findViewById(R.id.txtCheckOut);
         chkFreeWIFI = findViewById(R.id.chkFreeWIFI);
         chkAirConditioned = findViewById(R.id.chkAirConditioned);
         chkTeaCoffee = findViewById(R.id.chkTeaCoffee);
@@ -127,6 +130,7 @@ public class HotelActivity extends AppCompatActivity implements View.OnClickList
         btnSaveHotel.setOnClickListener(this);
         tvHotelClass.setOnClickListener(this);
         tvCurrency.setOnClickListener(this);
+        tvHotelLocation.setOnClickListener(this);
 
         hotelCode = getIntent().getStringExtra("HotelCode");
 
@@ -142,46 +146,6 @@ public class HotelActivity extends AppCompatActivity implements View.OnClickList
 
         if (myHotelModel != null) InitHotel();
         else InitHotelRegistration();
-    }
-
-    private void GetCurrencyList() {
-        currencyReference.whereEqualTo("statusCode", StatusCode.Active.getStatusCode()).get()
-                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-                    @Override
-                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                        if (!queryDocumentSnapshots.isEmpty()) {
-                            currencyList = new ArrayList<>();
-                            List<DocumentSnapshot> documentSnapshotList = queryDocumentSnapshots.getDocuments();
-                            for (DocumentSnapshot documentSnapshot : documentSnapshotList) {
-                                CurrencyModel currency = documentSnapshot.toObject(CurrencyModel.class);
-                                currencyList.add(currency);
-                                if (myHotelModel != null)
-                                    if (myHotelModel.getCurrencyCode().equals(currency.getCurrencyCode()))
-                                    {
-                                        tvCurrency.setText(currency.getSymbol());
-                                        currencyCode = currency.getCurrencyCode();
-                                    }
-                            }
-
-                            hotelActivity.runOnUiThread(new Runnable() {
-                                public void run() {
-                                    Functions.HideProgressBar();
-                                }
-                            });
-                        }
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        hotelActivity.runOnUiThread(new Runnable() {
-                            public void run() {
-                                Functions.HideProgressBar();
-                                new Functions().ShowErrorDialog("Currency Load Error !", "Try Again", HotelActivity.this);
-                            }
-                        });
-                    }
-                });
     }
 
     private void InitHotelRegistration() {
@@ -206,8 +170,12 @@ public class HotelActivity extends AppCompatActivity implements View.OnClickList
                                         hotelCode = hotelDetailsIndex.getPrefix() + (hotelDetailsIndex.getCurrentCount() + 1);
                                         txtHotelCode.setText(hotelCode + " (Registration Code)");
                                     }
-                                    GetCurrencyList();
                                 }
+                                hotelActivity.runOnUiThread(new Runnable() {
+                                    public void run() {
+                                        Functions.HideProgressBar();
+                                    }
+                                });
                             }
                         })
                         .addOnFailureListener(new OnFailureListener() {
@@ -255,6 +223,7 @@ public class HotelActivity extends AppCompatActivity implements View.OnClickList
                 btnManageRooms.setVisibility(View.VISIBLE);
                 txtHotelCode.setText(myHotelModel.getHotelCode() + " (Registration Code)");
                 txtHotelName.setText(myHotelModel.getHotelName());
+                txtHotelDescription.setText(myHotelModel.getHotelDescription());
                 tvHotelLocation.setText(myHotelModel.getHotelLocation());
                 tvHotelClass.setText(myHotelModel.getHotelClass() + " Star");
                 txtTelephoneNo.setText(myHotelModel.getHotelTelNo());
@@ -270,7 +239,15 @@ public class HotelActivity extends AppCompatActivity implements View.OnClickList
                 chkSpa.setChecked(myHotelModel.isSpa());
                 chkParking.setChecked(myHotelModel.isParking());
 
-                GetCurrencyList();
+                locationCode = myHotelModel.getLocationCode();
+                locationName = UserHomeActivity.locationList.stream().filter(c -> c.getLocationCode().equals(locationCode)).findFirst().get().getLocationName();
+
+                latitude = myHotelModel.getLongitude();
+                longitude = myHotelModel.getLongitude();
+
+                currencyCode = myHotelModel.getCurrencyCode();
+                String currencySymbol = UserHomeActivity.currencyList.stream().filter(c -> c.getCurrencyCode().equals(currencyCode)).findFirst().get().getSymbol();
+                tvCurrency.setText(currencySymbol);
 
                 hotelActivity.runOnUiThread(new Runnable() {
                     public void run() {
@@ -298,8 +275,8 @@ public class HotelActivity extends AppCompatActivity implements View.OnClickList
                         myHotelModel.setHotelLocation(tvHotelLocation.getText().toString().trim());
                         myHotelModel.setHotelClass(Integer.parseInt(tvHotelClass.getText().toString().replace(" Star", "")));
                         myHotelModel.setHotelTelNo(txtTelephoneNo.getText().toString().trim());
-                        myHotelModel.setCheckIn(tvCheckIn.getText().toString().trim());
-                        myHotelModel.setCheckOut(tvCheckOut.getText().toString().trim());
+                        myHotelModel.setCheckIn(txtCheckIn.getText().toString().trim());
+                        myHotelModel.setCheckOut(txtCheckOut.getText().toString().trim());
                         myHotelModel.setBudget(Double.parseDouble(txtBudget.getText().toString().trim()));
                         myHotelModel.setCurrencyCode(currencyCode);
                         myHotelModel.setFreeWIFI(chkFreeWIFI.isChecked());
@@ -424,8 +401,8 @@ public class HotelActivity extends AppCompatActivity implements View.OnClickList
                         myHotelModel.setHotelLocation(tvHotelLocation.getText().toString().trim());
                         myHotelModel.setHotelClass(Integer.parseInt(tvHotelClass.getText().toString().replace(" Star", "")));
                         myHotelModel.setHotelTelNo(txtTelephoneNo.getText().toString().trim());
-                        myHotelModel.setCheckIn(tvCheckIn.getText().toString().trim());
-                        myHotelModel.setCheckOut(tvCheckOut.getText().toString().trim());
+                        myHotelModel.setCheckIn(txtCheckIn.getText().toString().trim());
+                        myHotelModel.setCheckOut(txtCheckOut.getText().toString().trim());
                         myHotelModel.setBudget(Double.parseDouble(txtBudget.getText().toString().trim()));
                         myHotelModel.setCurrencyCode(currencyCode);
                         myHotelModel.setFreeWIFI(chkFreeWIFI.isChecked());
@@ -558,10 +535,17 @@ public class HotelActivity extends AppCompatActivity implements View.OnClickList
             return new Functions().ShowErrorDialog("Hotel Name: Enter Letters And Spaces Only !", "Try Again", this);
         }
 
+        String hotelDescription = txtHotelDescription.getText().toString().trim();
+        if (hotelDescription.equals("")) {
+            return new Functions().ShowErrorDialog("Hotel Description Required !", "Okay", this);
+        } else if (hotelDescription.length() < 10) {
+            return new Functions().ShowErrorDialog("Describe More About Hotel !", "Try Again", this);
+        }
+
         String hotelLocation = tvHotelLocation.getText().toString().trim();
         if (hotelLocation.equals("")) {
             return new Functions().ShowErrorDialog("Hotel Location Required !", "Okay", this);
-        } else if (hotelName.length() < 3) {
+        } else if (hotelLocation.length() < 3) {
             return new Functions().ShowErrorDialog("Enter Valid Hotel Location !", "Try Again", this);
         }
 
@@ -575,6 +559,16 @@ public class HotelActivity extends AppCompatActivity implements View.OnClickList
             return new Functions().ShowErrorDialog("Enter Telephone No !", "Okay", this);
         } else if (!Regex.ValidatePhoneNo(telephoneNo)) {
             return new Functions().ShowErrorDialog("Enter Valid Phone Number !", "Try Again", this);
+        }
+
+        String checkInTime = txtCheckIn.getText().toString().trim();
+        if (checkInTime.equals("")) {
+            return new Functions().ShowErrorDialog("Enter Check-In Time !", "Okay", this);
+        }
+
+        String checkOutTime = txtCheckOut.getText().toString().trim();
+        if (checkOutTime.equals("")) {
+            return new Functions().ShowErrorDialog("Enter Check-Out Time !", "Okay", this);
         }
 
         String roomBudget = txtBudget.getText().toString().trim();
@@ -612,6 +606,10 @@ public class HotelActivity extends AppCompatActivity implements View.OnClickList
                 SelectCurrencyUnit();
                 break;
             }
+            case R.id.tvHotelLocation: {
+                SelectHotelLocation();
+                break;
+            }
             case R.id.imgViewSelectCoverImage: {
                 SelectHotelCoverImage();
                 break;
@@ -620,19 +618,20 @@ public class HotelActivity extends AppCompatActivity implements View.OnClickList
                 ManageHotelRooms();
                 break;
             }
-            case R.id.tvCheckIn: {
-                SelectCheckinCheckout(R.id.tvCheckIn);
-                break;
-            }
-            case R.id.tvCheckOut: {
-                SelectCheckinCheckout(R.id.tvCheckOut);
-                break;
-            }
         }
     }
 
-    private void SelectCheckinCheckout(int tvCheckInCheckOut) {
-
+    private void SelectHotelLocation() {
+        Intent intent = new Intent(HotelActivity.this, ConfigureLocationActivity.class);
+        if(locationCode != null && locationName != null) {
+            intent.putExtra("LocationCode", locationCode);
+            intent.putExtra("LocationName", locationName);
+        }
+        if(latitude != null && longitude != null) {
+            intent.putExtra("Latitude", latitude);
+            intent.putExtra("Longitude", longitude);
+        }
+        startActivity(intent);
     }
 
     private void SelectHotelCoverImage() {

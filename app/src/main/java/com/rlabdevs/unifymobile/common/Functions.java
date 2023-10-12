@@ -39,6 +39,7 @@ import com.rlabdevs.unifymobile.models.CuisineTypeModel;
 import com.rlabdevs.unifymobile.models.CurrencyModel;
 import com.rlabdevs.unifymobile.models.HotelModel;
 import com.rlabdevs.unifymobile.models.IndexModel;
+import com.rlabdevs.unifymobile.models.LocationModel;
 import com.rlabdevs.unifymobile.models.SelectorItemModel;
 
 import java.util.ArrayList;
@@ -304,6 +305,29 @@ public class Functions implements DialogInterface.OnDismissListener {
                             List<DocumentSnapshot> documentSnapshotList = queryDocumentSnapshots.getDocuments();
                             for (DocumentSnapshot documentSnapshot : documentSnapshotList) {
                                 UserHomeActivity.currencyList.add(documentSnapshot.toObject(CurrencyModel.class));
+                            }
+                        }
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                    }
+                });
+    }
+
+    public static void getLocationList() {
+        CollectionReference locationReference = firestoreDB.collection("Location");
+
+        locationReference.get()
+                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                    @Override
+                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                        if (!queryDocumentSnapshots.isEmpty()) {
+                            UserHomeActivity.locationList = new ArrayList<>();
+                            List<DocumentSnapshot> documentSnapshotList = queryDocumentSnapshots.getDocuments();
+                            for (DocumentSnapshot documentSnapshot : documentSnapshotList) {
+                                UserHomeActivity.locationList.add(documentSnapshot.toObject(LocationModel.class));
                             }
                         }
                     }

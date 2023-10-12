@@ -7,10 +7,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -24,6 +26,9 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.gson.Gson;
 import com.rlabdevs.unifymobile.R;
+import com.rlabdevs.unifymobile.activities.directions.GetDirectionsActivity;
+import com.rlabdevs.unifymobile.activities.thingstodo.ThingsToDoActivity;
+import com.rlabdevs.unifymobile.activities.thingstodo.ThingsToDoViewActivity;
 import com.rlabdevs.unifymobile.activities.user.manage.hotels.rooms.HotelRoomsActivity;
 import com.rlabdevs.unifymobile.adapters.HotelRoomsAdapter;
 import com.rlabdevs.unifymobile.adapters.MyHotelsAdapter;
@@ -43,10 +48,11 @@ public class HotelViewActivity extends AppCompatActivity {
 
     private RelativeLayout relativeLayoutHotel;
     private TextView tvHotelName, tvHotelClass;
-    private EditText txtHotelLocation, txtTelephoneNo, txtCheckInOut;
+    private EditText txtHotelDescription, txtHotelLocation, txtTelephoneNo, txtCheckInOut;
     private ImageView imgViewHotelImage;
     private SpinKitView spinKitProgress;
     private RecyclerView recyclerViewHotelRooms;
+    private Button btnGetDirections;
 
     private CollectionReference roomsReference, roomTypesReference;
     private List<RoomModel> hotelRoomsList;
@@ -75,11 +81,15 @@ public class HotelViewActivity extends AppCompatActivity {
         relativeLayoutHotel = findViewById(R.id.relativeLayoutHotel);
         tvHotelName = findViewById(R.id.tvHotelName);
         tvHotelClass = findViewById(R.id.tvHotelClass);
+        txtHotelDescription = findViewById(R.id.txtHotelDescription);
         txtHotelLocation = findViewById(R.id.txtHotelLocation);
         txtTelephoneNo = findViewById(R.id.txtTelephoneNo);
         txtCheckInOut = findViewById(R.id.txtCheckInOut);
         imgViewHotelImage = findViewById(R.id.imgViewHotelImage);
         spinKitProgress = findViewById(R.id.spinKitProgress);
+
+        btnGetDirections = findViewById(R.id.btnGetDirections);
+        btnGetDirections.setOnClickListener(getDirectionsOnClickListener);
 
         Picasso.with(hotelViewActivity).load(hotel.getHotelImage()).into(new Target() {
             @Override
@@ -98,11 +108,23 @@ public class HotelViewActivity extends AppCompatActivity {
             }
         });
 
+        tvHotelName.setText(hotel.getHotelName());
+        txtHotelDescription.setText(hotel.getHotelDescription());
         txtHotelLocation.setText("Location: " + hotel.getHotelLocation());
         tvHotelClass.setText("Class: " + hotel.getHotelClass() + " Star");
         txtTelephoneNo.setText("Tel No: " + hotel.getHotelTelNo());
         txtCheckInOut.setText("In/Out: " + hotel.getCheckIn() + "/" + hotel.getCheckOut());
     }
+
+    private View.OnClickListener getDirectionsOnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            Intent thingsToDoViewIntent = new Intent(HotelViewActivity.this, GetDirectionsActivity.class);
+            thingsToDoViewIntent.putExtra("DesLatitude", hotel.getLatitude());
+            thingsToDoViewIntent.putExtra("DesLongitude", hotel.getLongitude());
+            startActivity(thingsToDoViewIntent);
+        }
+    };
 
     private void InitRecyclerViewHotelRooms() {
         recyclerViewHotelRooms = findViewById(R.id.recyclerViewHotelRooms);

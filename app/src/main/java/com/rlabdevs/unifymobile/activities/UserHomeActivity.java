@@ -5,19 +5,25 @@ import androidx.cardview.widget.CardView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.rlabdevs.unifymobile.R;
 import com.rlabdevs.unifymobile.activities.account.LoginActivity;
 import com.rlabdevs.unifymobile.activities.explore.ExploreActivity;
 import com.rlabdevs.unifymobile.activities.hotels.HotelFilterActivity;
+import com.rlabdevs.unifymobile.activities.search.SearchResultsActivity;
 import com.rlabdevs.unifymobile.activities.thingstodo.ThingsToDoActivity;
 import com.rlabdevs.unifymobile.activities.thingstodo.ThingsToDoViewActivity;
 import com.rlabdevs.unifymobile.activities.user.MenuActivity;
 import com.rlabdevs.unifymobile.common.Functions;
 import com.rlabdevs.unifymobile.models.CuisineTypeModel;
 import com.rlabdevs.unifymobile.models.CurrencyModel;
+import com.rlabdevs.unifymobile.models.LocationModel;
 
 import java.util.List;
 
@@ -25,8 +31,10 @@ public class UserHomeActivity extends AppCompatActivity implements View.OnClickL
 
     private CardView cardViewExplore, cardViewThingsToDo, cardViewHotels;
     private ImageView imgViewAccount;
+    private EditText txtSearch;
 
     public static List<CurrencyModel> currencyList;
+    public static List<LocationModel> locationList;
     public static List<CuisineTypeModel> cuisineTypeList;
 
     @Override
@@ -36,7 +44,26 @@ public class UserHomeActivity extends AppCompatActivity implements View.OnClickL
         InitUI();
 
         Functions.getCurrencyTypeList();
+        Functions.getLocationList();
         Functions.getCuisineTypeList();
+
+        txtSearch = findViewById(R.id.txtSearch);
+        txtSearch.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
+                if (i == EditorInfo.IME_ACTION_SEARCH || (keyEvent != null && keyEvent.getAction() == KeyEvent.ACTION_DOWN && keyEvent.getKeyCode() == KeyEvent.KEYCODE_ENTER)) {
+                    String searchText = (txtSearch.getText().toString() + "").trim();
+                    if(!searchText.equals("")) {
+                        txtSearch.setText("");
+                        Intent intent = new Intent(UserHomeActivity.this, SearchResultsActivity.class);
+                        intent.putExtra("SearchText", searchText);
+                        startActivity(intent);
+                    }
+                    return true;
+                }
+                return false;
+            }
+        });
     }
 
     private void InitUI() {

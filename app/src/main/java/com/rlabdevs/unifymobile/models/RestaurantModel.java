@@ -7,6 +7,7 @@ public class RestaurantModel {
     private String RestaurantCode;
     private String RestaurantName;
     private String RestaurantLocation;
+    private String LocationCode;
     private int RestaurantClass;
     private double RestaurantRating;
     private double AveragePrice;
@@ -28,11 +29,12 @@ public class RestaurantModel {
     public RestaurantModel() {
     }
 
-    public RestaurantModel(String ID, String restaurantCode, String restaurantName, String restaurantLocation, int restaurantClass, double restaurantRating, double averagePrice, String currencyCode, String restaurantTelNo, String openingHour, String closingHour, String restaurantImage, boolean freeWIFI, boolean beverages, boolean pool, boolean parking, boolean takeaway, List<String> cuisineTypes, String userDetailsCode, String statusCode, double latitude, double longitude) {
+    public RestaurantModel(String ID, String restaurantCode, String restaurantName, String restaurantLocation, String locationCode, int restaurantClass, double restaurantRating, double averagePrice, String currencyCode, String restaurantTelNo, String openingHour, String closingHour, String restaurantImage, boolean freeWIFI, boolean beverages, boolean parking, boolean takeaway, List<String> cuisineTypes, String userDetailsCode, String statusCode, double latitude, double longitude) {
         this.ID = ID;
         RestaurantCode = restaurantCode;
         RestaurantName = restaurantName;
         RestaurantLocation = restaurantLocation;
+        LocationCode = locationCode;
         RestaurantClass = restaurantClass;
         RestaurantRating = restaurantRating;
         AveragePrice = averagePrice;
@@ -82,6 +84,14 @@ public class RestaurantModel {
 
     public void setRestaurantLocation(String restaurantLocation) {
         RestaurantLocation = restaurantLocation;
+    }
+
+    public String getLocationCode() {
+        return LocationCode;
+    }
+
+    public void setLocationCode(String locationCode) {
+        LocationCode = locationCode;
     }
 
     public int getRestaurantClass() {

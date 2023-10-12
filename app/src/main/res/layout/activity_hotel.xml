@@ -73,7 +73,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:scaleType="fitXY"
-                    android:src="@drawable/hotel1" />
+                    android:src="@drawable/img_bg_light_rad_10" />
 
                 <ImageView
                     android:id="@+id/imgViewSelectCoverImage"
@@ -163,11 +163,41 @@
                 android:alpha="0.9"
                 android:src="@drawable/hotel" />
 
+            <EditText
+                android:id="@+id/txtHotelDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/imgViewHotelName"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="7dp"
+                android:background="@drawable/edit_text_bg_light_rad_10"
+                android:gravity="top"
+                android:hint="Enter Hotel Description"
+                android:inputType="textMultiLine"
+                android:minHeight="100dp"
+                android:paddingStart="50dp"
+                android:paddingTop="10dp"
+                android:paddingEnd="15dp"
+                android:singleLine="true"
+                android:textColor="@color/grey_regular" />
+
+            <ImageView
+                android:id="@+id/imgViewHotelDescription"
+                android:layout_width="35dp"
+                android:layout_height="30dp"
+                android:layout_alignStart="@id/txtHotelDescription"
+                android:layout_alignTop="@id/txtHotelDescription"
+                android:layout_marginStart="7dp"
+                android:layout_marginTop="7dp"
+                android:alpha="0.6"
+                android:padding="3dp"
+                android:src="@drawable/hotel_description" />
+
             <TextView
                 android:id="@+id/tvHotelLocation"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:layout_below="@id/txtHotelName"
+                android:layout_below="@id/txtHotelDescription"
                 android:layout_marginTop="7dp"
                 android:background="@drawable/edit_text_bg_light_rad_10"
                 android:gravity="center_vertical"
@@ -245,8 +275,8 @@
                 android:alpha="0.9"
                 android:src="@drawable/phone_message" />
 
-            <TextView
-                android:id="@+id/tvCheckIn"
+            <EditText
+                android:id="@+id/txtCheckIn"
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
                 android:layout_below="@id/txtTelephoneNo"
@@ -258,18 +288,18 @@
                 android:paddingStart="50dp"
                 android:paddingEnd="15dp"
                 android:singleLine="true"
-                android:text="Check-In"
+                android:hint="Check-In"
                 android:textColor="@color/grey_regular"
                 android:textSize="19sp" />
 
-            <TextView
-                android:id="@+id/tvCheckOut"
+            <EditText
+                android:id="@+id/txtCheckOut"
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
                 android:layout_below="@id/txtTelephoneNo"
                 android:layout_marginStart="7dp"
                 android:layout_marginTop="7dp"
-                android:layout_toEndOf="@id/tvCheckIn"
+                android:layout_toEndOf="@id/txtCheckIn"
                 android:background="@drawable/edit_text_bg_light_rad_10"
                 android:gravity="center_vertical"
                 android:maxLines="1"
@@ -277,7 +307,7 @@
                 android:paddingStart="15dp"
                 android:paddingEnd="15dp"
                 android:singleLine="true"
-                android:text="Check-Out"
+                android:hint="Check-Out"
                 android:textColor="@color/grey_regular"
                 android:textSize="19sp" />
 
@@ -285,19 +315,19 @@
                 android:id="@+id/imgViewCheckInOut"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:layout_alignStart="@id/tvCheckIn"
-                android:layout_alignTop="@id/tvCheckIn"
-                android:layout_alignBottom="@id/tvCheckIn"
+                android:layout_alignStart="@id/txtCheckIn"
+                android:layout_alignTop="@id/txtCheckIn"
+                android:layout_alignBottom="@id/txtCheckIn"
                 android:layout_marginStart="10dp"
-                android:alpha="0.9"
-                android:src="@drawable/phone_message" />
+                android:alpha="0.55"
+                android:src="@drawable/checkin" />
 
 
             <TextView
                 android:id="@+id/tvRoomSummary"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/tvCheckIn"
+                android:layout_below="@id/txtCheckIn"
                 android:layout_alignParentEnd="true"
                 android:layout_marginTop="30dp"
                 android:paddingTop="3dp"

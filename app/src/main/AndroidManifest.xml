@@ -14,6 +14,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.UnifyMobile">
         <activity
+            android:name=".activities.search.SearchResultsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.location.ConfigureLocationActivity"
+            android:exported="false" />
+        <activity
             android:name=".activities.directions.GetDirectionsActivity"
             android:exported="false" />
         <activity

@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="30dp"
+    tools:context=".activities.location.ConfigureLocationActivity">
+
+    <TextView
+        android:id="@+id/tvSelectLocationHeading"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Configure Location"
+        android:textColor="@color/grey_regular"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tvHotelCity"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_below="@id/tvSelectLocationHeading"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/edit_text_bg_light_rad_10"
+        android:gravity="center_vertical"
+        android:maxLines="1"
+        android:paddingStart="50dp"
+        android:paddingEnd="15dp"
+        android:singleLine="true"
+        android:text="Select City"
+        android:textColor="@color/grey_light"
+        android:textSize="19sp" />
+
+    <ImageView
+        android:id="@+id/imgViewCity"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_alignStart="@id/tvHotelCity"
+        android:layout_alignTop="@id/tvHotelCity"
+        android:layout_alignBottom="@id/tvHotelCity"
+        android:layout_marginStart="10dp"
+        android:alpha="0.9"
+        android:src="@drawable/address" />
+
+    <TextView
+        android:id="@+id/tvPlaceMarker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvHotelCity"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="20dp"
+        android:paddingTop="3dp"
+        android:paddingBottom="3dp"
+        android:text="Pin On Google Maps"
+        android:textColor="@color/grey_regular"
+        android:textSize="18sp" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/btnSelectLocation"
+        android:layout_below="@id/tvPlaceMarker"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/mapview_background"
+        android:padding="2dp">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardViewMap"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:elevation="10dp"
+            app:cardCornerRadius="8dp">
+
+            <fragment
+                android:id="@+id/fragmentMap"
+                android:name="com.google.android.gms.maps.SupportMapFragment"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+        </androidx.cardview.widget.CardView>
+
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/btnSelectLocation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/button_bg_light_active_rad_10"
+        android:text="Select Location"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+</RelativeLayout>

@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/relativeLayoutHotelFilter"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:animateLayoutChanges="true"
+    android:background="@color/white"
+    tools:context=".activities.hotels.HotelFilterActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="30dp"
+            android:paddingRight="30dp">
+
+            <TextView
+                android:id="@+id/tvSearchResultsHeading"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:text="Search Results"
+                android:textColor="@color/grey_regular"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <RelativeLayout
+                android:id="@+id/relativeLayoutHotels"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvSearchResultsHeading"
+                android:layout_marginTop="30dp">
+
+                <TextView
+                    android:id="@+id/tvHotelsHeading"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Hotels"
+                    android:textColor="@color/grey_regular"
+                    android:textSize="18sp" />
+
+                <com.github.ybq.android.spinkit.SpinKitView
+                    android:id="@+id/spinKitProgressHotels"
+                    style="@style/SpinKitView.ThreeBounce"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:layout_below="@id/tvHotelsHeading"
+                    android:visibility="visible"
+                    app:SpinKit_Color="@color/grey_regular" />
+
+                <LinearLayout
+                    android:id="@+id/linearLayoutHotelNoResults"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_below="@id/spinKitProgressHotels"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/no_results_background"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="10dp"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Sorry, there are no hotels for the search text."
+                        android:textColor="@color/royal_red_01"
+                        android:textSize="14sp" />
+
+                </LinearLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerViewHotels"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@id/linearLayoutHotelNoResults"
+                    android:layout_marginTop="10dp" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/relativeLayoutRestaurants"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/relativeLayoutHotels"
+                android:layout_marginTop="30dp">
+
+                <TextView
+                    android:id="@+id/tvRestaurantsHeading"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Restaurants"
+                    android:textColor="@color/grey_regular"
+                    android:textSize="18sp" />
+
+                <com.github.ybq.android.spinkit.SpinKitView
+                    android:id="@+id/spinKitProgressRestaurants"
+                    style="@style/SpinKitView.ThreeBounce"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:layout_below="@id/tvRestaurantsHeading"
+                    android:visibility="visible"
+                    app:SpinKit_Color="@color/grey_regular" />
+
+                <LinearLayout
+                    android:id="@+id/linearLayoutRestaurantNoResults"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_below="@id/spinKitProgressRestaurants"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/no_results_background"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="10dp"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Sorry, there are no restaurants for the search text."
+                        android:textColor="@color/royal_red_01"
+                        android:textSize="14sp" />
+
+                </LinearLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerViewRestaurants"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@id/linearLayoutRestaurantNoResults"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="30dp" />
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+</RelativeLayout>

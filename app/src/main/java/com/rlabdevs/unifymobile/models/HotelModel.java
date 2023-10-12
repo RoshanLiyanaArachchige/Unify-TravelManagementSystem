@@ -5,7 +5,9 @@ public class HotelModel {
     private String ID;
     private String HotelCode;
     private String HotelName;
+    private String HotelDescription;
     private String HotelLocation;
+    private String LocationCode;
     private int HotelClass;
     private double HotelRating;
     private double Budget;
@@ -32,11 +34,13 @@ public class HotelModel {
     public HotelModel() {
     }
 
-    public HotelModel(String ID, String hotelCode, String hotelName, String hotelLocation, int hotelClass, double hotelRating, double budget, String currencyCode, String hotelTelNo, String checkIn, String checkOut, String hotelImage, boolean freeWIFI, boolean airConditioned, boolean freeBreakfast, boolean teaCoffee, boolean bar, boolean roomService, boolean television, boolean pool, boolean parking, boolean spa, String userDetailsCode, String statusCode, double latitude, double longitude) {
+    public HotelModel(String ID, String hotelCode, String hotelName, String hotelDescription, String hotelLocation, String locationCode, int hotelClass, double hotelRating, double budget, String currencyCode, String hotelTelNo, String checkIn, String checkOut, String hotelImage, boolean freeWIFI, boolean airConditioned, boolean freeBreakfast, boolean teaCoffee, boolean bar, boolean roomService, boolean television, boolean pool, boolean parking, boolean spa, String userDetailsCode, String statusCode, double latitude, double longitude) {
         this.ID = ID;
         HotelCode = hotelCode;
         HotelName = hotelName;
+        HotelDescription = hotelDescription;
         HotelLocation = hotelLocation;
+        LocationCode = locationCode;
         HotelClass = hotelClass;
         HotelRating = hotelRating;
         Budget = budget;
@@ -85,12 +89,28 @@ public class HotelModel {
         HotelName = hotelName;
     }
 
+    public String getHotelDescription() {
+        return HotelDescription;
+    }
+
+    public void setHotelDescription(String hotelDescription) {
+        HotelDescription = hotelDescription;
+    }
+
     public String getHotelLocation() {
         return HotelLocation;
     }
 
     public void setHotelLocation(String hotelLocation) {
         HotelLocation = hotelLocation;
+    }
+
+    public String getLocationCode() {
+        return LocationCode;
+    }
+
+    public void setLocationCode(String locationCode) {
+        LocationCode = locationCode;
     }
 
     public int getHotelClass() {

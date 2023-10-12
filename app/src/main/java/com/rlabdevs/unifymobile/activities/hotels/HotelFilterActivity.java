@@ -29,10 +29,12 @@ import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.rlabdevs.unifymobile.R;
+import com.rlabdevs.unifymobile.activities.UserHomeActivity;
 import com.rlabdevs.unifymobile.adapters.HotelFilterAdapter;
 import com.rlabdevs.unifymobile.adapters.ItemSelectorAdapter;
 import com.rlabdevs.unifymobile.common.Functions;
 import com.rlabdevs.unifymobile.models.HotelModel;
+import com.rlabdevs.unifymobile.models.LocationModel;
 import com.rlabdevs.unifymobile.models.SelectorItemModel;
 
 import java.util.ArrayList;
@@ -172,7 +174,7 @@ public class HotelFilterActivity extends AppCompatActivity implements View.OnCli
             while(hotelModelIterator.hasNext())
             {
                 HotelModel hotelFilter = hotelModelIterator.next();
-                if(hotelFilter.getHotelClass() < classVal)
+                if(hotelFilter.getHotelClass() != classVal)
                     hotelModelIterator.remove();
             }
         }
@@ -291,21 +293,10 @@ public class HotelFilterActivity extends AppCompatActivity implements View.OnCli
 
     private void ChangeHotelLocation() {
         List<SelectorItemModel> itemList = new ArrayList<>();
-        itemList.add(new SelectorItemModel("ITM1", "Any"));
-        itemList.add(new SelectorItemModel("ITM2", "Ampara"));
-        itemList.add(new SelectorItemModel("ITM3", "Anuradhapura"));
-        itemList.add(new SelectorItemModel("ITM4", "Badulla"));
-        itemList.add(new SelectorItemModel("ITM5", "Batticola"));
-        itemList.add(new SelectorItemModel("ITM6", "Colombo"));
-        itemList.add(new SelectorItemModel("ITM7", "Galle"));
-        itemList.add(new SelectorItemModel("ITM8", "Gampaha"));
-        itemList.add(new SelectorItemModel("ITM9", "Hambantota"));
-        itemList.add(new SelectorItemModel("ITM10", "Jaffna"));
-        itemList.add(new SelectorItemModel("ITM11", "Kalutara"));
-        itemList.add(new SelectorItemModel("ITM12", "Kandy"));
-        itemList.add(new SelectorItemModel("ITM13", "Kegalle"));
-        itemList.add(new SelectorItemModel("ITM14", "Kurunegala"));
-        itemList.add(new SelectorItemModel("ITM15", "Mannar"));
+        itemList.add(new SelectorItemModel("", "Any"));
+        for(LocationModel locationData : UserHomeActivity.locationList) {
+            itemList.add(new SelectorItemModel(locationData.getLocationCode(), locationData.getLocationName()));
+        }
         new Functions().ShowItemSelector("Select Hotel Location", itemList, HotelFilterActivity.this, tvLocationName, null);
     }
 

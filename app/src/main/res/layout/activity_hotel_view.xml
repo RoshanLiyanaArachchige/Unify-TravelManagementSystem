@@ -68,7 +68,6 @@
             android:id="@+id/txtHotelDescription"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:minHeight="100dp"
             android:layout_below="@id/tvHotelDescription"
             android:layout_alignParentStart="true"
             android:layout_marginTop="7dp"
@@ -77,9 +76,11 @@
             android:gravity="top"
             android:hint="Enter Hotel Description"
             android:inputType="textMultiLine"
+            android:minHeight="100dp"
             android:paddingStart="50dp"
             android:paddingTop="10dp"
             android:paddingEnd="15dp"
+            android:paddingBottom="10dp"
             android:singleLine="true"
             android:textColor="@color/grey_regular" />
 

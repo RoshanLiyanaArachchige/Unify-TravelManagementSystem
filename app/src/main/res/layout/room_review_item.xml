@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="7dp"
+    android:background="@drawable/card_bg_white"
+    android:padding="10dp">
+
+    <TextView
+        android:id="@+id/tvReviewContent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="This is a sample review content"
+        android:textColor="@color/grey_regular"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/tvReviewDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvReviewContent"
+        android:layout_marginTop="7dp"
+        android:text="2023/01/02"
+        android:textAlignment="textEnd"
+        android:textColor="@color/grey_regular"
+        android:textSize="16sp" />
+
+</RelativeLayout>

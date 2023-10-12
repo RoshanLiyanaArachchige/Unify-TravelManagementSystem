@@ -181,7 +181,11 @@ public class RoomActivity extends AppCompatActivity implements View.OnClickListe
                 txtRoomTypeCode.setText(roomModel.getRoomTypeCode());
                 txtRoomDescription.setText(roomModel.getRoomDescription());
                 txtRoomPrice.setText(String.valueOf(roomModel.getRoomPrice()));
+
                 currencyCode = roomModel.getCurrencyCode();
+                String currencySymbol = UserHomeActivity.currencyList.stream().filter(c -> c.getCurrencyCode().equals(currencyCode)).findFirst().get().getSymbol();
+                tvCurrency.setText(currencySymbol);
+
                 tvNoOfAdults.setText(roomModel.getNoOfAdults() > 1 ? roomModel.getNoOfAdults() + " Adults" : roomModel.getNoOfAdults() + " Adult");
                 tvNoOfChildren.setText(roomModel.getNoOfChildren() > 1 ? roomModel.getNoOfChildren() + " Children" : roomModel.getNoOfChildren() + " Child");
                 txtNoOfTotalRooms.setText(roomModel.getNoOfTotalRooms() > 1 ? roomModel.getNoOfTotalRooms() + " Rooms" : roomModel.getNoOfTotalRooms() + " Room");

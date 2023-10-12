@@ -1,10 +1,14 @@
 package com.rlabdevs.unifymobile.activities;
 
+import static com.rlabdevs.unifymobile.activities.MainActivity.firestoreDB;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -12,6 +16,14 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.rlabdevs.unifymobile.R;
 import com.rlabdevs.unifymobile.activities.account.LoginActivity;
 import com.rlabdevs.unifymobile.activities.explore.ExploreActivity;
@@ -24,8 +36,11 @@ import com.rlabdevs.unifymobile.common.Functions;
 import com.rlabdevs.unifymobile.models.CuisineTypeModel;
 import com.rlabdevs.unifymobile.models.CurrencyModel;
 import com.rlabdevs.unifymobile.models.LocationModel;
+import com.rlabdevs.unifymobile.models.RoomModel;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class UserHomeActivity extends AppCompatActivity implements View.OnClickListener {
 

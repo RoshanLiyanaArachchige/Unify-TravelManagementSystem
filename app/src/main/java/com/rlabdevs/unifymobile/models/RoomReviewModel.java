@@ -1,34 +1,23 @@
 package com.rlabdevs.unifymobile.models;
 
-import com.google.type.DateTime;
+import java.util.Date;
 
 public class RoomReviewModel {
-
     private String ID;
-    private String RoomReviewCode;
-    private String ReviewCode;
-    private int ValueRating;
-    private int RoomRating;
-    private int LocationRating;
-    private int CleanlinessRating;
-    private int SleepQualityRating;
-    private int ServicesAndFacilitiesRating;
-    private String StatusCode;
+    private String ReviewContent;
+    private String RoomCode;
+    private Date PostedDateTime;
+    private String PostedByUserDetailsCode;
 
     public RoomReviewModel() {
     }
 
-    public RoomReviewModel(String ID, String roomReviewCode, String reviewCode, int valueRating, int roomRating, int locationRating, int cleanlinessRating, int sleepQualityRating, int servicesAndFacilitiesRating, String statusCode) {
+    public RoomReviewModel(String ID, String reviewContent, String roomCode, Date postedDateTime, String postedByUserDetailsCode) {
         this.ID = ID;
-        RoomReviewCode = roomReviewCode;
-        ReviewCode = reviewCode;
-        ValueRating = valueRating;
-        RoomRating = roomRating;
-        LocationRating = locationRating;
-        CleanlinessRating = cleanlinessRating;
-        SleepQualityRating = sleepQualityRating;
-        ServicesAndFacilitiesRating = servicesAndFacilitiesRating;
-        StatusCode = statusCode;
+        ReviewContent = reviewContent;
+        RoomCode = roomCode;
+        PostedDateTime = postedDateTime;
+        PostedByUserDetailsCode = postedByUserDetailsCode;
     }
 
     public String getID() {
@@ -39,75 +28,35 @@ public class RoomReviewModel {
         this.ID = ID;
     }
 
-    public String getRoomReviewCode() {
-        return RoomReviewCode;
+    public String getReviewContent() {
+        return ReviewContent;
     }
 
-    public void setRoomReviewCode(String roomReviewCode) {
-        RoomReviewCode = roomReviewCode;
+    public void setReviewContent(String reviewContent) {
+        ReviewContent = reviewContent;
     }
 
-    public String getReviewCode() {
-        return ReviewCode;
+    public String getRoomCode() {
+        return RoomCode;
     }
 
-    public void setReviewCode(String reviewCode) {
-        ReviewCode = reviewCode;
+    public void setRoomCode(String roomCode) {
+        RoomCode = roomCode;
     }
 
-    public int getValueRating() {
-        return ValueRating;
+    public Date getPostedDateTime() {
+        return PostedDateTime;
     }
 
-    public void setValueRating(int valueRating) {
-        ValueRating = valueRating;
+    public void setPostedDateTime(Date postedDateTime) {
+        PostedDateTime = postedDateTime;
     }
 
-    public int getRoomRating() {
-        return RoomRating;
+    public String getPostedByUserDetailsCode() {
+        return PostedByUserDetailsCode;
     }
 
-    public void setRoomRating(int roomRating) {
-        RoomRating = roomRating;
-    }
-
-    public int getLocationRating() {
-        return LocationRating;
-    }
-
-    public void setLocationRating(int locationRating) {
-        LocationRating = locationRating;
-    }
-
-    public int getCleanlinessRating() {
-        return CleanlinessRating;
-    }
-
-    public void setCleanlinessRating(int cleanlinessRating) {
-        CleanlinessRating = cleanlinessRating;
-    }
-
-    public int getSleepQualityRating() {
-        return SleepQualityRating;
-    }
-
-    public void setSleepQualityRating(int sleepQualityRating) {
-        SleepQualityRating = sleepQualityRating;
-    }
-
-    public int getServicesAndFacilitiesRating() {
-        return ServicesAndFacilitiesRating;
-    }
-
-    public void setServicesAndFacilitiesRating(int servicesAndFacilitiesRating) {
-        ServicesAndFacilitiesRating = servicesAndFacilitiesRating;
-    }
-
-    public String getStatusCode() {
-        return StatusCode;
-    }
-
-    public void setStatusCode(String statusCode) {
-        StatusCode = statusCode;
+    public void setPostedByUserDetailsCode(String postedByUserDetailsCode) {
+        PostedByUserDetailsCode = postedByUserDetailsCode;
     }
 }

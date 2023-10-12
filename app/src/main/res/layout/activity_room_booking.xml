@@ -1,0 +1,335 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:scrollbars="none"
+    tools:context=".activities.user.manage.hotels.rooms.RoomActivity">
+
+    <RelativeLayout
+        android:id="@+id/relativeLayoutRoom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:animateLayoutChanges="true">
+
+        <TextView
+            android:id="@+id/tvPlaceBookingHeading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="28dp"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:text="Place Booking"
+            android:textColor="@color/grey_regular"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/btnViewRoom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/tvPlaceBookingHeading"
+            android:layout_alignBottom="@id/tvPlaceBookingHeading"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="15dp"
+            android:text="View Room"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:visibility="visible" />
+
+        <EditText
+            android:id="@+id/txtBookingCode"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_below="@id/tvPlaceBookingHeading"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/edit_text_bg_light_rad_10"
+            android:enabled="false"
+            android:inputType="text"
+            android:maxLines="1"
+            android:paddingStart="50dp"
+            android:paddingEnd="15dp"
+            android:singleLine="true"
+            android:text="Fetching Booking Code..."
+            android:textColor="@color/grey_regular" />
+
+        <ImageView
+            android:id="@+id/imgViewBookingCode"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignStart="@id/txtBookingCode"
+            android:layout_alignTop="@id/txtBookingCode"
+            android:layout_alignBottom="@id/txtBookingCode"
+            android:layout_marginStart="10dp"
+            android:alpha="0.9"
+            android:src="@drawable/logbook" />
+
+        <EditText
+            android:id="@+id/txtFullName"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_below="@id/txtBookingCode"
+            android:layout_marginTop="7dp"
+            android:background="@drawable/edit_text_bg_light_rad_10"
+            android:hint="Enter Full Name"
+            android:inputType="text"
+            android:maxLines="1"
+            android:paddingLeft="50dp"
+            android:paddingRight="15dp"
+            android:singleLine="true"
+            android:textColor="@color/grey_regular" />
+
+        <ImageView
+            android:id="@+id/imgViewFullName"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignStart="@id/txtFullName"
+            android:layout_alignTop="@id/txtFullName"
+            android:layout_alignBottom="@id/txtFullName"
+            android:layout_marginStart="10dp"
+            android:alpha="0.9"
+            android:src="@drawable/name" />
+
+        <EditText
+            android:id="@+id/txtEmailAddress"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_below="@id/txtFullName"
+            android:layout_marginTop="7dp"
+            android:background="@drawable/edit_text_bg_light_rad_10"
+            android:hint="Enter Email Address"
+            android:inputType="text"
+            android:maxLines="1"
+            android:paddingLeft="50dp"
+            android:paddingRight="15dp"
+            android:singleLine="true"
+            android:textColor="@color/grey_regular" />
+
+        <ImageView
+            android:id="@+id/imgViewEmailAddress"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignStart="@id/txtEmailAddress"
+            android:layout_alignTop="@id/txtEmailAddress"
+            android:layout_alignBottom="@id/txtEmailAddress"
+            android:layout_marginStart="10dp"
+            android:alpha="0.9"
+            android:src="@drawable/email" />
+
+        <EditText
+            android:id="@+id/txtMobilePhone"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_below="@id/txtEmailAddress"
+            android:layout_marginTop="7dp"
+            android:background="@drawable/edit_text_bg_light_rad_10"
+            android:hint="Enter Mobile Number"
+            android:inputType="phone"
+            android:maxLines="1"
+            android:paddingLeft="50dp"
+            android:paddingRight="15dp"
+            android:singleLine="true"
+            android:textColor="@color/grey_regular" />
+
+        <ImageView
+            android:id="@+id/imgViewMobilePhone"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignStart="@id/txtMobilePhone"
+            android:layout_alignTop="@id/txtMobilePhone"
+            android:layout_alignBottom="@id/txtMobilePhone"
+            android:layout_marginStart="10dp"
+            android:alpha="0.9"
+            android:src="@drawable/phone_message" />
+
+        <TextView
+            android:id="@+id/tvNoOfAdults"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txtMobilePhone"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="7dp"
+            android:background="@drawable/edit_text_bg_light_rad_10"
+            android:hint="No. Adults"
+            android:inputType="text"
+            android:minWidth="160dp"
+            android:paddingStart="50dp"
+            android:paddingTop="8dp"
+            android:paddingEnd="15dp"
+            android:paddingBottom="8dp"
+            android:textColor="@color/grey_regular"
+            android:textSize="19sp" />
+
+        <ImageView
+            android:id="@+id/imgViewNoOfAdults"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignStart="@id/tvNoOfAdults"
+            android:layout_alignTop="@id/tvNoOfAdults"
+            android:layout_alignBottom="@id/tvNoOfAdults"
+            android:layout_marginStart="10dp"
+            android:alpha="0.60"
+            android:src="@drawable/adult" />
+
+        <TextView
+            android:id="@+id/tvNoOfChildren"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txtMobilePhone"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="7dp"
+            android:layout_marginTop="7dp"
+            android:layout_toEndOf="@id/tvNoOfAdults"
+            android:background="@drawable/edit_text_bg_light_rad_10"
+            android:hint="No. Children"
+            android:inputType="text"
+            android:paddingStart="50dp"
+            android:paddingTop="8dp"
+            android:paddingEnd="15dp"
+            android:paddingBottom="8dp"
+            android:textColor="@color/grey_regular"
+            android:textSize="19sp" />
+
+        <ImageView
+            android:id="@+id/imgViewNoOfChildren"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignStart="@id/tvNoOfChildren"
+            android:layout_alignTop="@id/tvNoOfChildren"
+            android:layout_alignBottom="@id/tvNoOfChildren"
+            android:layout_marginStart="10dp"
+            android:alpha="0.60"
+            android:padding="2dp"
+            android:src="@drawable/child" />
+
+        <EditText
+            android:id="@+id/txtCheckinDate"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_below="@id/tvNoOfAdults"
+            android:layout_marginTop="7dp"
+            android:background="@drawable/edit_text_bg_light_rad_10"
+            android:enabled="false"
+            android:hint="Select Checkin Date"
+            android:inputType="text"
+            android:maxLines="1"
+            android:paddingLeft="50dp"
+            android:paddingRight="15dp"
+            android:singleLine="true"
+            android:textColor="@color/grey_regular" />
+
+        <ImageView
+            android:id="@+id/imgViewCheckinDate"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignStart="@id/txtCheckinDate"
+            android:layout_alignTop="@id/txtCheckinDate"
+            android:layout_alignBottom="@id/txtCheckinDate"
+            android:layout_marginStart="10dp"
+            android:alpha="0.55"
+            android:padding="3dp"
+            android:src="@drawable/calendar_clock" />
+
+        <EditText
+            android:id="@+id/txtCheckoutDate"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_below="@id/txtCheckinDate"
+            android:layout_marginTop="7dp"
+            android:background="@drawable/edit_text_bg_light_rad_10"
+            android:enabled="false"
+            android:hint="Select Checkout Date"
+            android:inputType="text"
+            android:maxLines="1"
+            android:paddingLeft="50dp"
+            android:paddingRight="15dp"
+            android:singleLine="true"
+            android:textColor="@color/grey_regular" />
+
+        <ImageView
+            android:id="@+id/imgViewCheckoutDate"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignStart="@id/txtCheckoutDate"
+            android:layout_alignTop="@id/txtCheckoutDate"
+            android:layout_alignBottom="@id/txtCheckoutDate"
+            android:layout_marginStart="10dp"
+            android:alpha="0.55"
+            android:padding="3dp"
+            android:src="@drawable/calendar_clock" />
+
+        <EditText
+            android:id="@+id/txtBookingStatus"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_below="@id/txtCheckoutDate"
+            android:layout_marginTop="7dp"
+            android:background="@drawable/edit_text_bg_light_rad_10"
+            android:hint="Booking Status"
+            android:inputType="text"
+            android:maxLines="1"
+            android:paddingLeft="50dp"
+            android:paddingRight="15dp"
+            android:singleLine="true"
+            android:textColor="@color/grey_regular" />
+
+        <ImageView
+            android:id="@+id/imgViewBookingStatus"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignStart="@id/txtBookingStatus"
+            android:layout_alignTop="@id/txtBookingStatus"
+            android:layout_alignBottom="@id/txtBookingStatus"
+            android:layout_marginStart="10dp"
+            android:alpha="0.55"
+            android:padding="3dp"
+            android:src="@drawable/info" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txtBookingStatus"
+            android:layout_marginTop="30dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnCancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:background="@drawable/bg_red"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:text="Cancel"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnConfirm"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:background="@drawable/bg_green"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:text="Confirm"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</ScrollView>

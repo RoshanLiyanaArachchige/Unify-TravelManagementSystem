@@ -11,6 +11,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.text.Html;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -109,7 +110,7 @@ public class HotelViewActivity extends AppCompatActivity {
         });
 
         tvHotelName.setText(hotel.getHotelName());
-        txtHotelDescription.setText(hotel.getHotelDescription());
+        txtHotelDescription.setText(Html.fromHtml(hotel.getHotelDescription()));
         txtHotelLocation.setText("Location: " + hotel.getHotelLocation());
         tvHotelClass.setText("Class: " + hotel.getHotelClass() + " Star");
         txtTelephoneNo.setText("Tel No: " + hotel.getHotelTelNo());

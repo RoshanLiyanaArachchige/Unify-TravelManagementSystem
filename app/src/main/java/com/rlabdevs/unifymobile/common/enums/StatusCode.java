@@ -2,7 +2,7 @@ package com.rlabdevs.unifymobile.common.enums;
 
 public enum StatusCode {
 
-    Active, Deactive, Deleted, Pending, Finished, Canceled, Approved, Disapproved;
+    Active, Deactive, Deleted, Pending, Finished, Canceled, Approved, Disapproved, Confirmed, Rejected;
 
     public String getStatusCode()
     {
@@ -24,6 +24,10 @@ public enum StatusCode {
                 return "STS7";
             case Disapproved:
                 return "STS8";
+            case Confirmed:
+                return "STS9";
+            case Rejected:
+                return "STS10";
         }
 
         return "";

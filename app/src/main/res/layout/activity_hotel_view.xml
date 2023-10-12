@@ -93,7 +93,7 @@
             android:layout_marginTop="7dp"
             android:alpha="0.6"
             android:padding="3dp"
-            android:src="@drawable/hotel_description" />
+            android:src="@drawable/description_icon" />
 
         <TextView
             android:id="@+id/tvHotelInformation"

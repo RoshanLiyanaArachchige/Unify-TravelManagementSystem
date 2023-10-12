@@ -191,7 +191,7 @@
                 android:layout_marginTop="7dp"
                 android:alpha="0.6"
                 android:padding="3dp"
-                android:src="@drawable/hotel_description" />
+                android:src="@drawable/description_icon" />
 
             <TextView
                 android:id="@+id/tvHotelLocation"
@@ -206,7 +206,7 @@
                 android:paddingEnd="15dp"
                 android:singleLine="true"
                 android:text="Set Hotel Location"
-                android:textColor="@color/grey_light"
+                android:textColor="@color/grey_regular"
                 android:textSize="19sp" />
 
             <ImageView

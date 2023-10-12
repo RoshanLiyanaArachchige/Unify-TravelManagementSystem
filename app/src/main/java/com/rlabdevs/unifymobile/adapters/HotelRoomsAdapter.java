@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.gson.Gson;
 import com.rlabdevs.unifymobile.R;
+import com.rlabdevs.unifymobile.activities.UserHomeActivity;
 import com.rlabdevs.unifymobile.activities.hotels.HotelViewActivity;
 import com.rlabdevs.unifymobile.activities.hotels.rooms.RoomViewActivity;
 import com.rlabdevs.unifymobile.activities.user.manage.hotels.rooms.HotelRoomsActivity;
@@ -71,13 +72,15 @@ public class HotelRoomsAdapter extends RecyclerView.Adapter<HotelRoomsAdapter.Ho
 
         holder.tvRoomCode.setText(room.getRoomCode());
         for (RoomTypesModel roomType: roomTypesList) {
-            if(roomType.getRoomTypeCode().equals(room.getRoomTypeCode()))
-            holder.tvRoomType.setText(roomType.getRoomType());
+            if(roomType.getRoomTypeCode().equals(room.getRoomTypeCode())) {
+                holder.tvRoomType.setText(roomType.getRoomType());
+            }
         }
 
         holder.tvRoomCapacity.setText("Max: " + Functions.RoomCapacityText(room.getNoOfAdults(), room.getNoOfChildren()));
 
-        holder.tvRoomPrice.setText(String.valueOf(room.getRoomPrice()));
+        String currencySymbol = UserHomeActivity.currencyList.stream().filter(c -> c.getCurrencyCode().equals(hotel.getCurrencyCode())).findFirst().get().getSymbol();
+        holder.tvRoomPrice.setText(String.valueOf(room.getRoomPrice()) + " " + currencySymbol);
 
         //Score and no of reviews
         //holder.tvScoreNoReviews.setText("No reviews yet");

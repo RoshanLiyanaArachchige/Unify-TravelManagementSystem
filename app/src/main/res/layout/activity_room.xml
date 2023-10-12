@@ -178,10 +178,12 @@
                 android:layout_below="@id/tvRoomType"
                 android:layout_marginTop="7dp"
                 android:background="@drawable/edit_text_bg_light_rad_10"
+                android:gravity="top"
                 android:hint="Enter Room Description"
                 android:inputType="textMultiLine"
+                android:minHeight="100dp"
                 android:paddingStart="50dp"
-                android:paddingTop="8dp"
+                android:paddingTop="10dp"
                 android:paddingEnd="15dp"
                 android:paddingBottom="8dp"
                 android:textColor="@color/grey_regular" />
@@ -192,10 +194,11 @@
                 android:layout_height="30dp"
                 android:layout_alignStart="@id/txtRoomDescription"
                 android:layout_alignTop="@id/txtRoomDescription"
-                android:layout_alignBottom="@id/txtRoomDescription"
                 android:layout_marginStart="10dp"
-                android:alpha="0.9"
-                android:src="@drawable/address" />
+                android:layout_marginTop="7dp"
+                android:alpha="0.6"
+                android:padding="3dp"
+                android:src="@drawable/description_icon" />
 
             <EditText
                 android:id="@+id/txtRoomPrice"
@@ -269,8 +272,8 @@
                 android:layout_alignTop="@id/tvNoOfAdults"
                 android:layout_alignBottom="@id/tvNoOfAdults"
                 android:layout_marginStart="10dp"
-                android:alpha="0.9"
-                android:src="@drawable/address" />
+                android:alpha="0.60"
+                android:src="@drawable/adult" />
 
             <TextView
                 android:id="@+id/tvNoOfChildren"
@@ -299,8 +302,9 @@
                 android:layout_alignTop="@id/tvNoOfChildren"
                 android:layout_alignBottom="@id/tvNoOfChildren"
                 android:layout_marginStart="10dp"
-                android:alpha="0.9"
-                android:src="@drawable/address" />
+                android:alpha="0.60"
+                android:padding="2dp"
+                android:src="@drawable/child" />
 
             <LinearLayout
                 android:id="@+id/linearLytNoOfRoomsAvailable"
@@ -318,8 +322,9 @@
                     android:layout_height="30dp"
                     android:layout_marginTop="5dp"
                     android:layout_marginBottom="5dp"
-                    android:alpha="0.9"
-                    android:src="@drawable/address" />
+                    android:alpha="0.60"
+                    android:padding="4dp"
+                    android:src="@drawable/info" />
 
                 <EditText
                     android:id="@+id/txtNoOfTotalRooms"

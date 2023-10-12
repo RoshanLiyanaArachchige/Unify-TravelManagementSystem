@@ -136,7 +136,7 @@ public class HotelRoomsActivity extends AppCompatActivity implements View.OnClic
                                                             public void run() {
                                                                 spinKitProgress.setVisibility(View.GONE);
                                                                 Functions.HideProgressBar();
-                                                                //rooms empty
+                                                                tvNoAddRooms.setVisibility(View.VISIBLE);
                                                             }
                                                         });
                                                     }
@@ -157,7 +157,6 @@ public class HotelRoomsActivity extends AppCompatActivity implements View.OnClic
                                         public void run() {
                                             spinKitProgress.setVisibility(View.GONE);
                                             Functions.HideProgressBar();
-                                            //room types empty
                                         }
                                     });
                                 }
@@ -183,6 +182,10 @@ public class HotelRoomsActivity extends AppCompatActivity implements View.OnClic
         switch (v.getId())
         {
             case R.id.imgViewAddNewRoom: {
+                NewHotelRoom();
+                break;
+            }
+            case R.id.tvNoAddRooms: {
                 NewHotelRoom();
                 break;
             }

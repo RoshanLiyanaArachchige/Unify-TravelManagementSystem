@@ -533,8 +533,9 @@ public class HotelActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private boolean ValidateHotel() {
-        if (!isHotelCoverSelected)
+        if (!isHotelCoverSelected) {
             return new Functions().ShowErrorDialog("Select Hotel Cover Image !", "Okay", this);
+        }
 
         String hotelName = txtHotelName.getText().toString().trim();
         if (hotelName.equals("")) {

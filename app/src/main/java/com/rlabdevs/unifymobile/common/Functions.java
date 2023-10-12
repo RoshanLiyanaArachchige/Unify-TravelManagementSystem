@@ -112,8 +112,11 @@ public class Functions implements DialogInterface.OnDismissListener {
 
     public static String RoomCapacityText(int adults, int children) {
         if(adults > 1 && children > 1) { return adults + " adults & " + children + " children"; }
+        else if(adults == 1 && children > 1) { return adults + " adult & " + children + " children"; }
         else if(adults > 1 && children == 1) { return adults + " adults & " + children + " child"; }
         else if(adults == 1 && children == 1) { return adults + " adult & " + children + " child"; }
+        else if(adults == 1 && children == 0) { return adults + " adult"; }
+        else if(adults > 1 && children == 0) { return adults + " adults"; }
         return "";
     }
 

@@ -34,6 +34,7 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.google.gson.Gson;
 import com.rlabdevs.unifymobile.R;
+import com.rlabdevs.unifymobile.activities.UserHomeActivity;
 import com.rlabdevs.unifymobile.common.Functions;
 import com.rlabdevs.unifymobile.common.Regex;
 import com.rlabdevs.unifymobile.common.enums.StatusCode;
@@ -71,7 +72,6 @@ public class RoomActivity extends AppCompatActivity implements View.OnClickListe
     private CollectionReference indexReference, hotelsReference, roomsReference, roomTypesReference;
 
     public static List<RoomTypesModel> roomTypesList;
-    private List<CurrencyModel> currencyList;
 
     private HotelModel hotelModel;
     private RoomModel roomModel;
@@ -281,7 +281,7 @@ public class RoomActivity extends AppCompatActivity implements View.OnClickListe
 
     private void SelectCurrencyUnit() {
         List<SelectorItemModel> itemList = new ArrayList<>();
-        for (CurrencyModel currencyModel : currencyList) {
+        for (CurrencyModel currencyModel : UserHomeActivity.currencyList) {
             itemList.add(new SelectorItemModel(currencyModel.getCurrencyCode(), currencyModel.getSymbol()));
         }
         new Functions().ShowItemSelector("Select Currency Unit", itemList, roomActivity, tvCurrency, null);
@@ -355,8 +355,9 @@ public class RoomActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private boolean ValidateRoom() {
-        if (!isRoomCoverSelected)
-        return new Functions().ShowErrorDialog("Select Room Cover Image !", "Okay", this);
+        if (!isRoomCoverSelected) {
+            return new Functions().ShowErrorDialog("Select Room Cover Image !", "Okay", this);
+        }
 
         String roomType = tvRoomType.getText().toString().trim();
         if (roomType.equals("")) {
@@ -418,9 +419,25 @@ public class RoomActivity extends AppCompatActivity implements View.OnClickListe
                         roomModel.setRoomTypeCode(txtRoomTypeCode.getText().toString());
                         roomModel.setRoomDescription(txtRoomDescription.getText().toString().trim());
                         roomModel.setRoomPrice(Double.parseDouble(txtRoomPrice.getText().toString().trim()));
-                        roomModel.setNoOfAdults(Integer.parseInt(tvNoOfAdults.getText().toString().trim().replace("Adults", "").replace("Adult", "")));
-                        roomModel.setNoOfChildren(Integer.parseInt(tvNoOfChildren.getText().toString().trim().replace("Children", "").replace("Child", "")));
-                        roomModel.setNoOfTotalRooms(Integer.parseInt(txtNoOfTotalRooms.getText().toString().trim().replace("Rooms", "").replace("Room", "")));
+
+                        String strNoAdults = tvNoOfAdults.getText().toString().replace("Adults", "").replace("Adult", "").trim();
+                        try {
+                            roomModel.setNoOfAdults(Integer.parseInt(strNoAdults));
+                        } catch (Exception ex) {
+                        }
+
+                        String strNoChildren = tvNoOfChildren.getText().toString().replace("Children", "").replace("Child", "").trim();
+                        try {
+                            roomModel.setNoOfChildren(Integer.parseInt(strNoChildren));
+                        } catch (Exception ex) {
+                        }
+
+                        String strNoRooms = txtNoOfTotalRooms.getText().toString().replace("Rooms", "").replace("Room", "").trim();
+                        try {
+                            roomModel.setNoOfTotalRooms(Integer.parseInt(strNoRooms));
+                        } catch (Exception ex) {
+                        }
+
                         roomModel.setCurrencyCode(currencyCode);
                         roomModel.setFreeWIFI(chkFreeWIFI.isChecked());
                         roomModel.setAirConditioned(chkAirConditioned.isChecked());
@@ -543,9 +560,25 @@ public class RoomActivity extends AppCompatActivity implements View.OnClickListe
                         roomModel.setRoomTypeCode(txtRoomTypeCode.getText().toString());
                         roomModel.setRoomDescription(txtRoomDescription.getText().toString().trim());
                         roomModel.setRoomPrice(Double.parseDouble(txtRoomPrice.getText().toString().trim()));
-                        roomModel.setNoOfAdults(Integer.parseInt(tvNoOfAdults.getText().toString().trim().replace("Adults", "").replace("Adult", "").trim()));
-                        roomModel.setNoOfChildren(Integer.parseInt(tvNoOfChildren.getText().toString().trim().replace("Children", "").replace("Child", "").trim()));
-                        roomModel.setNoOfTotalRooms(Integer.parseInt(txtNoOfTotalRooms.getText().toString().trim().replace("Rooms", "").replace("Room", "").trim()));
+
+                        String strNoAdults = tvNoOfAdults.getText().toString().replace("Adults", "").replace("Adult", "").trim();
+                        try {
+                            roomModel.setNoOfAdults(Integer.parseInt(strNoAdults));
+                        } catch (Exception ex) {
+                        }
+
+                        String strNoChildren = tvNoOfChildren.getText().toString().replace("Children", "").replace("Child", "").trim();
+                        try {
+                            roomModel.setNoOfChildren(Integer.parseInt(strNoChildren));
+                        } catch (Exception ex) {
+                        }
+
+                        String strNoRooms = txtNoOfTotalRooms.getText().toString().replace("Rooms", "").replace("Room", "").trim();
+                        try {
+                            roomModel.setNoOfTotalRooms(Integer.parseInt(strNoRooms));
+                        } catch (Exception ex) {
+                        }
+
                         roomModel.setCurrencyCode(currencyCode);
                         roomModel.setFreeWIFI(chkFreeWIFI.isChecked());
                         roomModel.setAirConditioned(chkAirConditioned.isChecked());

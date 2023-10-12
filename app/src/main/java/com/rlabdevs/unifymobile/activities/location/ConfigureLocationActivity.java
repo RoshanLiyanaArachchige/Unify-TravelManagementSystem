@@ -6,6 +6,8 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import android.Manifest;
+import android.app.Activity;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.View;
@@ -31,6 +33,7 @@ import com.rlabdevs.unifymobile.models.SelectorItemModel;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class ConfigureLocationActivity extends AppCompatActivity implements OnMapReadyCallback {
 
@@ -67,6 +70,7 @@ public class ConfigureLocationActivity extends AppCompatActivity implements OnMa
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.fragmentMap);
         mapFragment.getMapAsync(this);
     }
+
     private View.OnClickListener cityOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
@@ -81,7 +85,21 @@ public class ConfigureLocationActivity extends AppCompatActivity implements OnMa
     private View.OnClickListener onSelectLocation = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
+            locationName = tvHotelCity.getText().toString();
 
+            if(Objects.equals(locationCode, null) || Objects.equals(locationName, null) || locationCode.equals("") || locationName.equals("")) {
+                new Functions().ShowErrorDialog("City Selection Required !", "Okay", ConfigureLocationActivity.this);
+            } else if(selectedLatitude == 0 || selectedLongitude == 0) {
+                new Functions().ShowErrorDialog("Location Pinning Required !", "Okay", ConfigureLocationActivity.this);
+            } else {
+                Intent resultIntent = new Intent();
+                resultIntent.putExtra("LocationCode", locationCode);
+                resultIntent.putExtra("LocationName", locationName);
+                resultIntent.putExtra("Latitude", selectedLatitude);
+                resultIntent.putExtra("Longitude", selectedLongitude);
+                setResult(Activity.RESULT_OK, resultIntent);
+                finish();
+            }
         }
     };
 
@@ -93,6 +111,8 @@ public class ConfigureLocationActivity extends AppCompatActivity implements OnMa
             LatLng defaultLocation = new LatLng(selectedLatitude, selectedLongitude);
             googleMap.addMarker(new MarkerOptions().position(defaultLocation).title("Selected Location"));
             googleMap.moveCamera(CameraUpdateFactory.newLatLng(defaultLocation));
+            CameraPosition cameraPosition = new CameraPosition.Builder().target(defaultLocation).zoom(16).build();
+            googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
         } else {
             loadCurrentLocation();
         }

@@ -46,6 +46,7 @@ import com.rlabdevs.unifymobile.activities.account.UserProfileActivity;
 import com.rlabdevs.unifymobile.activities.location.ConfigureLocationActivity;
 import com.rlabdevs.unifymobile.activities.user.MenuActivity;
 import com.rlabdevs.unifymobile.activities.user.manage.hotels.rooms.HotelRoomsActivity;
+import com.rlabdevs.unifymobile.common.Constants;
 import com.rlabdevs.unifymobile.common.Functions;
 import com.rlabdevs.unifymobile.common.Regex;
 import com.rlabdevs.unifymobile.common.enums.StatusCode;
@@ -78,8 +79,6 @@ public class HotelActivity extends AppCompatActivity implements View.OnClickList
 
     private StorageReference storageReference;
     private CollectionReference indexReference, currencyReference, hotelsReference;
-
-    private List<CurrencyModel> currencyList;
 
     public HotelModel myHotelModel;
     private IndexModel hotelDetailsIndex;
@@ -242,8 +241,11 @@ public class HotelActivity extends AppCompatActivity implements View.OnClickList
                 locationCode = myHotelModel.getLocationCode();
                 locationName = UserHomeActivity.locationList.stream().filter(c -> c.getLocationCode().equals(locationCode)).findFirst().get().getLocationName();
 
-                latitude = myHotelModel.getLongitude();
+                latitude = myHotelModel.getLatitude();
                 longitude = myHotelModel.getLongitude();
+
+                txtCheckIn.setText(myHotelModel.getCheckIn());
+                txtCheckOut.setText(myHotelModel.getCheckOut());
 
                 currencyCode = myHotelModel.getCurrencyCode();
                 String currencySymbol = UserHomeActivity.currencyList.stream().filter(c -> c.getCurrencyCode().equals(currencyCode)).findFirst().get().getSymbol();
@@ -272,7 +274,11 @@ public class HotelActivity extends AppCompatActivity implements View.OnClickList
                         myHotelModel = new HotelModel();
                         myHotelModel.setHotelCode(hotelCode);
                         myHotelModel.setHotelName(txtHotelName.getText().toString().trim());
+                        myHotelModel.setHotelDescription(txtHotelDescription.getText().toString().trim());
+                        myHotelModel.setLocationCode(locationCode);
                         myHotelModel.setHotelLocation(tvHotelLocation.getText().toString().trim());
+                        myHotelModel.setLatitude(latitude);
+                        myHotelModel.setLongitude(longitude);
                         myHotelModel.setHotelClass(Integer.parseInt(tvHotelClass.getText().toString().replace(" Star", "")));
                         myHotelModel.setHotelTelNo(txtTelephoneNo.getText().toString().trim());
                         myHotelModel.setCheckIn(txtCheckIn.getText().toString().trim());
@@ -398,7 +404,11 @@ public class HotelActivity extends AppCompatActivity implements View.OnClickList
                         });
 
                         myHotelModel.setHotelName(txtHotelName.getText().toString().trim());
+                        myHotelModel.setHotelDescription(txtHotelDescription.getText().toString().trim());
+                        myHotelModel.setLocationCode(locationCode);
                         myHotelModel.setHotelLocation(tvHotelLocation.getText().toString().trim());
+                        myHotelModel.setLatitude(latitude);
+                        myHotelModel.setLongitude(longitude);
                         myHotelModel.setHotelClass(Integer.parseInt(tvHotelClass.getText().toString().replace(" Star", "")));
                         myHotelModel.setHotelTelNo(txtTelephoneNo.getText().toString().trim());
                         myHotelModel.setCheckIn(txtCheckIn.getText().toString().trim());
@@ -631,7 +641,7 @@ public class HotelActivity extends AppCompatActivity implements View.OnClickList
             intent.putExtra("Latitude", latitude);
             intent.putExtra("Longitude", longitude);
         }
-        startActivity(intent);
+        startActivityForResult(intent, Constants.LOCATION_CONFIGURE_REQUEST_CODE);
     }
 
     private void SelectHotelCoverImage() {
@@ -652,7 +662,7 @@ public class HotelActivity extends AppCompatActivity implements View.OnClickList
 
     private void SelectCurrencyUnit() {
         List<SelectorItemModel> itemList = new ArrayList<>();
-        for (CurrencyModel currencyModel : currencyList) {
+        for (CurrencyModel currencyModel : UserHomeActivity.currencyList) {
             itemList.add(new SelectorItemModel(currencyModel.getCurrencyCode(), currencyModel.getSymbol()));
         }
         new Functions().ShowItemSelector("Select Currency Unit", itemList, hotelActivity, tvCurrency, null);
@@ -730,6 +740,12 @@ public class HotelActivity extends AppCompatActivity implements View.OnClickList
                     e.printStackTrace();
                 }
             }
+        } else if(requestCode == Constants.LOCATION_CONFIGURE_REQUEST_CODE && resultCode == RESULT_OK) {
+            locationCode = data.getStringExtra("LocationCode");
+            locationName = data.getStringExtra("LocationName");
+            tvHotelLocation.setText(locationName);
+            latitude = data.getDoubleExtra("Latitude", 0);
+            longitude = data.getDoubleExtra("Longitude", 0);
         }
     }
 }

@@ -34,8 +34,6 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.google.gson.Gson;
 import com.rlabdevs.unifymobile.R;
-import com.rlabdevs.unifymobile.activities.MainActivity;
-import com.rlabdevs.unifymobile.activities.user.manage.hotels.HotelActivity;
 import com.rlabdevs.unifymobile.common.Functions;
 import com.rlabdevs.unifymobile.common.Regex;
 import com.rlabdevs.unifymobile.common.enums.StatusCode;
@@ -70,9 +68,9 @@ public class RoomActivity extends AppCompatActivity implements View.OnClickListe
     private Dialog setupRoomConfirmationDialog;
 
     private StorageReference storageReference;
-    private CollectionReference indexReference, currencyReference, hotelsReference, roomsReference, roomTypesReference;
+    private CollectionReference indexReference, hotelsReference, roomsReference, roomTypesReference;
 
-    private List<RoomTypesModel> roomTypesList;
+    public static List<RoomTypesModel> roomTypesList;
     private List<CurrencyModel> currencyList;
 
     private HotelModel hotelModel;
@@ -140,7 +138,6 @@ public class RoomActivity extends AppCompatActivity implements View.OnClickListe
 
         storageReference = firebaseStorage.getReference();
         indexReference = firestoreDB.collection("Index");
-        currencyReference = firestoreDB.collection("Currency");
         hotelsReference = firestoreDB.collection("Hotels");
         roomsReference = hotelsReference.document(hotelModel.getID()).collection("Rooms");
         roomTypesReference = hotelsReference.document(hotelModel.getID()).collection("RoomTypes");
@@ -199,7 +196,7 @@ public class RoomActivity extends AppCompatActivity implements View.OnClickListe
                 chkSpa.setChecked(roomModel.isSpa());
                 chkParking.setChecked(roomModel.isParking());
 
-                GetCurrencyListAndRoomTypesList();
+                GetRoomTypesList();
             }
         }).start();
     }
@@ -214,7 +211,7 @@ public class RoomActivity extends AppCompatActivity implements View.OnClickListe
                     }
                 });
 
-                indexReference.whereEqualTo("indexName", "Hotels").get()
+                indexReference.whereEqualTo("indexName", "Rooms").get()
                         .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                             @Override
                             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
@@ -226,7 +223,7 @@ public class RoomActivity extends AppCompatActivity implements View.OnClickListe
                                         roomCode = roomIndex.getPrefix() + (roomIndex.getCurrentCount() + 1);
                                         txtRoomCode.setText(roomCode + " (Registration Code)");
                                     }
-                                    GetCurrencyListAndRoomTypesList();
+                                    GetRoomTypesList();
                                 }
                             }
                         })
@@ -244,61 +241,29 @@ public class RoomActivity extends AppCompatActivity implements View.OnClickListe
         }).start();
     }
 
-    private void GetCurrencyListAndRoomTypesList() {
-        currencyReference.whereEqualTo("statusCode", StatusCode.Active.getStatusCode()).get()
+    private void GetRoomTypesList() {
+        roomTypesReference.get()
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override
                     public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                         if (!queryDocumentSnapshots.isEmpty()) {
-                            currencyList = new ArrayList<>();
+                            roomTypesList = new ArrayList<>();
                             List<DocumentSnapshot> documentSnapshotList = queryDocumentSnapshots.getDocuments();
                             for (DocumentSnapshot documentSnapshot : documentSnapshotList) {
-                                CurrencyModel currency = documentSnapshot.toObject(CurrencyModel.class);
-                                currencyList.add(currency);
+                                RoomTypesModel roomType = documentSnapshot.toObject(RoomTypesModel.class);
+                                roomType.setID(documentSnapshot.getId());
                                 if (roomModel != null)
-                                    if (roomModel.getCurrencyCode().equals(currency.getCurrencyCode()))
-                                    {
-                                        currencyCode = currency.getCurrencyCode();
-                                        tvCurrency.setText(currency.getSymbol());
-                                    }
+                                    if (roomModel.getRoomTypeCode().equals(roomType.getRoomTypeCode()))
+                                        tvRoomType.setText(roomType.getRoomType());
+                                roomTypesList.add(roomType);
                             }
                         }
 
-                        roomTypesReference.get()
-                                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-                                    @Override
-                                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                                        if (!queryDocumentSnapshots.isEmpty()) {
-                                            roomTypesList = new ArrayList<>();
-                                            List<DocumentSnapshot> documentSnapshotList = queryDocumentSnapshots.getDocuments();
-                                            for (DocumentSnapshot documentSnapshot : documentSnapshotList) {
-                                                RoomTypesModel roomType = documentSnapshot.toObject(RoomTypesModel.class);
-                                                roomType.setID(documentSnapshot.getId());
-                                                if (roomModel != null)
-                                                    if (roomModel.getRoomTypeCode().equals(roomType.getRoomTypeCode()))
-                                                        tvRoomType.setText(roomType.getRoomType());
-                                                roomTypesList.add(roomType);
-                                            }
-
-                                            roomActivity.runOnUiThread(new Runnable() {
-                                                public void run() {
-                                                    Functions.HideProgressBar();
-                                                }
-                                            });
-                                        }
-                                    }
-                                })
-                                .addOnFailureListener(new OnFailureListener() {
-                                    @Override
-                                    public void onFailure(@NonNull Exception e) {
-                                        roomActivity.runOnUiThread(new Runnable() {
-                                            public void run() {
-                                                Functions.HideProgressBar();
-                                                new Functions().ShowErrorDialog("Room Types Load Error !", "Try Again", RoomActivity.this);
-                                            }
-                                        });
-                                    }
-                                });
+                        roomActivity.runOnUiThread(new Runnable() {
+                            public void run() {
+                                Functions.HideProgressBar();
+                            }
+                        });
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
@@ -307,7 +272,7 @@ public class RoomActivity extends AppCompatActivity implements View.OnClickListe
                         roomActivity.runOnUiThread(new Runnable() {
                             public void run() {
                                 Functions.HideProgressBar();
-                                new Functions().ShowErrorDialog("Currency Load Error !", "Try Again", RoomActivity.this);
+                                new Functions().ShowErrorDialog("Room Types Load Error !", "Try Again", RoomActivity.this);
                             }
                         });
                     }

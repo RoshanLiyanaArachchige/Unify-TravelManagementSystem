@@ -133,6 +133,7 @@ public class RoomTypesActivity extends AppCompatActivity implements View.OnClick
                                     }
                                     imgViewAddNewRoom.setVisibility(View.VISIBLE);
                                     spinKitProgress.setVisibility(View.GONE);
+                                    tvNoAddRoomsTypes.setVisibility(View.GONE);
                                 }
                                 else
                                 {
@@ -243,6 +244,7 @@ public class RoomTypesActivity extends AppCompatActivity implements View.OnClick
                                     @Override
                                     public void onSuccess(Void unused) {
                                         roomTypesList.add(roomType);
+                                        RoomActivity.roomTypesList.add(roomType);
                                         roomTypesAdapter.notifyDataSetChanged();
                                         roomTypeIndex.setCurrentCount(roomTypeIndex.getCurrentCount()+ 1);
                                         indexReference.document(roomTypeIndex.getID()).set(roomTypeIndex)
@@ -299,6 +301,7 @@ public class RoomTypesActivity extends AppCompatActivity implements View.OnClick
                                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                                     @Override
                                     public void onSuccess(Void unused) {
+                                        RoomActivity.roomTypesList = new ArrayList<>();
                                         for (RoomTypesModel roomTypeListItem :roomTypesList) {
                                             if(roomTypeListItem.getRoomTypeCode().equals(roomType.getRoomTypeCode()))
                                             {
@@ -306,6 +309,7 @@ public class RoomTypesActivity extends AppCompatActivity implements View.OnClick
                                                 roomTypeListItem.setStatusCode(roomType.getStatusCode());
                                                 roomTypesAdapter.notifyDataSetChanged();
                                             }
+                                            RoomActivity.roomTypesList.add(roomTypeListItem);
                                         }
                                         Functions.HideProgressBar();
                                         relativeLytNewRoomType.setVisibility(View.GONE);

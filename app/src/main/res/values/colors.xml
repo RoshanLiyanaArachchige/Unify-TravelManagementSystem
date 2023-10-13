@@ -39,8 +39,16 @@
     <color name="transparent">#00000000</color>
 
     <color name="black_01">#10000000</color>
+    <color name="black_05">#52000000</color>
+
+    <color name="gray_01">#1AD4D8E1</color>
+    <color name="gray_02">#F0F1F5</color>
 
     <color name="mapview_background_color">@color/black_01</color>
     <color name="mapview_border_color">@color/black_01</color>
+
+    <color name="date_time_selection_dialog_window_color">@color/black_05</color>
+    <color name="date_time_selection_dialog_background_color">@color/gray_02</color>
+    <color name="date_time_selection_dialog_border_color">@color/gray_01</color>
 
 </resources>

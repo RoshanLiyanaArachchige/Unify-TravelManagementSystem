@@ -207,16 +207,84 @@
             android:padding="2dp"
             android:src="@drawable/child" />
 
+        <LinearLayout
+            android:id="@+id/linearLytNoOfRooms"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvNoOfAdults"
+            android:layout_marginTop="7dp"
+            android:background="@drawable/edit_text_bg_light_rad_10"
+            android:orientation="horizontal"
+            android:paddingLeft="10dp">
+
+            <ImageView
+                android:id="@+id/imgViewNoOfRoomsAvailable"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:alpha="0.60"
+                android:padding="4dp"
+                android:src="@drawable/info" />
+
+            <EditText
+                android:id="@+id/txtNoOfTotalRooms"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginStart="7dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/edit_text_bg_light_rad_10_no_stroke"
+                android:enabled="false"
+                android:hint="No. Total Rooms"
+                android:inputType="text"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:textAlignment="viewStart"
+                android:textColor="@color/grey_regular" />
+
+            <Button
+                android:id="@+id/btnReduceRoomCount"
+                android:layout_width="50dp"
+                android:layout_height="35dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="3dp"
+                android:padding="0dp"
+                android:text="-"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:visibility="visible" />
+
+            <Button
+                android:id="@+id/btnIncreaseRoomCount"
+                android:layout_width="50dp"
+                android:layout_height="35dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="3dp"
+                android:padding="0dp"
+                android:text="+"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:visibility="visible" />
+
+
+        </LinearLayout>
+
         <EditText
             android:id="@+id/txtCheckinDate"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:layout_below="@id/tvNoOfAdults"
+            android:layout_below="@id/linearLytNoOfRooms"
             android:layout_marginTop="7dp"
             android:background="@drawable/edit_text_bg_light_rad_10"
-            android:enabled="false"
+            android:clickable="true"
+            android:editable="false"
             android:hint="Select Checkin Date"
-            android:inputType="text"
+            android:inputType="none"
             android:maxLines="1"
             android:paddingLeft="50dp"
             android:paddingRight="15dp"
@@ -242,10 +310,11 @@
             android:layout_below="@id/txtCheckinDate"
             android:layout_marginTop="7dp"
             android:background="@drawable/edit_text_bg_light_rad_10"
-            android:enabled="false"
+            android:clickable="true"
             android:hint="Select Checkout Date"
-            android:inputType="text"
+            android:inputType="none"
             android:maxLines="1"
+            android:editable="false"
             android:paddingLeft="50dp"
             android:paddingRight="15dp"
             android:singleLine="true"
@@ -269,7 +338,9 @@
             android:layout_height="40dp"
             android:layout_below="@id/txtCheckoutDate"
             android:layout_marginTop="7dp"
+            android:layout_marginBottom="30dp"
             android:background="@drawable/edit_text_bg_light_rad_10"
+            android:enabled="false"
             android:hint="Booking Status"
             android:inputType="text"
             android:maxLines="1"
@@ -291,12 +362,14 @@
             android:src="@drawable/info" />
 
         <LinearLayout
+            android:id="@+id/lnrLayoutActions"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/txtBookingStatus"
-            android:layout_marginTop="30dp"
+            android:layout_marginBottom="30dp"
             android:gravity="center"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:visibility="gone">
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btnCancel"
@@ -329,6 +402,24 @@
                 android:textStyle="bold" />
 
         </LinearLayout>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnSubmit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/lnrLayoutActions"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:background="@drawable/button_bg_light_active_rad_10"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:text="Submit"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:visibility="gone" />
 
     </RelativeLayout>
 

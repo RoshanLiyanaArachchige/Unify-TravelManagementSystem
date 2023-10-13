@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.rlabdevs.unifymobile.R;
+import com.rlabdevs.unifymobile.activities.bookings.hotel.RoomBookingActivity;
 import com.rlabdevs.unifymobile.activities.location.ConfigureLocationActivity;
 import com.rlabdevs.unifymobile.activities.user.manage.hotels.HotelActivity;
 import com.rlabdevs.unifymobile.activities.user.manage.hotels.rooms.RoomActivity;
@@ -139,6 +140,22 @@ public class ItemSelectorAdapter extends RecyclerView.Adapter<ItemSelectorAdapte
                                 {
                                     ConfigureLocationActivity.tvHotelCity.setText(tvItemName.getText());
                                     ConfigureLocationActivity.locationCode = tvItemCode.getText().toString();
+                                }
+                            }
+                            break;
+                        }
+                        case "RoomBookingActivity" :
+                        {
+                            Functions.HideItemSelector();
+                            if(tvSet != null)
+                            {
+                                if(tvSet.getId() == R.id.tvNoOfAdults)
+                                {
+                                    RoomBookingActivity.tvNoOfAdults.setText(tvItemName.getText());
+                                }
+                                else if(tvSet.getId() == R.id.tvNoOfChildren)
+                                {
+                                    RoomBookingActivity.tvNoOfChildren.setText(tvItemName.getText());
                                 }
                             }
                             break;

@@ -35,6 +35,7 @@ import com.rlabdevs.unifymobile.adapters.ItemSelectorAdapter;
 import com.rlabdevs.unifymobile.common.enums.CurrencyCode;
 import com.rlabdevs.unifymobile.common.enums.StatusCode;
 import com.rlabdevs.unifymobile.common.enums.UserRole;
+import com.rlabdevs.unifymobile.dialog.DateTimeSelectionDialog;
 import com.rlabdevs.unifymobile.models.CuisineTypeModel;
 import com.rlabdevs.unifymobile.models.CurrencyModel;
 import com.rlabdevs.unifymobile.models.HotelModel;
@@ -43,6 +44,7 @@ import com.rlabdevs.unifymobile.models.LocationModel;
 import com.rlabdevs.unifymobile.models.SelectorItemModel;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.EnumSet;
 import java.util.List;
 
@@ -50,6 +52,7 @@ public class Functions implements DialogInterface.OnDismissListener {
 
     private static Dialog errorDialog, itemSelectorDialog;
     public static Dialog progressDialog;
+    public static DateTimeSelectionDialog dateTimeSelectionDialog;
 
     private List<SelectorItemModel> selectorItemsList;
     public ItemSelectorAdapter itemSelectorAdapter;
@@ -233,6 +236,21 @@ public class Functions implements DialogInterface.OnDismissListener {
         {
             selectorItemsList.add(selectorItem);
             itemSelectorAdapter.notifyDataSetChanged();
+        }
+    }
+
+    public static void showDateTimeSelectionDialog(Activity activity, EditText dateTimeInputElement, Date selectedDateTime, boolean isCancelable, String selectDateTimeTitle, View.OnClickListener onDateTimeSelectClickListener) {
+        if (dateTimeSelectionDialog == null || !dateTimeSelectionDialog.isShowing()) {
+            dateTimeSelectionDialog = new DateTimeSelectionDialog(activity, isCancelable, dateTimeInputElement);
+            dateTimeSelectionDialog.setSelectDateTimeTitle(selectDateTimeTitle);
+            dateTimeSelectionDialog.setDateTimeSelectOnClickListener(onDateTimeSelectClickListener);
+
+            if (selectedDateTime != null) {
+                dateTimeSelectionDialog.setSelectedDateTime(selectedDateTime);
+            }
+
+            dateTimeSelectionDialog.switchToDatePickerView();
+            dateTimeSelectionDialog.show();
         }
     }
 

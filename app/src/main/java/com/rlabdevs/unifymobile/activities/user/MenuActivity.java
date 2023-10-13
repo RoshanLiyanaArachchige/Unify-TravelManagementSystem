@@ -18,6 +18,7 @@ import android.widget.TextView;
 import com.rlabdevs.unifymobile.R;
 import com.rlabdevs.unifymobile.activities.MainActivity;
 import com.rlabdevs.unifymobile.activities.account.UserProfileActivity;
+import com.rlabdevs.unifymobile.activities.bookings.hotel.ViewRoomBookingsActivity;
 import com.rlabdevs.unifymobile.activities.user.manage.hotels.MyHotelsActivity;
 import com.rlabdevs.unifymobile.activities.user.manage.restaurants.MyRestaurantsActivity;
 import com.rlabdevs.unifymobile.activities.user.manage.taxiservices.MyTaxiServicesActivity;
@@ -96,7 +97,7 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
             }
             case R.id.linearLytViewBookings:
             {
-                new Functions().StartActivity(MenuActivity.this, ViewBookingsActivity.class);
+                new Functions().StartActivity(MenuActivity.this, ViewRoomBookingsActivity.class);
                 linearLytMyServicesList.setVisibility(View.GONE);
                 break;
             }

@@ -3,6 +3,7 @@ package com.rlabdevs.unifymobile.models;
 import java.util.Date;
 
 public class RoomBookingModel {
+    private String ID;
     private String BookedByUserDetailsCode;
     private String BookingCode;
     private String BookingStatusCode;
@@ -14,13 +15,15 @@ public class RoomBookingModel {
     private String MobileNo;
     private Integer NoOfAdults;
     private Integer NoOfChildren;
+    private Integer NoOfRooms;
     private String RoomCode;
     private String RoomTypeCode;
 
     public RoomBookingModel() {
     }
 
-    public RoomBookingModel(String bookedByUserDetailsCode, String bookingCode, String bookingStatusCode, Date checkinDate, Date checkoutDate, String emailAddress, String fullName, String hotelCode, String mobileNo, Integer noOfAdults, Integer noOfChildren, String roomCode, String roomTypeCode) {
+    public RoomBookingModel(String ID, String bookedByUserDetailsCode, String bookingCode, String bookingStatusCode, Date checkinDate, Date checkoutDate, String emailAddress, String fullName, String hotelCode, String mobileNo, Integer noOfAdults, Integer noOfChildren, Integer noOfRooms, String roomCode, String roomTypeCode) {
+        this.ID = ID;
         BookedByUserDetailsCode = bookedByUserDetailsCode;
         BookingCode = bookingCode;
         BookingStatusCode = bookingStatusCode;
@@ -32,8 +35,17 @@ public class RoomBookingModel {
         MobileNo = mobileNo;
         NoOfAdults = noOfAdults;
         NoOfChildren = noOfChildren;
+        NoOfRooms = noOfRooms;
         RoomCode = roomCode;
         RoomTypeCode = roomTypeCode;
+    }
+
+    public String getID() {
+        return ID;
+    }
+
+    public void setID(String ID) {
+        this.ID = ID;
     }
 
     public String getBookedByUserDetailsCode() {
@@ -122,6 +134,14 @@ public class RoomBookingModel {
 
     public void setNoOfChildren(Integer noOfChildren) {
         NoOfChildren = noOfChildren;
+    }
+
+    public Integer getNoOfRooms() {
+        return NoOfRooms;
+    }
+
+    public void setNoOfRooms(Integer noOfRooms) {
+        NoOfRooms = noOfRooms;
     }
 
     public String getRoomCode() {

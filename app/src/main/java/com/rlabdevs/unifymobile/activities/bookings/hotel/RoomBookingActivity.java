@@ -53,6 +53,7 @@ import java.util.Objects;
 public class RoomBookingActivity extends AppCompatActivity implements View.OnClickListener {
 
     private EditText txtBookingCode, txtFullName, txtEmailAddress, txtMobilePhone, txtNoOfTotalRooms, txtCheckinDate, txtCheckoutDate, txtBookingStatus;
+    private TextView tvPlaceBookingHeading;
     public static TextView tvNoOfAdults, tvNoOfChildren;
     private LinearLayout lnrLayoutActions;
     private Button btnViewRoom, btnReduceRoomCount, btnIncreaseRoomCount, btnCancel, btnConfirm, btnSubmit;
@@ -144,6 +145,7 @@ public class RoomBookingActivity extends AppCompatActivity implements View.OnCli
         btnCancel = findViewById(R.id.btnCancel);
         btnConfirm = findViewById(R.id.btnConfirm);
         btnSubmit = findViewById(R.id.btnSubmit);
+        tvPlaceBookingHeading = findViewById(R.id.tvPlaceBookingHeading);
         tvNoOfAdults = findViewById(R.id.tvNoOfAdults);
         tvNoOfChildren = findViewById(R.id.tvNoOfChildren);
         txtNoOfTotalRooms = findViewById(R.id.txtNoOfTotalRooms);
@@ -157,6 +159,7 @@ public class RoomBookingActivity extends AppCompatActivity implements View.OnCli
         txtCheckoutDate = findViewById(R.id.txtCheckoutDate);
         txtBookingStatus = findViewById(R.id.txtBookingStatus);
 
+        tvNoOfAdults.setOnClickListener(this);
         tvNoOfAdults.setOnClickListener(this);
         tvNoOfChildren.setOnClickListener(this);
         btnReduceRoomCount.setOnClickListener(this);
@@ -307,6 +310,7 @@ public class RoomBookingActivity extends AppCompatActivity implements View.OnCli
     }
 
     private void LoadExistingRoomBooking() {
+        tvPlaceBookingHeading.setText("View Booking");
         txtBookingCode.setText(roomBookingModel.getBookingCode() + " (Booking Code)");
         txtFullName.setText(roomBookingModel.getFullName());
         txtEmailAddress.setText(roomBookingModel.getEmailAddress());

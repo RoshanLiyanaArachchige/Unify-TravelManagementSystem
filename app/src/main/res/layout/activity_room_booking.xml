@@ -311,10 +311,10 @@
             android:layout_marginTop="7dp"
             android:background="@drawable/edit_text_bg_light_rad_10"
             android:clickable="true"
+            android:editable="false"
             android:hint="Select Checkout Date"
             android:inputType="none"
             android:maxLines="1"
-            android:editable="false"
             android:paddingLeft="50dp"
             android:paddingRight="15dp"
             android:singleLine="true"
@@ -384,7 +384,8 @@
                 android:textAllCaps="false"
                 android:textColor="@color/white"
                 android:textSize="20sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:visibility="gone" />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btnConfirm"
@@ -399,7 +400,8 @@
                 android:textAllCaps="false"
                 android:textColor="@color/white"
                 android:textSize="20sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:visibility="gone" />
 
         </LinearLayout>
 

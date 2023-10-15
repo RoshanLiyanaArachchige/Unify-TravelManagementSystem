@@ -441,7 +441,7 @@ public class RoomBookingActivity extends AppCompatActivity implements View.OnCli
                     }
                 });
 
-                roomBookingModel.setBookingStatusCode(StatusCode.Confirmed.getStatusCode());
+                roomBookingModel.setBookingStatusCode(StatusCode.Canceled.getStatusCode());
 
                 roomBookingReference.document(roomBookingModel.getID()).set(roomBookingModel)
                         .addOnSuccessListener(new OnSuccessListener<Void>() {

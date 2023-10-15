@@ -373,4 +373,10 @@ public class CreatedRoomBookingsFragment extends Fragment implements View.OnClic
     public void afterTextChanged(Editable editable) {
         filterRoomBookings();
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        initRoomBookings();
+    }
 }

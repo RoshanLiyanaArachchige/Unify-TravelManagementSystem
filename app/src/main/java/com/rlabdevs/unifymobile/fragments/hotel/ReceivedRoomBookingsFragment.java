@@ -349,4 +349,10 @@ public class ReceivedRoomBookingsFragment extends Fragment implements View.OnCli
     public void afterTextChanged(Editable editable) {
         filterRoomBookings();
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        initRoomBookings();
+    }
 }

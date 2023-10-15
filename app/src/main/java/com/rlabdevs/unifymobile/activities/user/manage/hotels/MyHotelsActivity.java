@@ -52,8 +52,6 @@ public class MyHotelsActivity extends AppCompatActivity implements View.OnClickL
         hotelReference = firestoreDB.collection("Hotels");
         myHotelsActivity = this;
         InitUI();
-        InitRecyclerViewMyHotelsList();
-        FetchMyHotels();
     }
 
     private void InitUI() {
@@ -75,6 +73,8 @@ public class MyHotelsActivity extends AppCompatActivity implements View.OnClickL
         linearLayoutManager = new LinearLayoutManager(this);
         recyclerViewMyHotels.setLayoutManager(linearLayoutManager);
         recyclerViewMyHotels.setAdapter(myHotelsAdapter);
+
+        FetchMyHotels();
     }
 
     private void FetchMyHotels() {
@@ -151,5 +151,11 @@ public class MyHotelsActivity extends AppCompatActivity implements View.OnClickL
                 break;
             }
         }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        InitRecyclerViewMyHotelsList();
     }
 }

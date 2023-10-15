@@ -64,8 +64,6 @@ public class HotelRoomsActivity extends AppCompatActivity implements View.OnClic
         roomTypesReference = firestoreDB.collection("RoomTypes");
         hotelRoomsActivity = this;
         InitUI();
-        InitRecyclerViewHotelsRoomsList();
-        FetchHotelRoomsAndTypes();
     }
 
     private void InitUI() {
@@ -88,6 +86,8 @@ public class HotelRoomsActivity extends AppCompatActivity implements View.OnClic
         linearLayoutManager = new LinearLayoutManager(this);
         recyclerViewHotelRooms.setLayoutManager(linearLayoutManager);
         recyclerViewHotelRooms.setAdapter(hotelRoomsAdapter);
+
+        FetchHotelRoomsAndTypes();
     }
 
     private void FetchHotelRoomsAndTypes() {
@@ -197,5 +197,11 @@ public class HotelRoomsActivity extends AppCompatActivity implements View.OnClic
         hotelRoomIntent.putExtra("Hotel", new Gson().toJson(hotel));
         //finish();
         startActivity(hotelRoomIntent);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        InitRecyclerViewHotelsRoomsList();
     }
 }

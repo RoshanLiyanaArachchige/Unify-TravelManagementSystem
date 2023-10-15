@@ -41,6 +41,7 @@ public class ViewRoomBookingsActivity extends AppCompatActivity implements View.
     private MaterialButton btnCreatedBookings, btnReceivedBookings;
     private FragmentManager fragmentManager;
     private FrameLayout fragmentContainer;
+    public static String selectedStatusCode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,5 +93,10 @@ public class ViewRoomBookingsActivity extends AppCompatActivity implements View.
                 break;
             }
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        finish();
     }
 }

@@ -252,23 +252,34 @@
             android:visibility="gone"
             app:SpinKit_Color="@color/grey_regular" />
 
-        <TextView
-            android:id="@+id/tvNoRooms"
+        <RelativeLayout
+            android:id="@+id/relativeLytNoRooms"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/spinKitProgress"
-            android:layout_marginTop="10dp"
-            android:text="Sorry, currently there are no rooms yet"
-            android:textAlignment="center"
-            android:textColor="@color/grey_regular"
-            android:textSize="16sp"
-            android:visibility="gone" />
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="30dp"
+            android:visibility="gone"
+            android:background="@drawable/card_bg_light_rad_10"
+            android:padding="10dp">
+
+            <TextView
+                android:id="@+id/tvNoRooms"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Sorry, currently there are no rooms yet"
+                android:textAlignment="center"
+                android:textColor="@color/grey_regular"
+                android:textSize="16sp"
+                android:visibility="visible" />
+
+        </RelativeLayout>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerViewHotelRooms"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@id/tvNoRooms"
+            android:layout_below="@id/relativeLytNoRooms"
             android:layout_marginTop="15dp"
             android:layout_marginBottom="15dp" />
 

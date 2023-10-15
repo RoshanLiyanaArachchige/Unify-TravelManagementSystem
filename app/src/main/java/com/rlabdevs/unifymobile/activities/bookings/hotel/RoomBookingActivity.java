@@ -170,8 +170,8 @@ public class RoomBookingActivity extends AppCompatActivity implements View.OnCli
         txtCheckoutDate.setOnClickListener(this);
 
         indexReference = firestoreDB.collection("Index");
-        userDetailsReference = MainActivity.firestoreDB.collection("UserDetails");
-        roomBookingReference = MainActivity.firestoreDB.collection("Hotels").document(hotelModel.getID()).collection("Rooms").document(roomModel.getID()).collection("RoomBookings");
+        userDetailsReference = firestoreDB.collection("UserDetails");
+        roomBookingReference = firestoreDB.collection("RoomBookings");
 
         userDetailsCode = MainActivity.sharedPref.getString("UserDetailsCode", "").toString();
 
@@ -339,6 +339,7 @@ public class RoomBookingActivity extends AppCompatActivity implements View.OnCli
 
         if (userDetailsCode.equals(roomBookingModel.getBookedByUserDetailsCode())) {
             if (currentBookingStatusCode.equals(StatusCode.Pending.getStatusCode())) {
+                lnrLayoutActions.setVisibility(View.VISIBLE);
                 btnCancel.setVisibility(View.VISIBLE);
                 btnSubmit.setVisibility(View.VISIBLE);
                 btnSubmit.setText("Update Booking");
@@ -353,8 +354,16 @@ public class RoomBookingActivity extends AppCompatActivity implements View.OnCli
             txtCheckinDate.setEnabled(false);
             txtCheckoutDate.setEnabled(false);
 
-            btnCancel.setVisibility(View.VISIBLE);
-            btnConfirm.setVisibility(View.VISIBLE);
+            btnReduceRoomCount.setEnabled(false);
+            btnIncreaseRoomCount.setEnabled(false);
+
+            if (currentBookingStatusCode.equals(StatusCode.Pending.getStatusCode()) || currentBookingStatusCode.equals(StatusCode.Confirmed.getStatusCode())) {
+                lnrLayoutActions.setVisibility(View.VISIBLE);
+                if(currentBookingStatusCode.equals(StatusCode.Pending.getStatusCode())) {
+                    btnConfirm.setVisibility(View.VISIBLE);
+                }
+                btnCancel.setVisibility(View.VISIBLE);
+            }
         }
     }
 
@@ -680,6 +689,11 @@ public class RoomBookingActivity extends AppCompatActivity implements View.OnCli
                 txtNoOfTotalRooms.setText("1 Room");
         } else {
             int noOfRooms = Integer.parseInt(strNoOfRooms.replace(" Rooms", "").replace(" Room", ""));
+            if(count > 0 && noOfRooms == roomModel.getNoOfTotalRooms()) {
+                Toast.makeText(this, "Max Available Rooms Reached.", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
             if (count > 0)
                 txtNoOfTotalRooms.setText(++noOfRooms + " Rooms");
             else if (noOfRooms > 2)

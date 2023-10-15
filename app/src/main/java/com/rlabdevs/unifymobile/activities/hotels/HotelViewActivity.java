@@ -47,8 +47,8 @@ public class HotelViewActivity extends AppCompatActivity {
 
     private HotelViewActivity hotelViewActivity;
 
-    private RelativeLayout relativeLayoutHotel;
-    private TextView tvNoRooms, tvHotelName, tvHotelClass;
+    private RelativeLayout relativeLytNoRooms, relativeLayoutHotel;
+    private TextView tvHotelName, tvHotelClass;
     private EditText txtHotelDescription, txtHotelLocation, txtTelephoneNo, txtCheckInOut;
     private ImageView imgViewHotelImage;
     private SpinKitView spinKitProgress;
@@ -80,7 +80,7 @@ public class HotelViewActivity extends AppCompatActivity {
 
     private void InitUI() {
         relativeLayoutHotel = findViewById(R.id.relativeLayoutHotel);
-        tvNoRooms = findViewById(R.id.tvNoRooms);
+        relativeLytNoRooms = findViewById(R.id.relativeLytNoRooms);
         tvHotelName = findViewById(R.id.tvHotelName);
         tvHotelClass = findViewById(R.id.tvHotelClass);
         txtHotelDescription = findViewById(R.id.txtHotelDescription);
@@ -180,7 +180,7 @@ public class HotelViewActivity extends AppCompatActivity {
                                                             public void run() {
                                                                 spinKitProgress.setVisibility(View.GONE);
                                                                 Functions.HideProgressBar();
-                                                                tvNoRooms.setVisibility(View.VISIBLE);
+                                                                relativeLytNoRooms.setVisibility(View.VISIBLE);
                                                             }
                                                         });
                                                     }
@@ -199,7 +199,7 @@ public class HotelViewActivity extends AppCompatActivity {
                                         public void run() {
                                             spinKitProgress.setVisibility(View.GONE);
                                             Functions.HideProgressBar();
-                                            tvNoRooms.setVisibility(View.VISIBLE);
+                                            relativeLytNoRooms.setVisibility(View.VISIBLE);
                                         }
                                     });
                                 }

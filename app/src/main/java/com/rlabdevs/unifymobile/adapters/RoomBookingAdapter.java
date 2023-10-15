@@ -29,19 +29,23 @@ import com.rlabdevs.unifymobile.models.RoomTypesModel;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.Locale;
 
 public class RoomBookingAdapter extends RecyclerView.Adapter<RoomBookingAdapter.RoomBookingViewHolder> {
 
     private Activity activity;
     private List<HotelModel> hotelList;
     private List<RoomModel> roomsList;
+    private List<RoomTypesModel> roomTypesList;
     private List<RoomBookingModel> roomBookingsList;
 
-    public RoomBookingAdapter(Activity activity, List<HotelModel> hotelList, List<RoomModel> roomsList, List<RoomBookingModel> roomBookingsList) {
+    public RoomBookingAdapter(Activity activity, List<HotelModel> hotelList, List<RoomModel> roomsList, List<RoomTypesModel> roomTypesList, List<RoomBookingModel> roomBookingsList) {
         this.activity = activity;
         this.hotelList = hotelList;
         this.roomsList = roomsList;
+        this.roomTypesList = roomTypesList;
         this.roomBookingsList = roomBookingsList;
     }
 
@@ -57,8 +61,17 @@ public class RoomBookingAdapter extends RecyclerView.Adapter<RoomBookingAdapter.
         RoomBookingModel roomBooking = roomBookingsList.get(position);
 
         holder.tvBookingCode.setText(roomBooking.getBookingCode());
+
+        String hotelName = hotelList.stream().filter(h -> h.getHotelCode().equals(roomBooking.getHotelCode())).findFirst().get().getHotelName();
+        holder.tvHotelName.setText(hotelName);
+
+        String roomType = roomTypesList.stream().filter(h -> h.getRoomTypeCode().equals(roomBooking.getRoomTypeCode())).findFirst().get().getRoomType();
+        holder.tvRoomType.setText(roomType);
+
         holder.tvFullName.setText(roomBooking.getFullName());
-        holder.tvEmailAddress.setText(roomBooking.getEmailAddress());
+
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd", Locale.getDefault());
+        holder.tvDateRange.setText(sdf.format(roomBooking.getCheckinDate()) + " - " + sdf.format(roomBooking.getCheckoutDate()));
 
         String statusCode = roomBooking.getBookingStatusCode();
         if(statusCode.equals(StatusCode.Pending.getStatusCode())) {
@@ -76,14 +89,16 @@ public class RoomBookingAdapter extends RecyclerView.Adapter<RoomBookingAdapter.
     }
 
     class RoomBookingViewHolder extends RecyclerView.ViewHolder{
-        TextView tvBookingCode, tvFullName, tvEmailAddress, tvBookingStatus;
+        TextView tvBookingCode, tvHotelName, tvRoomType, tvFullName, tvDateRange, tvBookingStatus;
 
         public RoomBookingViewHolder(@NonNull View itemView) {
             super(itemView);
 
             tvBookingCode = itemView.findViewById(R.id.tvBookingCode);
+            tvHotelName = itemView.findViewById(R.id.tvHotelName);
+            tvRoomType = itemView.findViewById(R.id.tvRoomType);
             tvFullName = itemView.findViewById(R.id.tvFullName);
-            tvEmailAddress = itemView.findViewById(R.id.tvEmailAddress);
+            tvDateRange = itemView.findViewById(R.id.tvDateRange);
             tvBookingStatus = itemView.findViewById(R.id.tvBookingStatus);
 
             itemView.setOnClickListener(new View.OnClickListener() {

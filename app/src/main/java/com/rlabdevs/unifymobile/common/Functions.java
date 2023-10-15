@@ -35,6 +35,7 @@ import com.rlabdevs.unifymobile.adapters.ItemSelectorAdapter;
 import com.rlabdevs.unifymobile.common.enums.CurrencyCode;
 import com.rlabdevs.unifymobile.common.enums.StatusCode;
 import com.rlabdevs.unifymobile.common.enums.UserRole;
+import com.rlabdevs.unifymobile.dialog.DateSelectionDialog;
 import com.rlabdevs.unifymobile.dialog.DateTimeSelectionDialog;
 import com.rlabdevs.unifymobile.models.CuisineTypeModel;
 import com.rlabdevs.unifymobile.models.CurrencyModel;
@@ -53,6 +54,7 @@ public class Functions implements DialogInterface.OnDismissListener {
     private static Dialog errorDialog, itemSelectorDialog;
     public static Dialog progressDialog;
     public static DateTimeSelectionDialog dateTimeSelectionDialog;
+    public static DateSelectionDialog dateSelectionDialog;
 
     private List<SelectorItemModel> selectorItemsList;
     public ItemSelectorAdapter itemSelectorAdapter;
@@ -251,6 +253,20 @@ public class Functions implements DialogInterface.OnDismissListener {
 
             dateTimeSelectionDialog.switchToDatePickerView();
             dateTimeSelectionDialog.show();
+        }
+    }
+
+    public static void showDateSelectionDialog(Activity activity, TextView dateInputElement, Date selectedDate, boolean isCancelable, String selectDateTitle, View.OnClickListener onDateSelectClickListener) {
+        if (dateSelectionDialog == null || !dateSelectionDialog.isShowing()) {
+            dateSelectionDialog = new DateSelectionDialog(activity, isCancelable, dateInputElement);
+            dateSelectionDialog.setSelectDateTitle(selectDateTitle);
+            dateSelectionDialog.setDateSelectOnClickListener(onDateSelectClickListener);
+
+            if (selectedDate != null) {
+                dateSelectionDialog.setSelectedDate(selectedDate);
+            }
+
+            dateSelectionDialog.show();
         }
     }
 

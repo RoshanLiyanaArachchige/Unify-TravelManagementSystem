@@ -145,8 +145,8 @@ public class RoomViewActivity extends AppCompatActivity {
     }
 
     private void FetchRoomReviews() {
-        CollectionReference roomReviewReference = firestoreDB.collection("Hotels").document(hotelModel.getID()).collection( "Rooms").document(roomModel.getID()).collection( "RoomReviews");
-        roomReviewReference.whereEqualTo("statusCode", StatusCode.Active.getStatusCode()).get()
+        CollectionReference roomReviewReference = firestoreDB.collection( "RoomReviews");
+        roomReviewReference.whereEqualTo("roomCode", roomModel.getRoomCode()).whereEqualTo("statusCode", StatusCode.Active.getStatusCode()).get()
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override
                     public void onSuccess(QuerySnapshot queryDocumentSnapshots) {

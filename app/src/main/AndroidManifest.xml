@@ -14,6 +14,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.UnifyMobile">
         <activity
+            android:name=".activities.bookings.taxi.ViewTaxiBookingsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.bookings.restaurant.ViewRestaurantBookingsActivity"
+            android:exported="false" />
+        <activity
             android:name=".activities.bookings.hotel.ViewRoomBookingsActivity"
             android:exported="false" />
         <activity

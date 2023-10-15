@@ -60,8 +60,8 @@ public class HotelRoomsActivity extends AppCompatActivity implements View.OnClic
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hotel_rooms);
         hotel = new Gson().fromJson(getIntent().getStringExtra("Hotel"), HotelModel.class);
-        roomsReference = firestoreDB.collection("Hotels/" + hotel.getID() + "/Rooms");
-        roomTypesReference = firestoreDB.collection("Hotels").document(hotel.getID()).collection("RoomTypes");
+        roomsReference = firestoreDB.collection("Rooms");
+        roomTypesReference = firestoreDB.collection("RoomTypes");
         hotelRoomsActivity = this;
         InitUI();
         InitRecyclerViewHotelsRoomsList();
@@ -101,7 +101,7 @@ public class HotelRoomsActivity extends AppCompatActivity implements View.OnClic
                     }
                 });
 
-                roomTypesReference.get()
+                roomTypesReference.whereEqualTo("hotelCode", hotel.getHotelCode()).get()
                         .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                             @Override
                             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
@@ -114,7 +114,7 @@ public class HotelRoomsActivity extends AppCompatActivity implements View.OnClic
                                         roomTypesList.add(roomType);
                                     }
 
-                                    roomsReference.get()
+                                    roomsReference.whereEqualTo("hotelCode", hotel.getHotelCode()).get()
                                             .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                                                 @Override
                                                 public void onSuccess(QuerySnapshot queryDocumentSnapshots) {

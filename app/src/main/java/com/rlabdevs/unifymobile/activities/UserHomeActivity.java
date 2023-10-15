@@ -22,6 +22,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.rlabdevs.unifymobile.R;
@@ -44,7 +45,7 @@ import java.util.Map;
 
 public class UserHomeActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private CardView cardViewExplore, cardViewThingsToDo, cardViewHotels;
+    private CardView cardViewExplore, cardViewThingsToDo, cardViewHotels, cardViewFlights;
     private ImageView imgViewAccount;
     private EditText txtSearch;
 
@@ -85,11 +86,13 @@ public class UserHomeActivity extends AppCompatActivity implements View.OnClickL
         cardViewExplore = findViewById(R.id.cardViewExplore);
         cardViewThingsToDo = findViewById(R.id.cardViewThingsToDo);
         cardViewHotels = findViewById(R.id.cardViewHotels);
+        cardViewFlights = findViewById(R.id.cardViewFlights);
         imgViewAccount = findViewById(R.id.imgViewAccount);
 
         cardViewExplore.setOnClickListener(this);
         cardViewThingsToDo.setOnClickListener(this);
         cardViewHotels.setOnClickListener(this);
+        cardViewFlights.setOnClickListener(this);
         imgViewAccount.setOnClickListener(this);
     }
 
@@ -110,6 +113,10 @@ public class UserHomeActivity extends AppCompatActivity implements View.OnClickL
             case R.id.cardViewHotels:
             {
                 new Functions().StartActivity(UserHomeActivity.this, HotelFilterActivity.class);
+                break;
+            }
+            case R.id.cardViewFlights:
+            {
                 break;
             }
             case R.id.imgViewAccount:

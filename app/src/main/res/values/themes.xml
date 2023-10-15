@@ -44,4 +44,7 @@
         <item name="android:background">@android:color/transparent</item>
         <item name="android:windowDisablePreview">true</item>
     </style>
+
+    <style name="MaterialToggleButtonStyle" parent="Widget.MaterialComponents.Button.OutlinedButton">
+    </style>
 </resources>

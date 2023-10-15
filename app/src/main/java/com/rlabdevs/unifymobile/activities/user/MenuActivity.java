@@ -19,6 +19,8 @@ import com.rlabdevs.unifymobile.R;
 import com.rlabdevs.unifymobile.activities.MainActivity;
 import com.rlabdevs.unifymobile.activities.account.UserProfileActivity;
 import com.rlabdevs.unifymobile.activities.bookings.hotel.ViewRoomBookingsActivity;
+import com.rlabdevs.unifymobile.activities.bookings.restaurant.ViewRestaurantBookingsActivity;
+import com.rlabdevs.unifymobile.activities.bookings.taxi.ViewTaxiBookingsActivity;
 import com.rlabdevs.unifymobile.activities.user.manage.hotels.MyHotelsActivity;
 import com.rlabdevs.unifymobile.activities.user.manage.restaurants.MyRestaurantsActivity;
 import com.rlabdevs.unifymobile.activities.user.manage.taxiservices.MyTaxiServicesActivity;
@@ -27,7 +29,7 @@ import com.rlabdevs.unifymobile.common.Functions;
 public class MenuActivity extends AppCompatActivity implements View.OnClickListener {
 
     private RelativeLayout relativeLayoutMenuActivity;
-    private LinearLayout linearLytMyServices, linearLytMyServicesList, linearLytManageHotels, linearLytManageRestaurants, linearLytTaxiService, linearLytViewBookings, linearLytUpdateProfile, linearLytLogout;
+    private LinearLayout linearLytMyServices, linearLytMyServicesList, linearLytManageHotels, linearLytManageRestaurants, linearLytTaxiService, linearLytViewBookings, linearLytBookingsList, linearLytHotelBookings, linearLytRestaurantBookings, linearLytTaxiBookings, linearLytUpdateProfile, linearLytLogout;
     private TextView tvFirstLastName, tvMailAddress;
 
     private Dialog logoutConfirmationDialog;
@@ -49,6 +51,10 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
         linearLytManageRestaurants = findViewById(R.id.linearLytManageRestaurants);
         linearLytTaxiService = findViewById(R.id.linearLytTaxiService);
         linearLytViewBookings = findViewById(R.id.linearLytViewBookings);
+        linearLytBookingsList = findViewById(R.id.linearLytBookingsList);
+        linearLytHotelBookings = findViewById(R.id.linearLytHotelBookings);
+        linearLytRestaurantBookings = findViewById(R.id.linearLytRestaurantBookings);
+        linearLytTaxiBookings = findViewById(R.id.linearLytTaxiBookings);
         linearLytUpdateProfile = findViewById(R.id.linearLytUpdateProfile);
         linearLytLogout = findViewById(R.id.linearLytLogout);
         tvFirstLastName = findViewById(R.id.tvFirstLastName);
@@ -64,51 +70,62 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
         linearLytManageRestaurants.setOnClickListener(this);
         linearLytTaxiService.setOnClickListener(this);
         linearLytViewBookings.setOnClickListener(this);
+        linearLytHotelBookings.setOnClickListener(this);
+        linearLytRestaurantBookings.setOnClickListener(this);
+        linearLytTaxiBookings.setOnClickListener(this);
         linearLytUpdateProfile.setOnClickListener(this);
         linearLytLogout.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
-        switch (v.getId())
-        {
-            case R.id.linearLytMyServices:
-            {
+        switch (v.getId()) {
+            case R.id.linearLytMyServices: {
+                linearLytBookingsList.setVisibility(View.GONE);
                 linearLytMyServicesList.setVisibility(View.VISIBLE);
                 break;
             }
-            case R.id.linearLytManageHotels:
-            {
+            case R.id.linearLytManageHotels: {
                 new Functions().StartActivity(MenuActivity.this, MyHotelsActivity.class);
                 linearLytMyServicesList.setVisibility(View.GONE);
                 break;
             }
-            case R.id.linearLytManageRestaurants:
-            {
+            case R.id.linearLytManageRestaurants: {
                 new Functions().StartActivity(MenuActivity.this, MyRestaurantsActivity.class);
                 linearLytMyServicesList.setVisibility(View.GONE);
                 break;
             }
-            case R.id.linearLytTaxiService:
-            {
+            case R.id.linearLytTaxiService: {
                 new Functions().StartActivity(MenuActivity.this, MyTaxiServicesActivity.class);
                 linearLytMyServicesList.setVisibility(View.GONE);
                 break;
             }
-            case R.id.linearLytViewBookings:
-            {
-                new Functions().StartActivity(MenuActivity.this, ViewRoomBookingsActivity.class);
+            case R.id.linearLytViewBookings: {
                 linearLytMyServicesList.setVisibility(View.GONE);
+                linearLytBookingsList.setVisibility(View.VISIBLE);
                 break;
             }
-            case R.id.linearLytUpdateProfile:
-            {
+            case R.id.linearLytHotelBookings: {
+                new Functions().StartActivity(MenuActivity.this, ViewRoomBookingsActivity.class);
+                linearLytBookingsList.setVisibility(View.GONE);
+                break;
+            }
+            case R.id.linearLytRestaurantBookings: {
+                new Functions().StartActivity(MenuActivity.this, ViewRestaurantBookingsActivity.class);
+                linearLytBookingsList.setVisibility(View.GONE);
+                break;
+            }
+            case R.id.linearLytTaxiBookings: {
+                new Functions().StartActivity(MenuActivity.this, ViewTaxiBookingsActivity.class);
+                linearLytBookingsList.setVisibility(View.GONE);
+                break;
+            }
+            case R.id.linearLytUpdateProfile: {
                 new Functions().StartActivity(MenuActivity.this, UserProfileActivity.class);
                 linearLytMyServicesList.setVisibility(View.GONE);
                 break;
             }
-            case R.id.linearLytLogout:
-            {
+            case R.id.linearLytLogout: {
                 ShowLogoutConfirmationDialog();
                 break;
             }

@@ -64,7 +64,7 @@ public class RoomTypesActivity extends AppCompatActivity implements View.OnClick
     private LinearLayoutManager linearLayoutManager;
 
     public IndexModel roomTypeIndex;
-    private String roomTypeCode;
+    private String roomTypeCode, hotelCode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,7 +72,8 @@ public class RoomTypesActivity extends AppCompatActivity implements View.OnClick
         setContentView(R.layout.activity_room_types);
         roomTypesActivity = this;
         indexReference = firestoreDB.collection("Index");
-        roomTypesReference = firestoreDB.collection("Hotels").document(getIntent().getStringExtra("HotelID")).collection("RoomTypes");
+        roomTypesReference = firestoreDB.collection("RoomTypes");
+        hotelCode = getIntent().getStringExtra("HotelCode");
         InitUI();
         InitRecyclerViewRoomTypes();
         FetchHotelRoomsTypes();
@@ -118,7 +119,7 @@ public class RoomTypesActivity extends AppCompatActivity implements View.OnClick
                     }
                 });
 
-                roomTypesReference.get()
+                roomTypesReference.whereEqualTo("hotelCode", hotelCode).get()
                         .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                             @Override
                             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
@@ -237,7 +238,7 @@ public class RoomTypesActivity extends AppCompatActivity implements View.OnClick
                             }
                         });
                         DocumentReference roomTypeDoc = roomTypesReference.document();
-                        RoomTypesModel roomType = new RoomTypesModel(roomTypeCode, txtRoomType.getText().toString(), StatusCode.Active.getStatusCode());
+                        RoomTypesModel roomType = new RoomTypesModel(roomTypeCode, hotelCode, txtRoomType.getText().toString(), StatusCode.Active.getStatusCode());
                         roomType.setID(roomTypeDoc.getId());
                         roomTypeDoc.set(roomType)
                                 .addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -295,7 +296,7 @@ public class RoomTypesActivity extends AppCompatActivity implements View.OnClick
                             }
                         });
                         String status = tvStatus.getText().toString().replace("(Status)", "").trim();
-                        RoomTypesModel roomType = new RoomTypesModel(txtRoomTypeCode.getText().toString(), txtRoomType.getText().toString(), GetStatusCodeFromName(status));
+                        RoomTypesModel roomType = new RoomTypesModel(txtRoomTypeCode.getText().toString(), hotelCode, txtRoomType.getText().toString(), GetStatusCodeFromName(status));
                         roomType.setID(tvRoomTypeID.getText().toString());
                         roomTypesReference.document(roomType.getID()).set(roomType)
                                 .addOnSuccessListener(new OnSuccessListener<Void>() {

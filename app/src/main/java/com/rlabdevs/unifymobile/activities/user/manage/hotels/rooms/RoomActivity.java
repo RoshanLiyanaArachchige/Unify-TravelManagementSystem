@@ -14,6 +14,7 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.text.Html;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -139,8 +140,8 @@ public class RoomActivity extends AppCompatActivity implements View.OnClickListe
         storageReference = firebaseStorage.getReference();
         indexReference = firestoreDB.collection("Index");
         hotelsReference = firestoreDB.collection("Hotels");
-        roomsReference = hotelsReference.document(hotelModel.getID()).collection("Rooms");
-        roomTypesReference = hotelsReference.document(hotelModel.getID()).collection("RoomTypes");
+        roomsReference = firestoreDB.collection("Rooms");
+        roomTypesReference = firestoreDB.collection("RoomTypes");
 
         if (roomModel != null) InitRoom();
         else InitRoomRegistration();
@@ -179,7 +180,7 @@ public class RoomActivity extends AppCompatActivity implements View.OnClickListe
                 btnManageRoomsTypes.setVisibility(View.VISIBLE);
                 txtRoomCode.setText(roomModel.getRoomCode() + " (Registration Code)");
                 txtRoomTypeCode.setText(roomModel.getRoomTypeCode());
-                txtRoomDescription.setText(roomModel.getRoomDescription());
+                txtRoomDescription.setText(Html.fromHtml(roomModel.getRoomDescription()));
                 txtRoomPrice.setText(String.valueOf(roomModel.getRoomPrice()));
 
                 currencyCode = roomModel.getCurrencyCode();
@@ -246,7 +247,7 @@ public class RoomActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void GetRoomTypesList() {
-        roomTypesReference.get()
+        roomTypesReference.whereEqualTo("hotelCode", hotelModel.getHotelCode()).get()
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override
                     public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
@@ -353,7 +354,7 @@ public class RoomActivity extends AppCompatActivity implements View.OnClickListe
 
     private void ManageRoomTypes() {
         Intent roomTypesIntent = new Intent(RoomActivity.this, RoomTypesActivity.class);
-        roomTypesIntent.putExtra("HotelID", hotelModel.getID());
+        roomTypesIntent.putExtra("HotelCode", hotelModel.getHotelCode());
         //finish();
         startActivity(roomTypesIntent);
     }

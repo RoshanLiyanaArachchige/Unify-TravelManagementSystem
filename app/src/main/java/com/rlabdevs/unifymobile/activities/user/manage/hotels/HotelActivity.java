@@ -18,6 +18,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.MediaStore;
+import android.text.Html;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -222,7 +223,7 @@ public class HotelActivity extends AppCompatActivity implements View.OnClickList
                 btnManageRooms.setVisibility(View.VISIBLE);
                 txtHotelCode.setText(myHotelModel.getHotelCode() + " (Registration Code)");
                 txtHotelName.setText(myHotelModel.getHotelName());
-                txtHotelDescription.setText(myHotelModel.getHotelDescription());
+                txtHotelDescription.setText(Html.fromHtml(myHotelModel.getHotelDescription()));
                 tvHotelLocation.setText(myHotelModel.getHotelLocation());
                 tvHotelClass.setText(myHotelModel.getHotelClass() + " Star");
                 txtTelephoneNo.setText(myHotelModel.getHotelTelNo());

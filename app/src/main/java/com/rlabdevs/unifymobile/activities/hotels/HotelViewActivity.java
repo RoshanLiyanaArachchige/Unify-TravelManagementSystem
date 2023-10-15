@@ -48,7 +48,7 @@ public class HotelViewActivity extends AppCompatActivity {
     private HotelViewActivity hotelViewActivity;
 
     private RelativeLayout relativeLayoutHotel;
-    private TextView tvHotelName, tvHotelClass;
+    private TextView tvNoRooms, tvHotelName, tvHotelClass;
     private EditText txtHotelDescription, txtHotelLocation, txtTelephoneNo, txtCheckInOut;
     private ImageView imgViewHotelImage;
     private SpinKitView spinKitProgress;
@@ -70,8 +70,8 @@ public class HotelViewActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hotel_view);
         hotel = new Gson().fromJson(getIntent().getStringExtra("Hotel"), HotelModel.class);
-        roomsReference = firestoreDB.collection("Hotels/" + hotel.getID() + "/Rooms");
-        roomTypesReference = firestoreDB.collection("Hotels/" + hotel.getID() + "/RoomTypes");
+        roomsReference = firestoreDB.collection("Rooms");
+        roomTypesReference = firestoreDB.collection("RoomTypes");
         hotelViewActivity = this;
         InitUI();
         InitRecyclerViewHotelRooms();
@@ -80,6 +80,7 @@ public class HotelViewActivity extends AppCompatActivity {
 
     private void InitUI() {
         relativeLayoutHotel = findViewById(R.id.relativeLayoutHotel);
+        tvNoRooms = findViewById(R.id.tvNoRooms);
         tvHotelName = findViewById(R.id.tvHotelName);
         tvHotelClass = findViewById(R.id.tvHotelClass);
         txtHotelDescription = findViewById(R.id.txtHotelDescription);
@@ -148,27 +149,25 @@ public class HotelViewActivity extends AppCompatActivity {
                     }
                 });
 
-                roomTypesReference.get()
+                roomTypesReference.whereEqualTo("hotelCode", hotel.getHotelCode()).get()
                         .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                             @Override
                             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                                if(!queryDocumentSnapshots.isEmpty())
-                                {
+                                if (!queryDocumentSnapshots.isEmpty()) {
                                     List<DocumentSnapshot> documentSnapshotList = queryDocumentSnapshots.getDocuments();
-                                    for (DocumentSnapshot documentSnapshot: documentSnapshotList) {
+                                    for (DocumentSnapshot documentSnapshot : documentSnapshotList) {
                                         RoomTypesModel roomType = documentSnapshot.toObject(RoomTypesModel.class);
                                         roomType.setID(documentSnapshot.getId());
                                         roomTypesList.add(roomType);
                                     }
 
-                                    roomsReference.get()
+                                    roomsReference.whereEqualTo("hotelCode", hotel.getHotelCode()).get()
                                             .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                                                 @Override
                                                 public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                                                    if(!queryDocumentSnapshots.isEmpty())
-                                                    {
+                                                    if (!queryDocumentSnapshots.isEmpty()) {
                                                         List<DocumentSnapshot> documentSnapshotList = queryDocumentSnapshots.getDocuments();
-                                                        for (DocumentSnapshot documentSnapshot: documentSnapshotList) {
+                                                        for (DocumentSnapshot documentSnapshot : documentSnapshotList) {
                                                             RoomModel room = documentSnapshot.toObject(RoomModel.class);
                                                             room.setID(documentSnapshot.getId());
                                                             hotelRoomsList.add(room);
@@ -176,14 +175,12 @@ public class HotelViewActivity extends AppCompatActivity {
                                                         }
                                                         spinKitProgress.setVisibility(View.GONE);
                                                         Functions.HideProgressBar();
-                                                    }
-                                                    else
-                                                    {
+                                                    } else {
                                                         hotelViewActivity.runOnUiThread(new Runnable() {
                                                             public void run() {
                                                                 spinKitProgress.setVisibility(View.GONE);
                                                                 Functions.HideProgressBar();
-                                                                //rooms empty
+                                                                tvNoRooms.setVisibility(View.VISIBLE);
                                                             }
                                                         });
                                                     }
@@ -197,14 +194,12 @@ public class HotelViewActivity extends AppCompatActivity {
                                                     new Functions().ShowErrorDialog("Rooms Load Failure !", "Try Again", HotelViewActivity.this);
                                                 }
                                             });
-                                }
-                                else
-                                {
+                                } else {
                                     hotelViewActivity.runOnUiThread(new Runnable() {
                                         public void run() {
                                             spinKitProgress.setVisibility(View.GONE);
                                             Functions.HideProgressBar();
-                                            //room types empty
+                                            tvNoRooms.setVisibility(View.VISIBLE);
                                         }
                                     });
                                 }

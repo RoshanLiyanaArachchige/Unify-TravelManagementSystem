@@ -17,6 +17,8 @@ import com.rlabdevs.unifymobile.activities.location.ConfigureLocationActivity;
 import com.rlabdevs.unifymobile.activities.user.manage.hotels.HotelActivity;
 import com.rlabdevs.unifymobile.activities.user.manage.hotels.rooms.RoomActivity;
 import com.rlabdevs.unifymobile.activities.user.manage.hotels.rooms.RoomTypesActivity;
+import com.rlabdevs.unifymobile.activities.user.manage.restaurants.RestaurantActivity;
+import com.rlabdevs.unifymobile.activities.user.manage.restaurants.meals.MealActivity;
 import com.rlabdevs.unifymobile.common.Functions;
 import com.rlabdevs.unifymobile.models.SelectorItemModel;
 
@@ -168,6 +170,49 @@ public class ItemSelectorAdapter extends RecyclerView.Adapter<ItemSelectorAdapte
                             {
                                 ViewRoomBookingsActivity.selectedStatusCode = tvItemCode.getText().toString();
                                 tvSet.setText(tvItemName.getText());
+                            }
+                            break;
+                        }
+
+                        case "RestaurantActivity" :
+                        {
+                            Functions.HideItemSelector();
+                            if(tvSet != null)
+                            {
+                                if(tvSet.getId() == R.id.tvRestaurantClass)
+                                    RestaurantActivity.tvRestaurantClass.setText(tvItemName.getText());
+                                else if(tvSet.getId() == R.id.tvCurrency)
+                                {
+                                    RestaurantActivity.currencyCode = tvItemCode.getText().toString();
+                                    RestaurantActivity.tvCurrency.setText(tvItemName.getText());
+                                }
+                            }
+                            break;
+                        }
+                        case "RestaurantFilterActivity" :
+                        {
+                            Functions.HideItemSelector();
+                            if(tvSet != null)
+                            {
+                                if(tvSet.getId() == R.id.tvClassValue)
+                                    tvSet.setText(tvItemName.getText());
+                                else if(tvSet.getId() == R.id.tvLocationName)
+                                    tvSet.setText(tvItemName.getText());
+                                else if(tvSet.getId() == R.id.tvBudgetRange)
+                                    tvSet.setText(tvItemName.getText());
+                            }
+                            break;
+                        }
+                        case "MealActivity" :
+                        {
+                            Functions.HideItemSelector();
+                            if(tvSet != null)
+                            {
+                                if(tvSet.getId() == R.id.tvCurrency)
+                                {
+                                    MealActivity.currencyCode = tvItemCode.getText().toString();
+                                    MealActivity.tvCurrency.setText(tvItemName.getText());
+                                }
                             }
                             break;
                         }

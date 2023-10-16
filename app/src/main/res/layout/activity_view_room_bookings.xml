@@ -36,7 +36,7 @@
                     android:textStyle="bold" />
 
                 <com.google.android.material.button.MaterialButtonToggleGroup
-                    android:id="@+id/toggleButtonDailyChecklistLoadPeriod"
+                    android:id="@+id/toggleButtonBookingType"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="end"

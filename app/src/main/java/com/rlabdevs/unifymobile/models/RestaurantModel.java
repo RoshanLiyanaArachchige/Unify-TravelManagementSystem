@@ -6,6 +6,7 @@ public class RestaurantModel {
     private String ID;
     private String RestaurantCode;
     private String RestaurantName;
+    private String RestaurantDescription;
     private String RestaurantLocation;
     private String LocationCode;
     private int RestaurantClass;
@@ -29,10 +30,11 @@ public class RestaurantModel {
     public RestaurantModel() {
     }
 
-    public RestaurantModel(String ID, String restaurantCode, String restaurantName, String restaurantLocation, String locationCode, int restaurantClass, double restaurantRating, double averagePrice, String currencyCode, String restaurantTelNo, String openingHour, String closingHour, String restaurantImage, boolean freeWIFI, boolean beverages, boolean parking, boolean takeaway, List<String> cuisineTypes, String userDetailsCode, String statusCode, double latitude, double longitude) {
+    public RestaurantModel(String ID, String restaurantCode, String restaurantName, String restaurantDescription, String restaurantLocation, String locationCode, int restaurantClass, double restaurantRating, double averagePrice, String currencyCode, String restaurantTelNo, String openingHour, String closingHour, String restaurantImage, boolean freeWIFI, boolean beverages, boolean parking, boolean takeaway, List<String> cuisineTypes, String userDetailsCode, String statusCode, double latitude, double longitude) {
         this.ID = ID;
         RestaurantCode = restaurantCode;
         RestaurantName = restaurantName;
+        RestaurantDescription = restaurantDescription;
         RestaurantLocation = restaurantLocation;
         LocationCode = locationCode;
         RestaurantClass = restaurantClass;
@@ -76,6 +78,14 @@ public class RestaurantModel {
 
     public void setRestaurantName(String restaurantName) {
         RestaurantName = restaurantName;
+    }
+
+    public String getRestaurantDescription() {
+        return RestaurantDescription;
+    }
+
+    public void setRestaurantDescription(String restaurantDescription) {
+        RestaurantDescription = restaurantDescription;
     }
 
     public String getRestaurantLocation() {

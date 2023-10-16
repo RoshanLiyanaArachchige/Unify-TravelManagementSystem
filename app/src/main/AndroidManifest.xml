@@ -14,6 +14,21 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.UnifyMobile">
         <activity
+            android:name=".activities.restaurants.meals.MealViewActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.restaurants.RestaurantFilterActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.user.manage.restaurants.meals.MealActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.user.manage.restaurants.meals.RestaurantMealsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.user.manage.restaurants.RestaurantActivity"
+            android:exported="false" />
+        <activity
             android:name=".activities.bookings.taxi.ViewTaxiBookingsActivity"
             android:exported="false" />
         <activity

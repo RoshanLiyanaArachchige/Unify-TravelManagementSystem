@@ -125,7 +125,7 @@
                 android:layout_marginStart="10dp"
                 android:alpha="0.9"
                 android:padding="3dp"
-                android:src="@drawable/hotel_class2" />
+                android:src="@drawable/service_class" />
 
             <TextView
                 android:id="@+id/tvNoOfAdults"

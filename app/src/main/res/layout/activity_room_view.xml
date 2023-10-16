@@ -61,7 +61,7 @@
                     android:id="@+id/imgViewRoomImage"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:scaleType="fitXY"
+                    android:scaleType="centerCrop"
                     android:src="@drawable/img_bg_light_rad_10" />
 
             </RelativeLayout>
@@ -161,7 +161,7 @@
                 android:layout_marginStart="10dp"
                 android:alpha="0.9"
                 android:padding="3dp"
-                android:src="@drawable/hotel_class2" />
+                android:src="@drawable/service_class" />
 
             <TextView
                 android:id="@+id/tvNoOfAdultsChildren"

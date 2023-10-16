@@ -5,10 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:scrollbars="none"
-    tools:context=".activities.user.manage.hotels.HotelActivity">
+    tools:context=".activities.user.manage.restaurants.RestaurantActivity">
 
     <RelativeLayout
-        android:id="@+id/relativeLayoutHotel"
+        android:id="@+id/relativeLayoutRestaurant"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
@@ -16,26 +16,26 @@
         android:animateLayoutChanges="true">
 
         <TextView
-            android:id="@+id/tvHotelHeading"
+            android:id="@+id/tvRestaurantHeading"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="28dp"
             android:paddingTop="5dp"
             android:paddingBottom="5dp"
-            android:text="Configure Hotel"
+            android:text="Configure Restaurant"
             android:textColor="@color/grey_regular"
             android:textSize="20sp"
             android:textStyle="bold" />
 
         <Button
-            android:id="@+id/btnManageRooms"
+            android:id="@+id/btnManageMeals"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignTop="@id/tvHotelHeading"
-            android:layout_alignBottom="@id/tvHotelHeading"
+            android:layout_alignTop="@id/tvRestaurantHeading"
+            android:layout_alignBottom="@id/tvRestaurantHeading"
             android:layout_alignParentEnd="true"
             android:layout_marginStart="15dp"
-            android:text="Manage Rooms"
+            android:text="Manage Meals"
             android:textAllCaps="false"
             android:textColor="@color/white"
             android:textSize="12sp"
@@ -43,10 +43,10 @@
             android:visibility="gone" />
 
         <TextView
-            android:id="@+id/tvHotelCoverImage"
+            android:id="@+id/tvRestaurantCoverImage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/tvHotelHeading"
+            android:layout_below="@id/tvRestaurantHeading"
             android:layout_alignParentEnd="true"
             android:layout_marginTop="30dp"
             android:paddingTop="3dp"
@@ -56,10 +56,10 @@
             android:textSize="18sp" />
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/cardViewHotelCover"
+            android:id="@+id/cardViewRestaurantCover"
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            android:layout_below="@id/tvHotelCoverImage"
+            android:layout_below="@id/tvRestaurantCoverImage"
             android:layout_marginTop="15dp"
             app:cardCornerRadius="20dp"
             app:cardElevation="0dp">
@@ -69,7 +69,7 @@
                 android:layout_height="match_parent">
 
                 <ImageView
-                    android:id="@+id/imgViewHotelImage"
+                    android:id="@+id/imgViewRestaurantImage"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:scaleType="centerCrop"
@@ -92,27 +92,27 @@
         </androidx.cardview.widget.CardView>
 
         <TextView
-            android:id="@+id/tvHotelInformation"
+            android:id="@+id/tvRestaurantInformation"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/cardViewHotelCover"
+            android:layout_below="@id/cardViewRestaurantCover"
             android:layout_alignParentEnd="true"
             android:layout_marginTop="30dp"
             android:paddingTop="3dp"
             android:paddingBottom="3dp"
-            android:text="Hotel Information"
+            android:text="Restaurant Information"
             android:textColor="@color/grey_regular"
             android:textSize="18sp" />
 
         <RelativeLayout
-            android:id="@+id/relativeLayoutRegisterHotel"
+            android:id="@+id/relativeLayoutRegisterRestaurant"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/tvHotelInformation"
+            android:layout_below="@id/tvRestaurantInformation"
             android:layout_marginTop="15dp">
 
             <EditText
-                android:id="@+id/txtHotelCode"
+                android:id="@+id/txtRestaurantCode"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:background="@drawable/edit_text_bg_light_rad_10"
@@ -129,22 +129,22 @@
                 android:id="@+id/imgViewRegistrationCode"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:layout_alignStart="@id/txtHotelCode"
-                android:layout_alignTop="@id/txtHotelCode"
-                android:layout_alignBottom="@id/txtHotelCode"
+                android:layout_alignStart="@id/txtRestaurantCode"
+                android:layout_alignTop="@id/txtRestaurantCode"
+                android:layout_alignBottom="@id/txtRestaurantCode"
                 android:layout_marginStart="10dp"
                 android:alpha="0.9"
                 android:src="@drawable/logbook" />
 
             <EditText
-                android:id="@+id/txtHotelName"
+                android:id="@+id/txtRestaurantName"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:layout_below="@id/txtHotelCode"
+                android:layout_below="@id/txtRestaurantCode"
                 android:layout_alignParentStart="true"
                 android:layout_marginTop="7dp"
                 android:background="@drawable/edit_text_bg_light_rad_10"
-                android:hint="Enter Hotel Name"
+                android:hint="Enter Restaurant Name"
                 android:inputType="text"
                 android:maxLines="1"
                 android:paddingStart="50dp"
@@ -153,26 +153,27 @@
                 android:textColor="@color/grey_regular" />
 
             <ImageView
-                android:id="@+id/imgViewHotelName"
+                android:id="@+id/imgViewRestaurantName"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:layout_alignStart="@id/txtHotelName"
-                android:layout_alignTop="@id/txtHotelName"
-                android:layout_alignBottom="@id/txtHotelName"
+                android:layout_alignStart="@id/txtRestaurantName"
+                android:layout_alignTop="@id/txtRestaurantName"
+                android:layout_alignBottom="@id/txtRestaurantName"
                 android:layout_marginStart="10dp"
-                android:alpha="0.9"
-                android:src="@drawable/hotel" />
+                android:alpha="0.6"
+                android:padding="3dp"
+                android:src="@drawable/store" />
 
             <EditText
-                android:id="@+id/txtHotelDescription"
+                android:id="@+id/txtRestaurantDescription"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/imgViewHotelName"
+                android:layout_below="@id/imgViewRestaurantName"
                 android:layout_alignParentStart="true"
                 android:layout_marginTop="7dp"
                 android:background="@drawable/edit_text_bg_light_rad_10"
                 android:gravity="top"
-                android:hint="Enter Hotel Description"
+                android:hint="Enter Restaurant Description"
                 android:inputType="textMultiLine"
                 android:minHeight="100dp"
                 android:paddingStart="50dp"
@@ -183,11 +184,11 @@
                 android:textColor="@color/grey_regular" />
 
             <ImageView
-                android:id="@+id/imgViewHotelDescription"
+                android:id="@+id/imgViewRestaurantDescription"
                 android:layout_width="35dp"
                 android:layout_height="30dp"
-                android:layout_alignStart="@id/txtHotelDescription"
-                android:layout_alignTop="@id/txtHotelDescription"
+                android:layout_alignStart="@id/txtRestaurantDescription"
+                android:layout_alignTop="@id/txtRestaurantDescription"
                 android:layout_marginStart="7dp"
                 android:layout_marginTop="7dp"
                 android:alpha="0.6"
@@ -195,10 +196,10 @@
                 android:src="@drawable/description_icon" />
 
             <TextView
-                android:id="@+id/tvHotelLocation"
+                android:id="@+id/tvRestaurantLocation"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:layout_below="@id/txtHotelDescription"
+                android:layout_below="@id/txtRestaurantDescription"
                 android:layout_marginTop="7dp"
                 android:background="@drawable/edit_text_bg_light_rad_10"
                 android:gravity="center_vertical"
@@ -206,7 +207,7 @@
                 android:paddingStart="50dp"
                 android:paddingEnd="15dp"
                 android:singleLine="true"
-                android:text="Set Hotel Location"
+                android:text="Set Restaurant Location"
                 android:textColor="@color/grey_regular"
                 android:textSize="19sp" />
 
@@ -214,22 +215,22 @@
                 android:id="@+id/imgViewAddress"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:layout_alignStart="@id/tvHotelLocation"
-                android:layout_alignTop="@id/tvHotelLocation"
-                android:layout_alignBottom="@id/tvHotelLocation"
+                android:layout_alignStart="@id/tvRestaurantLocation"
+                android:layout_alignTop="@id/tvRestaurantLocation"
+                android:layout_alignBottom="@id/tvRestaurantLocation"
                 android:layout_marginStart="10dp"
                 android:alpha="0.9"
                 android:src="@drawable/address" />
 
             <TextView
-                android:id="@+id/tvHotelClass"
+                android:id="@+id/tvRestaurantClass"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:layout_below="@id/tvHotelLocation"
+                android:layout_below="@id/tvRestaurantLocation"
                 android:layout_marginTop="7dp"
                 android:background="@drawable/edit_text_bg_light_rad_10"
                 android:gravity="center_vertical"
-                android:hint="Select Hotel Class"
+                android:hint="Select Restaurant Class"
                 android:inputType="text"
                 android:maxLines="1"
                 android:paddingStart="50dp"
@@ -239,12 +240,12 @@
                 android:textSize="19sp" />
 
             <ImageView
-                android:id="@+id/imgViewHotelClass"
+                android:id="@+id/imgViewRestaurantClass"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:layout_alignStart="@id/tvHotelClass"
-                android:layout_alignTop="@id/tvHotelClass"
-                android:layout_alignBottom="@id/tvHotelClass"
+                android:layout_alignStart="@id/tvRestaurantClass"
+                android:layout_alignTop="@id/tvRestaurantClass"
+                android:layout_alignBottom="@id/tvRestaurantClass"
                 android:layout_marginStart="10dp"
                 android:alpha="0.9"
                 android:padding="3dp"
@@ -254,7 +255,7 @@
                 android:id="@+id/txtTelephoneNo"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:layout_below="@id/tvHotelClass"
+                android:layout_below="@id/tvRestaurantClass"
                 android:layout_marginTop="7dp"
                 android:background="@drawable/edit_text_bg_light_rad_10"
                 android:hint="Enter Telephone No"
@@ -277,14 +278,14 @@
                 android:src="@drawable/phone_message" />
 
             <EditText
-                android:id="@+id/txtCheckIn"
+                android:id="@+id/txtOpenTime"
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
                 android:layout_below="@id/txtTelephoneNo"
                 android:layout_marginTop="7dp"
                 android:background="@drawable/edit_text_bg_light_rad_10"
                 android:gravity="center_vertical"
-                android:hint="Check-In"
+                android:hint="Open Time"
                 android:maxLines="1"
                 android:minWidth="175dp"
                 android:paddingStart="50dp"
@@ -294,16 +295,16 @@
                 android:textSize="19sp" />
 
             <EditText
-                android:id="@+id/txtCheckOut"
+                android:id="@+id/txtCloseTime"
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
                 android:layout_below="@id/txtTelephoneNo"
                 android:layout_marginStart="7dp"
                 android:layout_marginTop="7dp"
-                android:layout_toEndOf="@id/txtCheckIn"
+                android:layout_toEndOf="@id/txtOpenTime"
                 android:background="@drawable/edit_text_bg_light_rad_10"
                 android:gravity="center_vertical"
-                android:hint="Check-Out"
+                android:hint="Close Time"
                 android:maxLines="1"
                 android:minWidth="175dp"
                 android:paddingStart="15dp"
@@ -316,24 +317,25 @@
                 android:id="@+id/imgViewCheckInOut"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:layout_alignStart="@id/txtCheckIn"
-                android:layout_alignTop="@id/txtCheckIn"
-                android:layout_alignBottom="@id/txtCheckIn"
+                android:layout_alignStart="@id/txtOpenTime"
+                android:layout_alignTop="@id/txtOpenTime"
+                android:layout_alignBottom="@id/txtOpenTime"
                 android:layout_marginStart="10dp"
                 android:alpha="0.55"
-                android:src="@drawable/checkin" />
+                android:padding="2dp"
+                android:src="@drawable/clock" />
 
 
             <TextView
-                android:id="@+id/tvRoomSummary"
+                android:id="@+id/tvMealSummary"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/txtCheckIn"
+                android:layout_below="@id/txtOpenTime"
                 android:layout_alignParentEnd="true"
                 android:layout_marginTop="30dp"
                 android:paddingTop="3dp"
                 android:paddingBottom="3dp"
-                android:text="Rooms Summary"
+                android:text="Meals Summary"
                 android:textColor="@color/grey_regular"
                 android:textSize="18sp" />
 
@@ -341,10 +343,10 @@
                 android:id="@+id/txtBudget"
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
-                android:layout_below="@id/tvRoomSummary"
+                android:layout_below="@id/tvMealSummary"
                 android:layout_marginTop="7dp"
                 android:background="@drawable/edit_text_bg_light_rad_10"
-                android:hint="Room Budget"
+                android:hint="Average Price"
                 android:inputType="numberDecimal"
                 android:maxLines="1"
                 android:paddingStart="50dp"
@@ -356,7 +358,7 @@
                 android:id="@+id/tvCurrency"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:layout_below="@id/tvRoomSummary"
+                android:layout_below="@id/tvMealSummary"
                 android:layout_marginStart="7dp"
                 android:layout_marginTop="7dp"
                 android:layout_toEndOf="@id/txtBudget"
@@ -383,7 +385,7 @@
                 android:src="@drawable/dollar" />
 
             <LinearLayout
-                android:id="@+id/linearLytRoomAmenities"
+                android:id="@+id/linearLytMealAmenities"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/txtBudget"
@@ -408,7 +410,7 @@
                         android:src="@drawable/amenities" />
 
                     <TextView
-                        android:id="@+id/tvRoomAmenities"
+                        android:id="@+id/tvMealAmenities"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
@@ -444,78 +446,11 @@
                         android:src="@drawable/wifi" />
 
                     <CheckBox
-                        android:id="@+id/chkAirConditioned"
+                        android:id="@+id/chkBeverages"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="15dp"
-                        android:text="Air Conditioned"
-                        android:textColor="@color/grey_regular"
-                        android:textSize="16sp" />
-
-                    <ImageView
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginStart="5dp"
-                        android:alpha="0.5"
-                        android:src="@drawable/air_conditioner" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="30dp"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="7dp"
-                    android:orientation="horizontal">
-
-                    <CheckBox
-                        android:id="@+id/chkFreeBreakfast"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Free Breakfast"
-                        android:textColor="@color/grey_regular"
-                        android:textSize="16sp" />
-
-                    <ImageView
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginStart="5dp"
-                        android:alpha="0.5"
-                        android:src="@drawable/breakfast" />
-
-                    <CheckBox
-                        android:id="@+id/chkTeaCoffee"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="15dp"
-                        android:text="Tea Coffee"
-                        android:textColor="@color/grey_regular"
-                        android:textSize="16sp" />
-
-                    <ImageView
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginStart="5dp"
-                        android:alpha="0.5"
-                        android:src="@drawable/teacoffee" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="30dp"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="7dp"
-                    android:orientation="horizontal">
-
-                    <CheckBox
-                        android:id="@+id/chkBar"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Bar"
+                        android:text="Beverages"
                         android:textColor="@color/grey_regular"
                         android:textSize="16sp" />
 
@@ -527,23 +462,6 @@
                         android:alpha="0.5"
                         android:src="@drawable/bar" />
 
-                    <CheckBox
-                        android:id="@+id/chkRoomService"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="15dp"
-                        android:text="Room Service"
-                        android:textColor="@color/grey_regular"
-                        android:textSize="16sp" />
-
-                    <ImageView
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginStart="5dp"
-                        android:alpha="0.5"
-                        android:src="@drawable/room_service" />
-
                 </LinearLayout>
 
                 <LinearLayout
@@ -554,10 +472,10 @@
                     android:orientation="horizontal">
 
                     <CheckBox
-                        android:id="@+id/chkTelevision"
+                        android:id="@+id/chkTakeAway"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="T/V"
+                        android:text="Take Away"
                         android:textColor="@color/grey_regular"
                         android:textSize="16sp" />
 
@@ -567,55 +485,13 @@
                         android:layout_gravity="center_vertical"
                         android:layout_marginStart="5dp"
                         android:alpha="0.5"
-                        android:src="@drawable/television" />
-
-                    <CheckBox
-                        android:id="@+id/chkPool"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="15dp"
-                        android:text="Pool"
-                        android:textColor="@color/grey_regular"
-                        android:textSize="16sp" />
-
-                    <ImageView
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginStart="5dp"
-                        android:alpha="0.5"
-                        android:src="@drawable/pool" />
-
-                    <CheckBox
-                        android:id="@+id/chkSpa"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="15dp"
-                        android:text="Spa"
-                        android:textColor="@color/grey_regular"
-                        android:textSize="16sp" />
-
-                    <ImageView
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginStart="5dp"
-                        android:alpha="0.5"
-                        android:src="@drawable/spa" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="30dp"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="7dp"
-                    android:orientation="horizontal">
+                        android:src="@drawable/takeaway" />
 
                     <CheckBox
                         android:id="@+id/chkParking"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="15dp"
                         android:text="Parking"
                         android:textColor="@color/grey_regular"
                         android:textSize="16sp" />
@@ -633,37 +509,76 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/linearLytCuisineTypes"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/linearLytRoomAmenities"
+                android:layout_below="@id/linearLytMealAmenities"
+                android:layout_marginTop="7dp"
+                android:background="@drawable/edit_text_bg_light_rad_10"
+                android:orientation="vertical"
+                android:paddingTop="7dp"
+                android:paddingBottom="7dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/imgViewCuisineTypes"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginStart="10dp"
+                        android:alpha="0.6"
+                        android:padding="4dp"
+                        android:src="@drawable/food" />
+
+                    <TextView
+                        android:id="@+id/tvCuisineTypes"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:paddingTop="3dp"
+                        android:paddingBottom="3dp"
+                        android:text="Cuisine Types"
+                        android:textColor="@color/grey_regular"
+                        android:textSize="18sp" />
+
+                </LinearLayout>
+
+                <com.google.android.material.button.MaterialButtonToggleGroup
+                    android:id="@+id/toggleButtonCuisineTypes"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingStart="15dp"
+                    android:paddingEnd="15dp"
+                    app:selectionRequired="true"
+                    app:singleSelection="false">
+
+                </com.google.android.material.button.MaterialButtonToggleGroup>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/linearLytCuisineTypes"
                 android:layout_marginTop="30dp"
                 android:layout_marginBottom="20dp"
                 android:gravity="center"
                 android:orientation="horizontal">
 
                 <Button
-                    android:id="@+id/btnSaveHotel"
+                    android:id="@+id/btnSaveRestaurant"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/button_bg_light_active_rad_10"
-                    android:text="Register Hotel"
+                    android:text="Register Restaurant"
                     android:textAllCaps="false"
                     android:textColor="@color/white"
                     android:textSize="20sp"
                     android:textStyle="bold" />
-
-                <Button
-                    android:id="@+id/btnManageRooms2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="15dp"
-                    android:background="@drawable/button_bg_light_active_rad_10"
-                    android:text="Rooms"
-                    android:textAllCaps="false"
-                    android:textColor="@color/white"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
-                    android:visibility="gone" />
 
             </LinearLayout>
 

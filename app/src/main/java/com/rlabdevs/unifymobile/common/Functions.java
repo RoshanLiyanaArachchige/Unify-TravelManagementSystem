@@ -125,6 +125,11 @@ public class Functions implements DialogInterface.OnDismissListener {
         return "";
     }
 
+    public static int convertDimensionToPixels(Activity activity, float dimens) {
+        float scale = activity.getResources().getDisplayMetrics().density;
+        return (int) (dimens * scale + 0.5f);
+    }
+
     public boolean ShowErrorDialog(String alertMessage, String buttonAction, Activity activity) {
         if (!isErrorDialogVisible) {
             ImageView imgViewDialogType;

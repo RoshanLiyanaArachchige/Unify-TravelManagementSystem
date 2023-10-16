@@ -44,7 +44,7 @@
                     android:id="@+id/imgViewHotelImage"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:scaleType="fitXY"
+                    android:scaleType="centerCrop"
                     android:src="@drawable/hotel1" />
 
             </RelativeLayout>
@@ -171,7 +171,7 @@
                 android:layout_marginStart="10dp"
                 android:alpha="0.9"
                 android:padding="3dp"
-                android:src="@drawable/hotel_class2" />
+                android:src="@drawable/service_class" />
 
             <EditText
                 android:id="@+id/txtTelephoneNo"

@@ -543,8 +543,6 @@ public class HotelActivity extends AppCompatActivity implements View.OnClickList
             return new Functions().ShowErrorDialog("Hotel Name Required !", "Okay", this);
         } else if (hotelName.length() < 5) {
             return new Functions().ShowErrorDialog("Hotel Name (5 Chars Min) !", "Try Again", this);
-        } else if (!Regex.ValidateLettersAndSpacesOnly(hotelName)) {
-            return new Functions().ShowErrorDialog("Hotel Name: Enter Letters And Spaces Only !", "Try Again", this);
         }
 
         String hotelDescription = txtHotelDescription.getText().toString().trim();
@@ -555,7 +553,7 @@ public class HotelActivity extends AppCompatActivity implements View.OnClickList
         }
 
         String hotelLocation = tvHotelLocation.getText().toString().trim();
-        if (hotelLocation.equals("")) {
+        if (hotelLocation.equals("Set Hotel Location")) {
             return new Functions().ShowErrorDialog("Hotel Location Required !", "Okay", this);
         } else if (hotelLocation.length() < 3) {
             return new Functions().ShowErrorDialog("Enter Valid Hotel Location !", "Try Again", this);

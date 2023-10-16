@@ -45,7 +45,7 @@ public class HotelFilterActivity extends AppCompatActivity implements View.OnCli
 
     private HotelFilterActivity hotelFilterActivity;
 
-    private RelativeLayout relativeLayoutHotelFilter;
+    private RelativeLayout relativeLayoutHotelFilter, relativeLytNoHotels;
     private GridLayout gridLayoutHotelFilters;
     private TextView tvLocationName, tvBudgetRange, tvClassValue;
     private RecyclerView recyclerViewHotels;
@@ -76,6 +76,7 @@ public class HotelFilterActivity extends AppCompatActivity implements View.OnCli
 
     private void InitUI() {
         relativeLayoutHotelFilter = findViewById(R.id.relativeLayoutHotelFilter);
+        relativeLytNoHotels = findViewById(R.id.relativeLytNoHotels);
         gridLayoutHotelFilters = findViewById(R.id.gridLayoutHotelFilters);
         tvLocationName = findViewById(R.id.tvLocationName);
         tvBudgetRange = findViewById(R.id.tvBudgetRange);
@@ -184,6 +185,12 @@ public class HotelFilterActivity extends AppCompatActivity implements View.OnCli
         for (HotelModel hotelFilter:tmpHotelList) {
             hotelFilterList.add(hotelFilter);
             hotelFilterAdapter.notifyDataSetChanged();
+        }
+
+        if(hotelFilterList.size() == 0) {
+            relativeLytNoHotels.setVisibility(View.VISIBLE);
+        } else {
+            relativeLytNoHotels.setVisibility(View.GONE);
         }
 
     }

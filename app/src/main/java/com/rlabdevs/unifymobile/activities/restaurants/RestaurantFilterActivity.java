@@ -41,7 +41,7 @@ public class RestaurantFilterActivity extends AppCompatActivity implements View.
 
     private RestaurantFilterActivity restaurantFilterActivity;
 
-    private RelativeLayout relativeLayoutRestaurantFilter;
+    private RelativeLayout relativeLayoutRestaurantFilter, relativeLytNoRestaurants;
     private GridLayout gridLayoutRestaurantFilters;
     private TextView tvLocationName, tvClassValue;
     private RecyclerView recyclerViewRestaurants;
@@ -72,6 +72,7 @@ public class RestaurantFilterActivity extends AppCompatActivity implements View.
 
     private void InitUI() {
         relativeLayoutRestaurantFilter = findViewById(R.id.relativeLayoutRestaurantFilter);
+        relativeLytNoRestaurants = findViewById(R.id.relativeLytNoRestaurants);
         gridLayoutRestaurantFilters = findViewById(R.id.gridLayoutRestaurantFilters);
         tvLocationName = findViewById(R.id.tvLocationName);
         tvClassValue = findViewById(R.id.tvClassValue);
@@ -129,6 +130,12 @@ public class RestaurantFilterActivity extends AppCompatActivity implements View.
         for (RestaurantModel restaurantFilter : tmpRestaurantList) {
             restaurantFilterList.add(restaurantFilter);
             restaurantFilterAdapter.notifyDataSetChanged();
+        }
+
+        if(restaurantFilterList.size() == 0) {
+            relativeLytNoRestaurants.setVisibility(View.VISIBLE);
+        } else {
+            relativeLytNoRestaurants.setVisibility(View.GONE);
         }
     }
 

@@ -29,6 +29,7 @@ import com.rlabdevs.unifymobile.R;
 import com.rlabdevs.unifymobile.activities.account.LoginActivity;
 import com.rlabdevs.unifymobile.activities.explore.ExploreActivity;
 import com.rlabdevs.unifymobile.activities.hotels.HotelFilterActivity;
+import com.rlabdevs.unifymobile.activities.restaurants.RestaurantFilterActivity;
 import com.rlabdevs.unifymobile.activities.search.SearchResultsActivity;
 import com.rlabdevs.unifymobile.activities.thingstodo.ThingsToDoActivity;
 import com.rlabdevs.unifymobile.activities.thingstodo.ThingsToDoViewActivity;
@@ -45,7 +46,7 @@ import java.util.Map;
 
 public class UserHomeActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private CardView cardViewExplore, cardViewThingsToDo, cardViewHotels, cardViewFlights;
+    private CardView cardViewExplore, cardViewThingsToDo, cardViewHotels, cardViewFlights, cardViewRestaurant;
     private ImageView imgViewAccount;
     private EditText txtSearch;
 
@@ -87,12 +88,14 @@ public class UserHomeActivity extends AppCompatActivity implements View.OnClickL
         cardViewThingsToDo = findViewById(R.id.cardViewThingsToDo);
         cardViewHotels = findViewById(R.id.cardViewHotels);
         cardViewFlights = findViewById(R.id.cardViewFlights);
+        cardViewRestaurant = findViewById(R.id.cardViewRestaurant);
         imgViewAccount = findViewById(R.id.imgViewAccount);
 
         cardViewExplore.setOnClickListener(this);
         cardViewThingsToDo.setOnClickListener(this);
         cardViewHotels.setOnClickListener(this);
         cardViewFlights.setOnClickListener(this);
+        cardViewRestaurant.setOnClickListener(this);
         imgViewAccount.setOnClickListener(this);
     }
 
@@ -113,6 +116,11 @@ public class UserHomeActivity extends AppCompatActivity implements View.OnClickL
             case R.id.cardViewHotels:
             {
                 new Functions().StartActivity(UserHomeActivity.this, HotelFilterActivity.class);
+                break;
+            }
+            case R.id.cardViewRestaurant:
+            {
+                new Functions().StartActivity(UserHomeActivity.this, RestaurantFilterActivity.class);
                 break;
             }
             case R.id.cardViewFlights:

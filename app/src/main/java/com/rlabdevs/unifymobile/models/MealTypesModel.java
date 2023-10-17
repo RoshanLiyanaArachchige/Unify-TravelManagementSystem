@@ -4,17 +4,17 @@ public class MealTypesModel {
     private String ID;
     private String RestaurantCode;
     private String MealTypeCode;
-    private String MealType;
+    private String MealTypeName;
     private String StatusCode;
 
     public MealTypesModel() {
     }
 
-    public MealTypesModel(String ID, String restaurantCode, String mealTypeCode, String mealType, String statusCode) {
+    public MealTypesModel(String ID, String restaurantCode, String mealTypeCode, String mealTypeName, String statusCode) {
         this.ID = ID;
         RestaurantCode = restaurantCode;
         MealTypeCode = mealTypeCode;
-        MealType = mealType;
+        MealTypeName = mealTypeName;
         StatusCode = statusCode;
     }
 
@@ -42,12 +42,12 @@ public class MealTypesModel {
         MealTypeCode = mealTypeCode;
     }
 
-    public String getMealType() {
-        return MealType;
+    public String getMealTypeName() {
+        return MealTypeName;
     }
 
-    public void setMealType(String mealType) {
-        MealType = mealType;
+    public void setMealType(String mealTypeName) {
+        MealTypeName = mealTypeName;
     }
 
     public String getStatusCode() {

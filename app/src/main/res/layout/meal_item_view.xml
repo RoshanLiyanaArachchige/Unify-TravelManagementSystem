@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="10dp"
+    android:layout_marginBottom="8dp"
+    android:background="@drawable/card_bg_light_rad_10">
+
+    <ImageView
+        android:id="@+id/imgViewMeal"
+        android:layout_width="110dp"
+        android:layout_height="75dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginBottom="3dp"
+        android:layout_marginEnd="10dp"
+        android:scaleType="centerCrop"
+        android:background="@drawable/card_bg_light_rad_10"/>
+
+    <LinearLayout
+        android:id="@+id/linearLytImageProgress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/imgViewMeal"
+        android:layout_alignBottom="@id/imgViewMeal"
+        android:layout_alignStart="@id/imgViewMeal"
+        android:layout_alignEnd="@id/imgViewMeal"
+        android:orientation="vertical">
+
+        <com.github.ybq.android.spinkit.SpinKitView
+            android:id="@+id/spinKitProgress"
+            style="@style/SpinKitView.Large.Pulse"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="visible"
+            app:SpinKit_Color="@color/grey_regular" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tvMealCode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"/>
+
+    <TextView
+        android:id="@+id/tvMealName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/imgViewMeal"
+        android:text="Seafood Nasi Goreng"
+        android:textColor="@color/grey_dark"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tvMealType"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvMealName"
+        android:layout_toEndOf="@id/imgViewMeal"
+        android:text="Main Course"
+        android:textColor="@color/grey_dark"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/tvMealSize"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvMealType"
+        android:layout_toEndOf="@id/imgViewMeal"
+        android:text="For 2 Persons"
+        android:textColor="@color/royal_blue"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/tvMealPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvMealSize"
+        android:layout_toRightOf="@id/imgViewMeal"
+        android:text="LKR 25000"
+        android:textColor="@color/royal_red"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/tvPerPortion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvMealSize"
+        android:layout_alignParentEnd="true"
+        android:layout_marginLeft="7dp"
+        android:layout_toRightOf="@id/tvMealPrice"
+        android:text="per portion"
+        android:textColor="@color/grey_regular"
+        android:textSize="14sp" />
+
+</RelativeLayout>

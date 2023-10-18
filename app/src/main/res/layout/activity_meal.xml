@@ -136,6 +136,33 @@
                 android:alpha="0.9"
                 android:src="@drawable/logbook" />
 
+            <EditText
+                android:id="@+id/txtMealName"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_below="@id/txtMealCode"
+                android:layout_marginTop="7dp"
+                android:background="@drawable/edit_text_bg_light_rad_10"
+                android:gravity="top"
+                android:hint="Enter Meal Name"
+                android:paddingStart="50dp"
+                android:paddingTop="10dp"
+                android:paddingEnd="15dp"
+                android:paddingBottom="8dp"
+                android:textColor="@color/grey_regular" />
+
+            <ImageView
+                android:id="@+id/imgViewMealDescription"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignStart="@id/txtMealDescription"
+                android:layout_alignTop="@id/txtMealDescription"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="7dp"
+                android:alpha="0.6"
+                android:padding="3dp"
+                android:src="@drawable/description_icon" />
+
             <TextView
                 android:id="@+id/tvMealType"
                 android:layout_width="match_parent"

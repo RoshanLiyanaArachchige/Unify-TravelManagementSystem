@@ -2,6 +2,7 @@ package com.rlabdevs.unifymobile.activities.user.manage.hotels.rooms;
 
 import static com.rlabdevs.unifymobile.activities.MainActivity.firebaseStorage;
 import static com.rlabdevs.unifymobile.activities.MainActivity.firestoreDB;
+import static com.rlabdevs.unifymobile.common.Constants.ROOM_COVER_IMAGE_PICK_REQUEST;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -54,8 +55,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RoomActivity extends AppCompatActivity implements View.OnClickListener {
-
-    private static final int ROOM_COVER_IMAGE_PICK_REQUEST = 16500;
 
     private RoomActivity roomActivity;
 

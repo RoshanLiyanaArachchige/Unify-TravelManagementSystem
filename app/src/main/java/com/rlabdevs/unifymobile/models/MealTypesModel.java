@@ -10,6 +10,13 @@ public class MealTypesModel {
     public MealTypesModel() {
     }
 
+    public MealTypesModel(String restaurantCode, String mealTypeCode, String mealTypeName, String statusCode) {
+        RestaurantCode = restaurantCode;
+        MealTypeCode = mealTypeCode;
+        MealTypeName = mealTypeName;
+        StatusCode = statusCode;
+    }
+
     public MealTypesModel(String ID, String restaurantCode, String mealTypeCode, String mealTypeName, String statusCode) {
         this.ID = ID;
         RestaurantCode = restaurantCode;

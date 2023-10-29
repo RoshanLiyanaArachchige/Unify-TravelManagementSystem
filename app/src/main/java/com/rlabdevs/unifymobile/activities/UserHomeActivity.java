@@ -1,14 +1,10 @@
 package com.rlabdevs.unifymobile.activities;
 
-import static com.rlabdevs.unifymobile.activities.MainActivity.firestoreDB;
-
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -16,15 +12,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
 import com.rlabdevs.unifymobile.R;
 import com.rlabdevs.unifymobile.activities.account.LoginActivity;
 import com.rlabdevs.unifymobile.activities.explore.ExploreActivity;
@@ -32,17 +19,13 @@ import com.rlabdevs.unifymobile.activities.hotels.HotelFilterActivity;
 import com.rlabdevs.unifymobile.activities.restaurants.RestaurantFilterActivity;
 import com.rlabdevs.unifymobile.activities.search.SearchResultsActivity;
 import com.rlabdevs.unifymobile.activities.thingstodo.ThingsToDoActivity;
-import com.rlabdevs.unifymobile.activities.thingstodo.ThingsToDoViewActivity;
 import com.rlabdevs.unifymobile.activities.user.MenuActivity;
 import com.rlabdevs.unifymobile.common.Functions;
 import com.rlabdevs.unifymobile.models.CuisineTypeModel;
 import com.rlabdevs.unifymobile.models.CurrencyModel;
 import com.rlabdevs.unifymobile.models.LocationModel;
-import com.rlabdevs.unifymobile.models.RoomModel;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public class UserHomeActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -70,7 +53,7 @@ public class UserHomeActivity extends AppCompatActivity implements View.OnClickL
             public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
                 if (i == EditorInfo.IME_ACTION_SEARCH || (keyEvent != null && keyEvent.getAction() == KeyEvent.ACTION_DOWN && keyEvent.getKeyCode() == KeyEvent.KEYCODE_ENTER)) {
                     String searchText = (txtSearch.getText().toString() + "").trim();
-                    if(!searchText.equals("")) {
+                    if (!searchText.equals("")) {
                         txtSearch.setText("");
                         Intent intent = new Intent(UserHomeActivity.this, SearchResultsActivity.class);
                         intent.putExtra("SearchText", searchText);
@@ -101,34 +84,27 @@ public class UserHomeActivity extends AppCompatActivity implements View.OnClickL
 
     @Override
     public void onClick(View view) {
-        switch (view.getId())
-        {
-            case R.id.cardViewExplore:
-            {
+        switch (view.getId()) {
+            case R.id.cardViewExplore: {
                 new Functions().StartActivity(UserHomeActivity.this, ExploreActivity.class);
                 break;
             }
-            case R.id.cardViewThingsToDo:
-            {
+            case R.id.cardViewThingsToDo: {
                 new Functions().StartActivity(UserHomeActivity.this, ThingsToDoActivity.class);
                 break;
             }
-            case R.id.cardViewHotels:
-            {
+            case R.id.cardViewHotels: {
                 new Functions().StartActivity(UserHomeActivity.this, HotelFilterActivity.class);
                 break;
             }
-            case R.id.cardViewRestaurant:
-            {
+            case R.id.cardViewRestaurant: {
                 new Functions().StartActivity(UserHomeActivity.this, RestaurantFilterActivity.class);
                 break;
             }
-            case R.id.cardViewFlights:
-            {
+            case R.id.cardViewFlights: {
                 break;
             }
-            case R.id.imgViewAccount:
-            {
+            case R.id.imgViewAccount: {
                 ConfigureAccount();
                 break;
             }
@@ -137,7 +113,7 @@ public class UserHomeActivity extends AppCompatActivity implements View.OnClickL
 
     private void ConfigureAccount() {
         boolean isUserLoggedIn = MainActivity.sharedPref.getBoolean("IsUserLoggedIn", false);
-        if(isUserLoggedIn)
+        if (isUserLoggedIn)
             new Functions().StartActivity(UserHomeActivity.this, MenuActivity.class);
         else
             new Functions().StartActivity(UserHomeActivity.this, LoginActivity.class);

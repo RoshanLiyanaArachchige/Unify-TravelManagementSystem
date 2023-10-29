@@ -19,6 +19,7 @@ import com.rlabdevs.unifymobile.activities.user.manage.hotels.rooms.RoomActivity
 import com.rlabdevs.unifymobile.activities.user.manage.hotels.rooms.RoomTypesActivity;
 import com.rlabdevs.unifymobile.activities.user.manage.restaurants.RestaurantActivity;
 import com.rlabdevs.unifymobile.activities.user.manage.restaurants.meals.MealActivity;
+import com.rlabdevs.unifymobile.activities.user.manage.restaurants.meals.MealTypesActivity;
 import com.rlabdevs.unifymobile.common.Functions;
 import com.rlabdevs.unifymobile.models.SelectorItemModel;
 
@@ -213,6 +214,21 @@ public class ItemSelectorAdapter extends RecyclerView.Adapter<ItemSelectorAdapte
                                     MealActivity.currencyCode = tvItemCode.getText().toString();
                                     MealActivity.tvCurrency.setText(tvItemName.getText());
                                 }
+                                else if(tvSet.getId() == R.id.tvMealType)
+                                {
+                                    MealActivity.txtMealTypeCode.setText(tvItemCode.getText());
+                                    MealActivity.tvMealType.setText(tvItemName.getText());
+                                }
+                            }
+                            break;
+                        }
+                        case "MealTypesActivity" :
+                        {
+                            Functions.HideItemSelector();
+                            if(tvSet != null)
+                            {
+                                if(tvSet.getId() == R.id.tvStatus)
+                                    MealTypesActivity.tvStatus.setText(tvItemName.getText() + " (Status)");
                             }
                             break;
                         }

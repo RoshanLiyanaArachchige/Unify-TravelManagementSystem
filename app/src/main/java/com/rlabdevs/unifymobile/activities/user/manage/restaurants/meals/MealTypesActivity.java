@@ -230,7 +230,7 @@ public class MealTypesActivity extends AppCompatActivity implements View.OnClick
                             }
                         });
                         DocumentReference mealTypeDoc = mealTypesReference.document();
-                        MealTypesModel mealType = new MealTypesModel(mealTypeCode, restaurantCode, txtMealType.getText().toString(), StatusCode.Active.getStatusCode());
+                        MealTypesModel mealType = new MealTypesModel(restaurantCode, mealTypeCode, txtMealType.getText().toString(), StatusCode.Active.getStatusCode());
                         mealType.setID(mealTypeDoc.getId());
                         mealTypeDoc.set(mealType)
                                 .addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -286,7 +286,7 @@ public class MealTypesActivity extends AppCompatActivity implements View.OnClick
                             }
                         });
                         String status = tvStatus.getText().toString().replace("(Status)", "").trim();
-                        MealTypesModel mealType = new MealTypesModel(txtMealTypeCode.getText().toString(), restaurantCode, txtMealType.getText().toString(), GetStatusCodeFromName(status));
+                        MealTypesModel mealType = new MealTypesModel(restaurantCode, txtMealTypeCode.getText().toString(), txtMealType.getText().toString(), GetStatusCodeFromName(status));
                         mealType.setID(tvMealTypeID.getText().toString());
                         mealTypesReference.document(mealType.getID()).set(mealType)
                                 .addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -295,7 +295,7 @@ public class MealTypesActivity extends AppCompatActivity implements View.OnClick
                                         MealActivity.mealTypesList = new ArrayList<>();
                                         for (MealTypesModel mealTypeListItem : mealTypesList) {
                                             if (mealTypeListItem.getMealTypeCode().equals(mealType.getMealTypeCode())) {
-                                                mealTypeListItem.setMealType(mealType.getMealTypeName());
+                                                mealTypeListItem.setMealTypeName(mealType.getMealTypeName());
                                                 mealTypeListItem.setStatusCode(mealType.getStatusCode());
                                                 mealTypesAdapter.notifyDataSetChanged();
                                             }

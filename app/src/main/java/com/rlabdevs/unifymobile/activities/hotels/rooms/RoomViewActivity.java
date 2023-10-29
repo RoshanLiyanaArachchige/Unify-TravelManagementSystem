@@ -28,7 +28,6 @@ import com.google.firebase.firestore.QuerySnapshot;
 import com.google.gson.Gson;
 import com.rlabdevs.unifymobile.R;
 import com.rlabdevs.unifymobile.activities.bookings.hotel.RoomBookingActivity;
-import com.rlabdevs.unifymobile.adapters.HotelFilterAdapter;
 import com.rlabdevs.unifymobile.adapters.RoomReviewAdapter;
 import com.rlabdevs.unifymobile.common.Functions;
 import com.rlabdevs.unifymobile.common.enums.StatusCode;

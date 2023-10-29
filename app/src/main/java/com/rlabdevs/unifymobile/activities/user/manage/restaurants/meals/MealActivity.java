@@ -61,7 +61,7 @@ public class MealActivity extends AppCompatActivity implements View.OnClickListe
     public static TextView tvCurrency, tvMealType;
     public static EditText txtMealTypeCode;
     private RelativeLayout relativeLayoutMeal;
-    private EditText txtMealCode, txtMealDescription, txtMealPrice, txtNoOfPersons;
+    private EditText txtMealCode, txtMealName, txtMealDescription, txtMealPrice, txtNoOfPersons;
     private Button btnManageMealsTypes, btnReducePersonCount, btnIncreasePersonCount, btnSaveMeal;
     private ImageView imgViewMealImage, imgViewSelectCoverImage;
 
@@ -94,6 +94,7 @@ public class MealActivity extends AppCompatActivity implements View.OnClickListe
 
         relativeLayoutMeal = findViewById(R.id.relativeLayoutMeal);
         txtMealCode = findViewById(R.id.txtMealCode);
+        txtMealName = findViewById(R.id.txtMealName);
         tvMealType = findViewById(R.id.tvMealType);
         txtMealTypeCode = findViewById(R.id.txtMealTypeCode);
         txtMealDescription = findViewById(R.id.txtMealDescription);
@@ -163,6 +164,7 @@ public class MealActivity extends AppCompatActivity implements View.OnClickListe
                 isMealCoverSelected = true;
                 btnManageMealsTypes.setVisibility(View.VISIBLE);
                 txtMealCode.setText(mealModel.getMealCode() + " (Registration Code)");
+                txtMealName.setText(mealModel.getMealName());
                 txtMealTypeCode.setText(mealModel.getMealTypeCode());
                 txtMealDescription.setText(Html.fromHtml(mealModel.getMealDescription()));
                 txtMealPrice.setText(String.valueOf(mealModel.getMealPrice()));
@@ -331,11 +333,16 @@ public class MealActivity extends AppCompatActivity implements View.OnClickListe
             return new Functions().ShowErrorDialog("Select Meal Type !", "Okay", this);
         }
 
+        String mealName = txtMealName.getText().toString().trim();
+        if (mealName.equals("")) {
+            return new Functions().ShowErrorDialog("Meal Name Required !", "Okay", this);
+        }
+
         String mealDescription = txtMealDescription.getText().toString().trim();
         if (mealDescription.equals("")) {
             return new Functions().ShowErrorDialog("Meal Description Required !", "Okay", this);
-        } else if (mealDescription.length() < 25) {
-            return new Functions().ShowErrorDialog("Description: Min 25 Chars !", "Try Again", this);
+        } else if (mealDescription.length() < 10) {
+            return new Functions().ShowErrorDialog("Description: Min 10 Chars !", "Try Again", this);
         }
 
         String mealPrice = txtMealPrice.getText().toString().trim();
@@ -375,6 +382,7 @@ public class MealActivity extends AppCompatActivity implements View.OnClickListe
                         mealModel = new MealModel();
                         mealModel.setRestaurantCode(restaurantModel.getRestaurantCode());
                         mealModel.setMealCode(mealCode);
+                        mealModel.setMealName(txtMealName.getText().toString());
                         mealModel.setMealTypeCode(txtMealTypeCode.getText().toString());
                         mealModel.setMealDescription(txtMealDescription.getText().toString().trim());
                         mealModel.setMealPrice(Double.parseDouble(txtMealPrice.getText().toString().trim()));
@@ -494,6 +502,7 @@ public class MealActivity extends AppCompatActivity implements View.OnClickListe
 
                         mealModel.setRestaurantCode(restaurantModel.getRestaurantCode());
                         mealModel.setMealCode(mealModel.getMealCode());
+                        mealModel.setMealName(txtMealName.getText().toString());
                         mealModel.setMealTypeCode(txtMealTypeCode.getText().toString());
                         mealModel.setMealDescription(txtMealDescription.getText().toString().trim());
                         mealModel.setMealPrice(Double.parseDouble(txtMealPrice.getText().toString().trim()));

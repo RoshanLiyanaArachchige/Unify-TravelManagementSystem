@@ -136,33 +136,6 @@
                 android:alpha="0.9"
                 android:src="@drawable/logbook" />
 
-            <EditText
-                android:id="@+id/txtMealName"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_below="@id/txtMealCode"
-                android:layout_marginTop="7dp"
-                android:background="@drawable/edit_text_bg_light_rad_10"
-                android:gravity="top"
-                android:hint="Enter Meal Name"
-                android:paddingStart="50dp"
-                android:paddingTop="10dp"
-                android:paddingEnd="15dp"
-                android:paddingBottom="8dp"
-                android:textColor="@color/grey_regular" />
-
-            <ImageView
-                android:id="@+id/imgViewMealDescription"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_alignStart="@id/txtMealDescription"
-                android:layout_alignTop="@id/txtMealDescription"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="7dp"
-                android:alpha="0.6"
-                android:padding="3dp"
-                android:src="@drawable/description_icon" />
-
             <TextView
                 android:id="@+id/tvMealType"
                 android:layout_width="match_parent"
@@ -195,14 +168,43 @@
                 android:layout_alignTop="@id/tvMealType"
                 android:layout_alignBottom="@id/tvMealType"
                 android:layout_marginStart="10dp"
-                android:alpha="0.9"
-                android:src="@drawable/restaurant" />
+                android:padding="4dp"
+                android:alpha="0.55"
+                android:src="@drawable/info" />
+
+            <EditText
+                android:id="@+id/txtMealName"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_below="@id/tvMealType"
+                android:layout_marginTop="7dp"
+                android:background="@drawable/edit_text_bg_light_rad_10"
+                android:hint="Enter Meal Name"
+                android:inputType="text"
+                android:maxLines="1"
+                android:minWidth="160dp"
+                android:paddingStart="50dp"
+                android:paddingEnd="15dp"
+                android:singleLine="true"
+                android:textColor="@color/grey_regular" />
+
+            <ImageView
+                android:id="@+id/imgViewMealName"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignStart="@id/txtMealName"
+                android:layout_alignTop="@id/txtMealName"
+                android:layout_alignBottom="@id/txtMealName"
+                android:layout_marginStart="10dp"
+                android:alpha="0.55"
+                android:padding="1dp"
+                android:src="@drawable/tag" />
 
             <EditText
                 android:id="@+id/txtMealDescription"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/tvMealType"
+                android:layout_below="@id/txtMealName"
                 android:layout_marginTop="7dp"
                 android:background="@drawable/edit_text_bg_light_rad_10"
                 android:gravity="top"

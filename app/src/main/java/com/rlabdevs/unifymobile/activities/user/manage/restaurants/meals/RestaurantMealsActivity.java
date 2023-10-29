@@ -38,7 +38,7 @@ import com.rlabdevs.unifymobile.models.RoomTypesModel;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RestaurantMealsActivity extends AppCompatActivity implements View.OnClickListener  {
+public class RestaurantMealsActivity extends AppCompatActivity implements View.OnClickListener {
 
     private RestaurantMealsActivity restaurantMealsActivity;
 
@@ -108,10 +108,9 @@ public class RestaurantMealsActivity extends AppCompatActivity implements View.O
                         .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                             @Override
                             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                                if(!queryDocumentSnapshots.isEmpty())
-                                {
+                                if (!queryDocumentSnapshots.isEmpty()) {
                                     List<DocumentSnapshot> documentSnapshotList = queryDocumentSnapshots.getDocuments();
-                                    for (DocumentSnapshot documentSnapshot: documentSnapshotList) {
+                                    for (DocumentSnapshot documentSnapshot : documentSnapshotList) {
                                         MealTypesModel mealType = documentSnapshot.toObject(MealTypesModel.class);
                                         mealType.setID(documentSnapshot.getId());
                                         mealTypesList.add(mealType);
@@ -121,10 +120,9 @@ public class RestaurantMealsActivity extends AppCompatActivity implements View.O
                                             .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                                                 @Override
                                                 public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                                                    if(!queryDocumentSnapshots.isEmpty())
-                                                    {
+                                                    if (!queryDocumentSnapshots.isEmpty()) {
                                                         List<DocumentSnapshot> documentSnapshotList = queryDocumentSnapshots.getDocuments();
-                                                        for (DocumentSnapshot documentSnapshot: documentSnapshotList) {
+                                                        for (DocumentSnapshot documentSnapshot : documentSnapshotList) {
                                                             MealModel meal = documentSnapshot.toObject(MealModel.class);
                                                             meal.setID(documentSnapshot.getId());
                                                             restaurantMealsList.add(meal);
@@ -132,9 +130,8 @@ public class RestaurantMealsActivity extends AppCompatActivity implements View.O
                                                         }
                                                         spinKitProgress.setVisibility(View.GONE);
                                                         Functions.HideProgressBar();
-                                                    }
-                                                    else
-                                                    {
+                                                        tvNoAddMeals.setVisibility(View.GONE);
+                                                    } else {
                                                         restaurantMealsActivity.runOnUiThread(new Runnable() {
                                                             public void run() {
                                                                 spinKitProgress.setVisibility(View.GONE);
@@ -153,9 +150,7 @@ public class RestaurantMealsActivity extends AppCompatActivity implements View.O
                                                     new Functions().ShowErrorDialog("Meals Load Failure !", "Try Again", RestaurantMealsActivity.this);
                                                 }
                                             });
-                                }
-                                else
-                                {
+                                } else {
                                     restaurantMealsActivity.runOnUiThread(new Runnable() {
                                         public void run() {
                                             spinKitProgress.setVisibility(View.GONE);
@@ -182,8 +177,7 @@ public class RestaurantMealsActivity extends AppCompatActivity implements View.O
 
     @Override
     public void onClick(View v) {
-        switch (v.getId())
-        {
+        switch (v.getId()) {
             case R.id.imgViewAddNewMeal: {
                 NewRestaurantMeal();
                 break;

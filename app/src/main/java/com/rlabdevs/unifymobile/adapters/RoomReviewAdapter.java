@@ -1,24 +1,16 @@
 package com.rlabdevs.unifymobile.adapters;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.github.ybq.android.spinkit.SpinKitView;
-import com.google.gson.Gson;
 import com.rlabdevs.unifymobile.R;
-import com.rlabdevs.unifymobile.activities.thingstodo.ThingsToDoViewActivity;
 import com.rlabdevs.unifymobile.models.RoomReviewModel;
-import com.rlabdevs.unifymobile.models.ThingsToDoModel;
-import com.squareup.picasso.Callback;
-import com.squareup.picasso.Picasso;
 
 import java.util.List;
 

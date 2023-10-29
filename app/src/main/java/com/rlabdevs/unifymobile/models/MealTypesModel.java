@@ -53,7 +53,7 @@ public class MealTypesModel {
         return MealTypeName;
     }
 
-    public void setMealType(String mealTypeName) {
+    public void setMealTypeName(String mealTypeName) {
         MealTypeName = mealTypeName;
     }
 

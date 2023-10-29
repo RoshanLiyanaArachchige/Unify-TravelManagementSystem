@@ -190,8 +190,9 @@
                 android:layout_alignTop="@id/tvNoOfAdultsChildren"
                 android:layout_alignBottom="@id/tvNoOfAdultsChildren"
                 android:layout_marginStart="10dp"
-                android:alpha="0.9"
-                android:src="@drawable/address" />
+                android:alpha="0.50"
+                android:padding="4dp"
+                android:src="@drawable/info" />
 
             <LinearLayout
                 android:id="@+id/linearLytRoomAmenities"

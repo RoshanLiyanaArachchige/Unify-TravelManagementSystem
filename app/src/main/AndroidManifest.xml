@@ -14,6 +14,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.UnifyMobile">
         <activity
+            android:name=".activities.bookings.restaurant.ResturantBookingActivity"
+            android:exported="false" />
+        <activity
             android:name=".activities.user.manage.restaurants.meals.MealTypesActivity"
             android:exported="false" />
         <activity

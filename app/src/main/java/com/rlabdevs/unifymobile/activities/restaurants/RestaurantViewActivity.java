@@ -29,6 +29,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.gson.Gson;
 import com.rlabdevs.unifymobile.R;
+import com.rlabdevs.unifymobile.activities.bookings.restaurant.ResturantBookingActivity;
 import com.rlabdevs.unifymobile.activities.directions.GetDirectionsActivity;
 import com.rlabdevs.unifymobile.adapters.RestaurantMealsAdapter;
 import com.rlabdevs.unifymobile.common.Functions;
@@ -53,7 +54,7 @@ public class RestaurantViewActivity extends AppCompatActivity {
     private SpinKitView spinKitProgress;
     private RecyclerView recyclerViewRestaurantMeals;
     private MaterialButtonToggleGroup toggleButtonCuisineTypes;
-    private Button btnGetDirections;
+    private Button btnGetDirections, btnBookNow;
 
     private CollectionReference mealsReference, mealTypesReference, cuisineTypesReference;
     private List<MealModel> restaurantMealsList;
@@ -91,6 +92,16 @@ public class RestaurantViewActivity extends AppCompatActivity {
         imgViewRestaurantImage = findViewById(R.id.imgViewRestaurantImage);
         spinKitProgress = findViewById(R.id.spinKitProgress);
         toggleButtonCuisineTypes = findViewById(R.id.toggleButtonCuisineTypes);
+
+        btnBookNow = findViewById(R.id.btnBookNow);
+        btnBookNow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(RestaurantViewActivity.this, ResturantBookingActivity.class);
+                intent.putExtra("Restaurant", new Gson().toJson(restaurant));
+                startActivity(intent);
+            }
+        });
 
         btnGetDirections = findViewById(R.id.btnGetDirections);
         btnGetDirections.setOnClickListener(getDirectionsOnClickListener);

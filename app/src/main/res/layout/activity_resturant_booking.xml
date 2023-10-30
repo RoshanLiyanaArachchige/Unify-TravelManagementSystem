@@ -1,0 +1,361 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:scrollbars="none"
+    tools:context=".activities.bookings.restaurant.ResturantBookingActivity">
+
+    <RelativeLayout
+        android:id="@+id/relativeLayoutRestaurant"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:animateLayoutChanges="true">
+
+        <TextView
+            android:id="@+id/tvPlaceBookingHeading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="28dp"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:text="Place Booking"
+            android:textColor="@color/grey_regular"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/txtBookingCode"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_below="@id/tvPlaceBookingHeading"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/edit_text_bg_light_rad_10"
+            android:enabled="false"
+            android:inputType="text"
+            android:maxLines="1"
+            android:paddingStart="50dp"
+            android:paddingEnd="15dp"
+            android:singleLine="true"
+            android:text="Fetching Booking Code..."
+            android:textColor="@color/grey_regular" />
+
+        <Button
+            android:id="@+id/btnViewRestaurant"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/tvPlaceBookingHeading"
+            android:layout_alignBottom="@id/tvPlaceBookingHeading"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="15dp"
+            android:text="View Restaurant"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:visibility="visible" />
+
+        <ImageView
+            android:id="@+id/imgViewBookingCode"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignStart="@id/txtBookingCode"
+            android:layout_alignTop="@id/txtBookingCode"
+            android:layout_alignBottom="@id/txtBookingCode"
+            android:layout_marginStart="10dp"
+            android:alpha="0.9"
+            android:src="@drawable/logbook" />
+
+        <EditText
+            android:id="@+id/txtFullName"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_below="@id/txtBookingCode"
+            android:layout_marginTop="7dp"
+            android:background="@drawable/edit_text_bg_light_rad_10"
+            android:hint="Enter Full Name"
+            android:inputType="text"
+            android:maxLines="1"
+            android:paddingLeft="50dp"
+            android:paddingRight="15dp"
+            android:singleLine="true"
+            android:textColor="@color/grey_regular" />
+
+        <ImageView
+            android:id="@+id/imgViewFullName"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignStart="@id/txtFullName"
+            android:layout_alignTop="@id/txtFullName"
+            android:layout_alignBottom="@id/txtFullName"
+            android:layout_marginStart="10dp"
+            android:alpha="0.9"
+            android:src="@drawable/name" />
+
+        <EditText
+            android:id="@+id/txtEmailAddress"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_below="@id/txtFullName"
+            android:layout_marginTop="7dp"
+            android:background="@drawable/edit_text_bg_light_rad_10"
+            android:hint="Enter Email Address"
+            android:inputType="text"
+            android:maxLines="1"
+            android:paddingLeft="50dp"
+            android:paddingRight="15dp"
+            android:singleLine="true"
+            android:textColor="@color/grey_regular" />
+
+        <ImageView
+            android:id="@+id/imgViewEmailAddress"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignStart="@id/txtEmailAddress"
+            android:layout_alignTop="@id/txtEmailAddress"
+            android:layout_alignBottom="@id/txtEmailAddress"
+            android:layout_marginStart="10dp"
+            android:alpha="0.9"
+            android:src="@drawable/email" />
+
+        <EditText
+            android:id="@+id/txtMobilePhone"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_below="@id/txtEmailAddress"
+            android:layout_marginTop="7dp"
+            android:background="@drawable/edit_text_bg_light_rad_10"
+            android:hint="Enter Mobile Number"
+            android:inputType="phone"
+            android:maxLines="1"
+            android:paddingLeft="50dp"
+            android:paddingRight="15dp"
+            android:singleLine="true"
+            android:textColor="@color/grey_regular" />
+
+        <ImageView
+            android:id="@+id/imgViewMobilePhone"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignStart="@id/txtMobilePhone"
+            android:layout_alignTop="@id/txtMobilePhone"
+            android:layout_alignBottom="@id/txtMobilePhone"
+            android:layout_marginStart="10dp"
+            android:alpha="0.9"
+            android:src="@drawable/phone_message" />
+
+        <LinearLayout
+            android:id="@+id/linearLytNoOfPersons"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txtMobilePhone"
+            android:layout_marginTop="7dp"
+            android:background="@drawable/edit_text_bg_light_rad_10"
+            android:orientation="horizontal"
+            android:paddingLeft="10dp">
+
+            <ImageView
+                android:id="@+id/imgViewNoOfRestaurantsAvailable"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:alpha="0.60"
+                android:padding="4dp"
+                android:src="@drawable/info" />
+
+            <EditText
+                android:id="@+id/txtNoOfPersons"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginStart="7dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/edit_text_bg_light_rad_10_no_stroke"
+                android:enabled="false"
+                android:hint="No. Persons"
+                android:inputType="text"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:textAlignment="viewStart"
+                android:textColor="@color/grey_regular" />
+
+            <Button
+                android:id="@+id/btnReducePersonCount"
+                android:layout_width="50dp"
+                android:layout_height="35dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="3dp"
+                android:padding="0dp"
+                android:text="-"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:visibility="visible" />
+
+            <Button
+                android:id="@+id/btnIncreasePersonCount"
+                android:layout_width="50dp"
+                android:layout_height="35dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="3dp"
+                android:padding="0dp"
+                android:text="+"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:visibility="visible" />
+
+
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/txtReservationDate"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_below="@id/linearLytNoOfPersons"
+            android:layout_marginTop="7dp"
+            android:background="@drawable/edit_text_bg_light_rad_10"
+            android:clickable="true"
+            android:editable="false"
+            android:hint="Select Reservation Date"
+            android:inputType="none"
+            android:maxLines="1"
+            android:paddingLeft="50dp"
+            android:paddingRight="15dp"
+            android:singleLine="true"
+            android:textColor="@color/grey_regular" />
+
+        <ImageView
+            android:id="@+id/imgViewReservationDate"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignStart="@id/txtReservationDate"
+            android:layout_alignTop="@id/txtReservationDate"
+            android:layout_alignBottom="@id/txtReservationDate"
+            android:layout_marginStart="10dp"
+            android:alpha="0.55"
+            android:padding="3dp"
+            android:src="@drawable/calendar_clock" />
+
+        <EditText
+            android:id="@+id/txtBookingStatus"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_below="@id/txtReservationDate"
+            android:layout_marginTop="7dp"
+            android:layout_marginBottom="30dp"
+            android:background="@drawable/edit_text_bg_light_rad_10"
+            android:enabled="false"
+            android:hint="Booking Status"
+            android:inputType="text"
+            android:maxLines="1"
+            android:paddingLeft="50dp"
+            android:paddingRight="15dp"
+            android:singleLine="true"
+            android:textColor="@color/grey_regular" />
+
+        <ImageView
+            android:id="@+id/imgViewBookingStatus"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignStart="@id/txtBookingStatus"
+            android:layout_alignTop="@id/txtBookingStatus"
+            android:layout_alignBottom="@id/txtBookingStatus"
+            android:layout_marginStart="10dp"
+            android:alpha="0.55"
+            android:padding="3dp"
+            android:src="@drawable/info" />
+
+        <TextView
+            android:id="@+id/txtViewMealInformation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txtBookingStatus"
+            android:layout_marginTop="0dp"
+            android:gravity="end"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:text="Meal Information"
+            android:textColor="@color/grey_regular"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:visibility="gone" />
+
+        <LinearLayout
+            android:id="@+id/lnrLayoutMealInformation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txtViewMealInformation"
+            android:orientation="vertical" />
+
+        <LinearLayout
+            android:id="@+id/lnrLayoutActions"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/lnrLayoutMealInformation"
+            android:layout_marginBottom="30dp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:visibility="gone">
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnCancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:background="@drawable/bg_red"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:text="Cancel"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:visibility="gone" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnConfirm"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:background="@drawable/bg_green"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:text="Confirm"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:visibility="gone" />
+
+        </LinearLayout>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnSubmit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/lnrLayoutActions"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:background="@drawable/button_bg_light_active_rad_10"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:text="Submit"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:visibility="gone" />
+
+    </RelativeLayout>
+
+</ScrollView>

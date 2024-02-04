@@ -1,11 +1,8 @@
 package com.rlabdevs.unifymobile.activities.thingstodo;
 
-import static com.rlabdevs.unifymobile.activities.MainActivity.firestoreDB;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -18,45 +15,18 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.github.ybq.android.spinkit.SpinKitView;
-import com.google.android.gms.location.FusedLocationProviderClient;
-import com.google.android.gms.location.LocationRequest;
-import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.maps.CameraUpdateFactory;
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.MapView;
-import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
 import com.rlabdevs.unifymobile.R;
-import com.rlabdevs.unifymobile.activities.MainActivity;
-import com.rlabdevs.unifymobile.activities.UserHomeActivity;
-import com.rlabdevs.unifymobile.activities.account.LoginActivity;
-import com.rlabdevs.unifymobile.activities.explore.ExploreActivity;
-import com.rlabdevs.unifymobile.adapters.HotelFilterAdapter;
-import com.rlabdevs.unifymobile.adapters.RestaurantFilterAdapter;
 import com.rlabdevs.unifymobile.adapters.ThingsToDoAdapter;
 import com.rlabdevs.unifymobile.common.Constants;
 import com.rlabdevs.unifymobile.common.Functions;
 import com.rlabdevs.unifymobile.common.enums.ApiResponse;
-import com.rlabdevs.unifymobile.models.HotelModel;
-import com.rlabdevs.unifymobile.models.RestaurantModel;
-import com.rlabdevs.unifymobile.models.account.NewUserModel;
 import com.rlabdevs.unifymobile.models.master.NewThingsToDoFilterModel;
-import com.rlabdevs.unifymobile.models.master.NewThingsToDoModel;
 import com.rlabdevs.unifymobile.services.RetrofitClient;
-import com.rlabdevs.unifymobile.services.other.IMasterService;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.rlabdevs.unifymobile.services.interfaces.other.IMasterService;
 
 import retrofit2.Call;
 import retrofit2.Callback;

@@ -2,11 +2,7 @@ package com.rlabdevs.unifymobile.activities.bookings.hotel;
 
 import static com.rlabdevs.unifymobile.activities.MainActivity.firestoreDB;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -15,29 +11,24 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
-import com.google.firebase.storage.OnProgressListener;
-import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
 import com.google.gson.Gson;
 import com.rlabdevs.unifymobile.R;
 import com.rlabdevs.unifymobile.activities.MainActivity;
-import com.rlabdevs.unifymobile.activities.account.UserProfileActivity;
-import com.rlabdevs.unifymobile.activities.hotels.HotelFilterActivity;
 import com.rlabdevs.unifymobile.activities.hotels.rooms.RoomViewActivity;
-import com.rlabdevs.unifymobile.activities.user.manage.hotels.HotelActivity;
-import com.rlabdevs.unifymobile.activities.user.manage.hotels.rooms.RoomActivity;
 import com.rlabdevs.unifymobile.common.Functions;
 import com.rlabdevs.unifymobile.common.Regex;
 import com.rlabdevs.unifymobile.common.enums.StatusCode;
 import com.rlabdevs.unifymobile.models.HotelModel;
 import com.rlabdevs.unifymobile.models.IndexModel;
-import com.rlabdevs.unifymobile.models.LoginModel;
 import com.rlabdevs.unifymobile.models.RoomBookingModel;
 import com.rlabdevs.unifymobile.models.RoomModel;
 import com.rlabdevs.unifymobile.models.SelectorItemModel;

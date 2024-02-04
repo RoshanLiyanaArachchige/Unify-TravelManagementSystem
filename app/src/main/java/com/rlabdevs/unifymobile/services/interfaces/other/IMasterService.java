@@ -1,4 +1,4 @@
-package com.rlabdevs.unifymobile.services.other;
+package com.rlabdevs.unifymobile.services.interfaces.other;
 
 import com.rlabdevs.unifymobile.models.master.NewCuisineTypeModel;
 import com.rlabdevs.unifymobile.models.master.NewCurrencyModel;

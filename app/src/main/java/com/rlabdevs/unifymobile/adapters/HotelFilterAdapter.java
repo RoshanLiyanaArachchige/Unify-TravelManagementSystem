@@ -46,8 +46,8 @@ public class HotelFilterAdapter extends RecyclerView.Adapter<HotelFilterAdapter.
         HotelModel hotel = hotelList.get(position);
         holder.tvHotelName.setText(hotel.getHotelName());
         holder.tvHotelRating.setText(String.valueOf(hotel.getHotelRating()));
-        String currencySymbol = UserHomeActivity.currencyList.stream().filter(c -> c.getCurrencyId().equals(hotel.getCurrencyCode())).findFirst().get().getSymbol();
-        holder.tvBudgetHotelClass.setText(hotel.getBudget() + currencySymbol + "+ ("+ hotel.getHotelClass() + " Star)");
+        //String currencySymbol = UserHomeActivity.currencyList.stream().filter(c -> c.getCurrencyId().equals(hotel.getCurrencyCode())).findFirst().get().getSymbol();
+        //holder.tvBudgetHotelClass.setText(hotel.getBudget() + currencySymbol + "+ ("+ hotel.getHotelClass() + " Star)");
         holder.lnrLytFreeWIFI.setVisibility(hotel.isFreeWIFI() ? View.VISIBLE : View.GONE);
         holder.lnrLytAirConditioner.setVisibility(hotel.isAirConditioned() ? View.VISIBLE : View.GONE);
         holder.lnrLytBreakfast.setVisibility(hotel.isFreeBreakfast() ? View.VISIBLE : View.GONE);

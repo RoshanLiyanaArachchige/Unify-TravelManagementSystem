@@ -1,10 +1,5 @@
 package com.rlabdevs.unifymobile.activities.account;
 
-import static com.rlabdevs.unifymobile.activities.MainActivity.firestoreDB;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -13,25 +8,17 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.rlabdevs.unifymobile.R;
 import com.rlabdevs.unifymobile.activities.MainActivity;
 import com.rlabdevs.unifymobile.activities.UserHomeActivity;
 import com.rlabdevs.unifymobile.common.Functions;
 import com.rlabdevs.unifymobile.common.enums.ApiResponse;
-import com.rlabdevs.unifymobile.common.enums.UserRole;
-import com.rlabdevs.unifymobile.models.LoginModel;
-import com.rlabdevs.unifymobile.models.UserDetailsModel;
 import com.rlabdevs.unifymobile.models.account.NewLoginDetailModel;
 import com.rlabdevs.unifymobile.models.account.NewUserModel;
 import com.rlabdevs.unifymobile.services.RetrofitClient;
-import com.rlabdevs.unifymobile.services.account.IUserService;
-
-import java.util.List;
+import com.rlabdevs.unifymobile.services.interfaces.account.IUserService;
 
 import retrofit2.Call;
 import retrofit2.Callback;

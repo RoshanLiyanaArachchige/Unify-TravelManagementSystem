@@ -1,4 +1,4 @@
-package com.rlabdevs.unifymobile.services.maps;
+package com.rlabdevs.unifymobile.services.interfaces.maps;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;

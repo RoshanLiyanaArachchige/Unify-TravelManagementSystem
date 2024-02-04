@@ -21,8 +21,8 @@ import com.rlabdevs.unifymobile.common.enums.IndexReference;
 import com.rlabdevs.unifymobile.models.account.NewLoginDetailModel;
 import com.rlabdevs.unifymobile.models.account.NewUserModel;
 import com.rlabdevs.unifymobile.services.RetrofitClient;
-import com.rlabdevs.unifymobile.services.account.IUserService;
-import com.rlabdevs.unifymobile.services.other.IMasterService;
+import com.rlabdevs.unifymobile.services.interfaces.account.IUserService;
+import com.rlabdevs.unifymobile.services.interfaces.other.IMasterService;
 
 import retrofit2.Call;
 import retrofit2.Callback;

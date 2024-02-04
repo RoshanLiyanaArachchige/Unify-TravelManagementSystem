@@ -16,8 +16,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.gson.Gson;
 import com.rlabdevs.unifymobile.R;
+import com.rlabdevs.unifymobile.activities.UserHomeActivity;
 import com.rlabdevs.unifymobile.activities.user.manage.hotels.HotelActivity;
+import com.rlabdevs.unifymobile.common.enums.Amenity;
 import com.rlabdevs.unifymobile.models.HotelModel;
+import com.rlabdevs.unifymobile.models.service.NewServiceModel;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
 
@@ -26,9 +29,9 @@ import java.util.List;
 public class MyHotelsAdapter extends RecyclerView.Adapter<MyHotelsAdapter.MyHotelsViewHolder> {
 
     private Activity activity;
-    private List<HotelModel> myHotelsList;
+    private List<NewServiceModel> myHotelsList;
 
-    public MyHotelsAdapter(Activity activity, List<HotelModel> myHotelsList) {
+    public MyHotelsAdapter(Activity activity, List<NewServiceModel> myHotelsList) {
         this.activity = activity;
         this.myHotelsList = myHotelsList;
     }
@@ -42,8 +45,8 @@ public class MyHotelsAdapter extends RecyclerView.Adapter<MyHotelsAdapter.MyHote
 
     @Override
     public void onBindViewHolder(@NonNull MyHotelsAdapter.MyHotelsViewHolder holder, int position) {
-        HotelModel hotel = myHotelsList.get(position);
-        Picasso.with(activity).load(hotel.getHotelImage()).into(new Target() {
+        NewServiceModel hotel = myHotelsList.get(position);
+        Picasso.with(activity).load(hotel.getImagePath()).into(new Target() {
             @Override
             public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
                 holder.linearLytImageProgress.setVisibility(View.GONE);
@@ -57,20 +60,21 @@ public class MyHotelsAdapter extends RecyclerView.Adapter<MyHotelsAdapter.MyHote
             public void onPrepareLoad(Drawable placeHolderDrawable) {
             }
         });
-        holder.tvHotelCode.setText(hotel.getHotelCode());
-        holder.tvHotelName.setText(hotel.getHotelName());
-        holder.tvHotelRating.setText(String.valueOf(hotel.getHotelRating()));
-        holder.tvBudgetHotelClass.setText(myHotelsList.get(position).getBudget() + "LKR ("+ hotel.getHotelClass() + " Star)");
-        holder.lnrLytFreeWIFI.setVisibility(hotel.isFreeWIFI() ? View.VISIBLE : View.GONE);
-        holder.lnrLytAirConditioner.setVisibility(hotel.isAirConditioned() ? View.VISIBLE : View.GONE);
-        holder.lnrLytBreakfast.setVisibility(hotel.isFreeBreakfast() ? View.VISIBLE : View.GONE);
-        holder.lnrLytTeaCoffee.setVisibility(hotel.isTeaCoffee() ? View.VISIBLE : View.GONE);
-        holder.lnrLytBar.setVisibility(hotel.isBar() ? View.VISIBLE : View.GONE);
-        holder.lnrLytRoomService.setVisibility(hotel.isRoomService() ? View.VISIBLE : View.GONE);
-        holder.lnrLytTelevision.setVisibility(hotel.isTelevision() ? View.VISIBLE : View.GONE);
-        holder.lnrLytPool.setVisibility(hotel.isPool() ? View.VISIBLE : View.GONE);
-        holder.lnrLytParking.setVisibility(hotel.isParking() ? View.VISIBLE : View.GONE);
-        holder.lnrLytSPA.setVisibility(hotel.isSpa() ? View.VISIBLE : View.GONE);
+        holder.tvHotelCode.setText(hotel.getCode());
+        holder.tvHotelName.setText(hotel.getName());
+        holder.tvHotelRating.setText(String.valueOf(hotel.getRating()));
+        String currencySymbol = UserHomeActivity.currencyList.stream().filter(c -> c.getCurrencyId().equals(hotel.getCurrencyId())).findFirst().get().getSymbol();
+        holder.tvBudgetHotelClass.setText(hotel.getStartingPrice() + currencySymbol + " ("+ hotel.getServiceClass().getServiceClass() + " Star)");
+        holder.lnrLytFreeWIFI.setVisibility(hotel.getServiceAmenities().stream().anyMatch(a -> a.getAmenityId().equals(Amenity.FreeWifi.getValue())) ? View.VISIBLE : View.GONE);
+        holder.lnrLytAirConditioner.setVisibility(hotel.getServiceAmenities().stream().anyMatch(a -> a.getAmenityId().equals(Amenity.AirConditioned.getValue())) ? View.VISIBLE : View.GONE);
+        holder.lnrLytBreakfast.setVisibility(hotel.getServiceAmenities().stream().anyMatch(a -> a.getAmenityId().equals(Amenity.FreeBreakfast.getValue())) ? View.VISIBLE : View.GONE);
+        holder.lnrLytTeaCoffee.setVisibility(hotel.getServiceAmenities().stream().anyMatch(a -> a.getAmenityId().equals(Amenity.TeaCoffee.getValue())) ? View.VISIBLE : View.GONE);
+        holder.lnrLytBar.setVisibility(hotel.getServiceAmenities().stream().anyMatch(a -> a.getAmenityId().equals(Amenity.Bar.getValue())) ? View.VISIBLE : View.GONE);
+        holder.lnrLytRoomService.setVisibility(hotel.getServiceAmenities().stream().anyMatch(a -> a.getAmenityId().equals(Amenity.RoomServices.getValue())) ? View.VISIBLE : View.GONE);
+        holder.lnrLytTelevision.setVisibility(hotel.getServiceAmenities().stream().anyMatch(a -> a.getAmenityId().equals(Amenity.Television.getValue())) ? View.VISIBLE : View.GONE);
+        holder.lnrLytPool.setVisibility(hotel.getServiceAmenities().stream().anyMatch(a -> a.getAmenityId().equals(Amenity.Pool.getValue())) ? View.VISIBLE : View.GONE);
+        holder.lnrLytParking.setVisibility(hotel.getServiceAmenities().stream().anyMatch(a -> a.getAmenityId().equals(Amenity.Parking.getValue())) ? View.VISIBLE : View.GONE);
+        holder.lnrLytSPA.setVisibility(hotel.getServiceAmenities().stream().anyMatch(a -> a.getAmenityId().equals(Amenity.Spa.getValue())) ? View.VISIBLE : View.GONE);
     }
 
     @Override

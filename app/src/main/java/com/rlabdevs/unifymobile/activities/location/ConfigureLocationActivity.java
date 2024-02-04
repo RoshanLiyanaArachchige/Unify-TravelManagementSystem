@@ -1,10 +1,5 @@
 package com.rlabdevs.unifymobile.activities.location;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-
 import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
@@ -13,6 +8,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
@@ -25,10 +25,8 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.rlabdevs.unifymobile.R;
 import com.rlabdevs.unifymobile.activities.UserHomeActivity;
-import com.rlabdevs.unifymobile.activities.hotels.HotelFilterActivity;
 import com.rlabdevs.unifymobile.common.Constants;
 import com.rlabdevs.unifymobile.common.Functions;
-import com.rlabdevs.unifymobile.models.LocationModel;
 import com.rlabdevs.unifymobile.models.SelectorItemModel;
 import com.rlabdevs.unifymobile.models.master.NewLocationModel;
 
@@ -42,7 +40,7 @@ public class ConfigureLocationActivity extends AppCompatActivity implements OnMa
     private GoogleMap googleMap;
     private Button btnSelectLocation;
     public static TextView tvHotelCity;
-    public static String locationCode;
+    public static Integer locationId;
     private String locationName;
     private Double selectedLatitude, selectedLongitude;
 
@@ -54,7 +52,7 @@ public class ConfigureLocationActivity extends AppCompatActivity implements OnMa
 
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
 
-        locationCode = getIntent().getStringExtra("LocationCode");
+        locationId = getIntent().getIntExtra("LocationId", 0);
         locationName = getIntent().getStringExtra("LocationName");
         selectedLatitude = getIntent().getDoubleExtra("Latitude", 0);
         selectedLongitude = getIntent().getDoubleExtra("Longitude", 0);
@@ -88,13 +86,13 @@ public class ConfigureLocationActivity extends AppCompatActivity implements OnMa
         public void onClick(View view) {
             locationName = tvHotelCity.getText().toString();
 
-            if(Objects.equals(locationCode, null) || Objects.equals(locationName, null) || locationCode.equals("") || locationName.equals("")) {
+            if(Objects.equals(locationId, 0) || Objects.equals(locationName, null) || locationName.equals("")) {
                 new Functions().ShowErrorDialog("City Selection Required !", "Okay", ConfigureLocationActivity.this);
             } else if(selectedLatitude == 0 || selectedLongitude == 0) {
                 new Functions().ShowErrorDialog("Location Pinning Required !", "Okay", ConfigureLocationActivity.this);
             } else {
                 Intent resultIntent = new Intent();
-                resultIntent.putExtra("LocationCode", locationCode);
+                resultIntent.putExtra("LocationId", locationId);
                 resultIntent.putExtra("LocationName", locationName);
                 resultIntent.putExtra("Latitude", selectedLatitude);
                 resultIntent.putExtra("Longitude", selectedLongitude);

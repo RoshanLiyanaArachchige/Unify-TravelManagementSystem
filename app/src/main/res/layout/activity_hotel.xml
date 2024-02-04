@@ -431,6 +431,7 @@
                         android:id="@+id/chkFreeWIFI"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:tag="1"
                         android:text="Free Wi-Fi"
                         android:textColor="@color/grey_regular"
                         android:textSize="16sp" />
@@ -448,6 +449,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="15dp"
+                        android:tag="2"
                         android:text="Air Conditioned"
                         android:textColor="@color/grey_regular"
                         android:textSize="16sp" />
@@ -473,6 +475,7 @@
                         android:id="@+id/chkFreeBreakfast"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:tag="3"
                         android:text="Free Breakfast"
                         android:textColor="@color/grey_regular"
                         android:textSize="16sp" />
@@ -490,6 +493,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="15dp"
+                        android:tag="4"
                         android:text="Tea Coffee"
                         android:textColor="@color/grey_regular"
                         android:textSize="16sp" />
@@ -515,6 +519,7 @@
                         android:id="@+id/chkBar"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:tag="5"
                         android:text="Bar"
                         android:textColor="@color/grey_regular"
                         android:textSize="16sp" />
@@ -532,6 +537,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="15dp"
+                        android:tag="6"
                         android:text="Room Service"
                         android:textColor="@color/grey_regular"
                         android:textSize="16sp" />
@@ -557,6 +563,7 @@
                         android:id="@+id/chkTelevision"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:tag="7"
                         android:text="T/V"
                         android:textColor="@color/grey_regular"
                         android:textSize="16sp" />
@@ -574,6 +581,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="15dp"
+                        android:tag="8"
                         android:text="Pool"
                         android:textColor="@color/grey_regular"
                         android:textSize="16sp" />
@@ -591,6 +599,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="15dp"
+                        android:tag="9"
                         android:text="Spa"
                         android:textColor="@color/grey_regular"
                         android:textSize="16sp" />
@@ -616,6 +625,7 @@
                         android:id="@+id/chkParking"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:tag="10"
                         android:text="Parking"
                         android:textColor="@color/grey_regular"
                         android:textSize="16sp" />

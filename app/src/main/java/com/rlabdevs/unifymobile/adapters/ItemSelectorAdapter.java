@@ -80,7 +80,7 @@ public class ItemSelectorAdapter extends RecyclerView.Adapter<ItemSelectorAdapte
                                     HotelActivity.tvHotelClass.setText(tvItemName.getText());
                                 else if(tvSet.getId() == R.id.tvCurrency)
                                 {
-                                    HotelActivity.currencyCode = tvItemCode.getText().toString();
+                                    HotelActivity.currencyId = Integer.parseInt(tvItemCode.getText().toString());
                                     HotelActivity.tvCurrency.setText(tvItemName.getText());
                                 }
                             }
@@ -144,7 +144,7 @@ public class ItemSelectorAdapter extends RecyclerView.Adapter<ItemSelectorAdapte
                                 if(tvSet.getId() == R.id.tvHotelCity)
                                 {
                                     ConfigureLocationActivity.tvHotelCity.setText(tvItemName.getText());
-                                    ConfigureLocationActivity.locationCode = tvItemCode.getText().toString();
+                                    ConfigureLocationActivity.locationId = Integer.parseInt(tvItemCode.getText().toString());
                                 }
                             }
                             break;

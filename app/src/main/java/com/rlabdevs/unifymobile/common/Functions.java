@@ -1,10 +1,7 @@
 package com.rlabdevs.unifymobile.common;
 
-import static com.rlabdevs.unifymobile.activities.MainActivity.firestoreDB;
-
 import android.app.Activity;
 import android.app.Dialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.text.InputType;
@@ -18,41 +15,27 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
 import com.rlabdevs.unifymobile.R;
 import com.rlabdevs.unifymobile.activities.UserHomeActivity;
-import com.rlabdevs.unifymobile.activities.explore.ExploreActivity;
-import com.rlabdevs.unifymobile.adapters.HotelFilterAdapter;
 import com.rlabdevs.unifymobile.adapters.ItemSelectorAdapter;
 import com.rlabdevs.unifymobile.common.enums.CurrencyCode;
 import com.rlabdevs.unifymobile.common.enums.StatusCode;
-import com.rlabdevs.unifymobile.common.enums.UserRole;
 import com.rlabdevs.unifymobile.dialog.DateSelectionDialog;
 import com.rlabdevs.unifymobile.dialog.DateTimeSelectionDialog;
-import com.rlabdevs.unifymobile.models.CuisineTypeModel;
-import com.rlabdevs.unifymobile.models.CurrencyModel;
-import com.rlabdevs.unifymobile.models.HotelModel;
 import com.rlabdevs.unifymobile.models.IndexModel;
-import com.rlabdevs.unifymobile.models.LocationModel;
 import com.rlabdevs.unifymobile.models.SelectorItemModel;
 import com.rlabdevs.unifymobile.models.master.NewCuisineTypeModel;
 import com.rlabdevs.unifymobile.models.master.NewCurrencyModel;
 import com.rlabdevs.unifymobile.models.master.NewLocationModel;
 import com.rlabdevs.unifymobile.services.RetrofitClient;
-import com.rlabdevs.unifymobile.services.other.IMasterService;
+import com.rlabdevs.unifymobile.services.interfaces.other.IMasterService;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.EnumSet;
 import java.util.List;
 
 import retrofit2.Call;

@@ -4,10 +4,6 @@ import static com.rlabdevs.unifymobile.activities.MainActivity.firebaseStorage;
 import static com.rlabdevs.unifymobile.activities.MainActivity.firestoreDB;
 import static com.rlabdevs.unifymobile.common.Constants.ROOM_COVER_IMAGE_PICK_REQUEST;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -18,12 +14,15 @@ import android.provider.MediaStore;
 import android.text.Html;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -40,7 +39,6 @@ import com.rlabdevs.unifymobile.activities.UserHomeActivity;
 import com.rlabdevs.unifymobile.common.Functions;
 import com.rlabdevs.unifymobile.common.Regex;
 import com.rlabdevs.unifymobile.common.enums.StatusCode;
-import com.rlabdevs.unifymobile.models.CurrencyModel;
 import com.rlabdevs.unifymobile.models.IndexModel;
 import com.rlabdevs.unifymobile.models.MealModel;
 import com.rlabdevs.unifymobile.models.MealTypesModel;

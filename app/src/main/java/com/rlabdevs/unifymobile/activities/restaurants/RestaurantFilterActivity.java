@@ -2,11 +2,6 @@ package com.rlabdevs.unifymobile.activities.restaurants;
 
 import static com.rlabdevs.unifymobile.activities.MainActivity.firestoreDB;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.app.Dialog;
 import android.os.Bundle;
 import android.text.Editable;
@@ -17,6 +12,11 @@ import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.github.ybq.android.spinkit.SpinKitView;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -29,7 +29,6 @@ import com.rlabdevs.unifymobile.activities.UserHomeActivity;
 import com.rlabdevs.unifymobile.adapters.ItemSelectorAdapter;
 import com.rlabdevs.unifymobile.adapters.RestaurantFilterAdapter;
 import com.rlabdevs.unifymobile.common.Functions;
-import com.rlabdevs.unifymobile.models.LocationModel;
 import com.rlabdevs.unifymobile.models.RestaurantModel;
 import com.rlabdevs.unifymobile.models.SelectorItemModel;
 import com.rlabdevs.unifymobile.models.master.NewLocationModel;

@@ -5,9 +5,11 @@ import static com.rlabdevs.unifymobile.activities.MainActivity.firestoreDB;
 import android.animation.LayoutTransition;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -24,10 +26,24 @@ import com.rlabdevs.unifymobile.R;
 import com.rlabdevs.unifymobile.activities.MainActivity;
 import com.rlabdevs.unifymobile.adapters.MyHotelsAdapter;
 import com.rlabdevs.unifymobile.common.Functions;
+import com.rlabdevs.unifymobile.common.enums.ApiResponse;
+import com.rlabdevs.unifymobile.common.enums.Status;
 import com.rlabdevs.unifymobile.models.HotelModel;
+import com.rlabdevs.unifymobile.models.service.NewServiceAmenityModel;
+import com.rlabdevs.unifymobile.models.service.NewServiceClassModel;
+import com.rlabdevs.unifymobile.models.service.NewServiceHourModel;
+import com.rlabdevs.unifymobile.models.service.NewServiceLocationModel;
+import com.rlabdevs.unifymobile.models.service.NewServiceModel;
+import com.rlabdevs.unifymobile.services.RetrofitClient;
+import com.rlabdevs.unifymobile.services.interfaces.other.ISystemService;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MyHotelsActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -39,17 +55,17 @@ public class MyHotelsActivity extends AppCompatActivity implements View.OnClickL
     private ImageView imgViewAddNewHotel;
     private SpinKitView spinKitProgress;
 
-    private CollectionReference hotelReference;
-    private List<HotelModel> myHotelsList;
+    private List<NewServiceModel> myHotelsList;
     private MyHotelsAdapter myHotelsAdapter;
 
     private LinearLayoutManager linearLayoutManager;
+    private ISystemService systemService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_hotels);
-        hotelReference = firestoreDB.collection("Hotels");
+        systemService = RetrofitClient.getClient().create(ISystemService.class);
         myHotelsActivity = this;
         InitUI();
     }
@@ -78,8 +94,7 @@ public class MyHotelsActivity extends AppCompatActivity implements View.OnClickL
     }
 
     private void FetchMyHotels() {
-
-        String UserDetailsCode = MainActivity.sharedPref.getString("UserDetailsCode", "");
+        Integer currentUserId = MainActivity.sharedPref.getInt("UserDetailsID", 0);
 
         new Thread(new Runnable() {
             @Override

@@ -1,4 +1,4 @@
-package com.rlabdevs.unifymobile.services.account;
+package com.rlabdevs.unifymobile.services.interfaces.account;
 
 import com.rlabdevs.unifymobile.models.account.NewLoginDetailModel;
 import com.rlabdevs.unifymobile.models.account.NewUserModel;

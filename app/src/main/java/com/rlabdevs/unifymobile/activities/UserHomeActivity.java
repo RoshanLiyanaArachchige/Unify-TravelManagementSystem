@@ -1,8 +1,5 @@
 package com.rlabdevs.unifymobile.activities;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
@@ -11,6 +8,9 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
 import com.rlabdevs.unifymobile.R;
 import com.rlabdevs.unifymobile.activities.account.LoginActivity;
@@ -21,9 +21,6 @@ import com.rlabdevs.unifymobile.activities.search.SearchResultsActivity;
 import com.rlabdevs.unifymobile.activities.thingstodo.ThingsToDoActivity;
 import com.rlabdevs.unifymobile.activities.user.MenuActivity;
 import com.rlabdevs.unifymobile.common.Functions;
-import com.rlabdevs.unifymobile.models.CuisineTypeModel;
-import com.rlabdevs.unifymobile.models.CurrencyModel;
-import com.rlabdevs.unifymobile.models.LocationModel;
 import com.rlabdevs.unifymobile.models.master.NewCuisineTypeModel;
 import com.rlabdevs.unifymobile.models.master.NewCurrencyModel;
 import com.rlabdevs.unifymobile.models.master.NewLocationModel;

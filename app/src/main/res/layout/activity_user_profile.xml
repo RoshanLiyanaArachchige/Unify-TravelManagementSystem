@@ -174,7 +174,7 @@
                     android:layout_below="@id/txtNIC"
                     android:layout_marginTop="7dp"
                     android:background="@drawable/edit_text_bg_light_rad_10"
-                    android:hint="Mobile Number"
+                    android:hint="Enter Mobile Number"
                     android:inputType="phone"
                     android:maxLines="1"
                     android:paddingLeft="50dp"

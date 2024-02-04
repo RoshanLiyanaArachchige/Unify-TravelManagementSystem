@@ -17,7 +17,7 @@ import com.rlabdevs.unifymobile.R;
 import com.rlabdevs.unifymobile.activities.UserHomeActivity;
 import com.rlabdevs.unifymobile.activities.directions.GetDirectionsActivity;
 import com.rlabdevs.unifymobile.models.HotelModel;
-import com.rlabdevs.unifymobile.models.ThingsToDoModel;
+import com.rlabdevs.unifymobile.models.master.NewThingsToDoModel;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
 
@@ -28,14 +28,14 @@ public class ThingsToDoViewActivity extends AppCompatActivity {
     private TextView tvTaskTitle, tvTaskDescription, txtViewLocationName, txtViewEntryFee, txtViewTimings;
     private ImageView imgViewTaskImage;
     private Button btnGetDirections;
-    private ThingsToDoModel thingsToDo;
+    private NewThingsToDoModel thingsToDo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_things_to_do_view);
 
-        thingsToDo = new Gson().fromJson(getIntent().getStringExtra("ThingsToDo"), ThingsToDoModel.class);
+        thingsToDo = new Gson().fromJson(getIntent().getStringExtra("ThingsToDo"), NewThingsToDoModel.class);
 
         initThingsToDoViewActivity();
     }
@@ -60,7 +60,7 @@ public class ThingsToDoViewActivity extends AppCompatActivity {
         if(Objects.equals(entryFee, null) || entryFee == 0) {
             txtViewEntryFee.setText("Free");
         } else {
-            String currencySymbol = UserHomeActivity.currencyList.stream().filter(c -> c.getCurrencyCode().equals(thingsToDo.getCurrencyCode())).findFirst().get().getSymbol();
+            String currencySymbol = UserHomeActivity.currencyList.stream().filter(c -> c.getCurrencyId().equals(thingsToDo.getCurrencyId())).findFirst().get().getSymbol();
             txtViewEntryFee.setText(entryFee.toString() + currencySymbol);
         }
 

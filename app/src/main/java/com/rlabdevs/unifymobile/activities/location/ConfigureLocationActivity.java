@@ -30,6 +30,7 @@ import com.rlabdevs.unifymobile.common.Constants;
 import com.rlabdevs.unifymobile.common.Functions;
 import com.rlabdevs.unifymobile.models.LocationModel;
 import com.rlabdevs.unifymobile.models.SelectorItemModel;
+import com.rlabdevs.unifymobile.models.master.NewLocationModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -75,8 +76,8 @@ public class ConfigureLocationActivity extends AppCompatActivity implements OnMa
         @Override
         public void onClick(View view) {
             List<SelectorItemModel> itemList = new ArrayList<>();
-            for(LocationModel locationData : UserHomeActivity.locationList) {
-                itemList.add(new SelectorItemModel(locationData.getLocationCode(), locationData.getLocationName()));
+            for(NewLocationModel locationData : UserHomeActivity.locationList) {
+                itemList.add(new SelectorItemModel(locationData.getLocationId().toString(), locationData.getName()));
             }
             new Functions().ShowItemSelector("Select City", itemList, ConfigureLocationActivity.this, tvHotelCity, null);
         }

@@ -32,6 +32,7 @@ import com.rlabdevs.unifymobile.common.Functions;
 import com.rlabdevs.unifymobile.models.LocationModel;
 import com.rlabdevs.unifymobile.models.RestaurantModel;
 import com.rlabdevs.unifymobile.models.SelectorItemModel;
+import com.rlabdevs.unifymobile.models.master.NewLocationModel;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -224,8 +225,8 @@ public class RestaurantFilterActivity extends AppCompatActivity implements View.
     private void ChangeRestaurantLocation() {
         List<SelectorItemModel> itemList = new ArrayList<>();
         itemList.add(new SelectorItemModel("", "Any"));
-        for (LocationModel locationData : UserHomeActivity.locationList) {
-            itemList.add(new SelectorItemModel(locationData.getLocationCode(), locationData.getLocationName()));
+        for(NewLocationModel locationData : UserHomeActivity.locationList) {
+            itemList.add(new SelectorItemModel(locationData.getLocationId().toString(), locationData.getName()));
         }
         new Functions().ShowItemSelector("Select Restaurant Location", itemList, RestaurantFilterActivity.this, tvLocationName, null);
     }

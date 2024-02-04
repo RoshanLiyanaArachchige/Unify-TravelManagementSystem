@@ -46,6 +46,7 @@ import com.rlabdevs.unifymobile.models.IndexModel;
 import com.rlabdevs.unifymobile.models.RoomModel;
 import com.rlabdevs.unifymobile.models.RoomTypesModel;
 import com.rlabdevs.unifymobile.models.SelectorItemModel;
+import com.rlabdevs.unifymobile.models.master.NewCurrencyModel;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
 
@@ -183,7 +184,7 @@ public class RoomActivity extends AppCompatActivity implements View.OnClickListe
                 txtRoomPrice.setText(String.valueOf(roomModel.getRoomPrice()));
 
                 currencyCode = roomModel.getCurrencyCode();
-                String currencySymbol = UserHomeActivity.currencyList.stream().filter(c -> c.getCurrencyCode().equals(currencyCode)).findFirst().get().getSymbol();
+                String currencySymbol = UserHomeActivity.currencyList.stream().filter(c -> c.getCurrencyId().equals(currencyCode)).findFirst().get().getSymbol();
                 tvCurrency.setText(currencySymbol);
 
                 tvNoOfAdults.setText(roomModel.getNoOfAdults() > 1 ? roomModel.getNoOfAdults() + " Adults" : roomModel.getNoOfAdults() + " Adult");
@@ -285,8 +286,8 @@ public class RoomActivity extends AppCompatActivity implements View.OnClickListe
 
     private void SelectCurrencyUnit() {
         List<SelectorItemModel> itemList = new ArrayList<>();
-        for (CurrencyModel currencyModel : UserHomeActivity.currencyList) {
-            itemList.add(new SelectorItemModel(currencyModel.getCurrencyCode(), currencyModel.getSymbol()));
+        for (NewCurrencyModel currencyModel : UserHomeActivity.currencyList) {
+            itemList.add(new SelectorItemModel(currencyModel.getCurrencyId().toString(), currencyModel.getSymbol()));
         }
         new Functions().ShowItemSelector("Select Currency Unit", itemList, roomActivity, tvCurrency, null);
     }

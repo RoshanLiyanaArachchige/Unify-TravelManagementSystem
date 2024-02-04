@@ -36,6 +36,7 @@ import com.rlabdevs.unifymobile.common.Functions;
 import com.rlabdevs.unifymobile.models.HotelModel;
 import com.rlabdevs.unifymobile.models.LocationModel;
 import com.rlabdevs.unifymobile.models.SelectorItemModel;
+import com.rlabdevs.unifymobile.models.master.NewLocationModel;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -301,8 +302,8 @@ public class HotelFilterActivity extends AppCompatActivity implements View.OnCli
     private void ChangeHotelLocation() {
         List<SelectorItemModel> itemList = new ArrayList<>();
         itemList.add(new SelectorItemModel("", "Any"));
-        for(LocationModel locationData : UserHomeActivity.locationList) {
-            itemList.add(new SelectorItemModel(locationData.getLocationCode(), locationData.getLocationName()));
+        for(NewLocationModel locationData : UserHomeActivity.locationList) {
+            itemList.add(new SelectorItemModel(locationData.getLocationId().toString(), locationData.getName()));
         }
         new Functions().ShowItemSelector("Select Hotel Location", itemList, HotelFilterActivity.this, tvLocationName, null);
     }

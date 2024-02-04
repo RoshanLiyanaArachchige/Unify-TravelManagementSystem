@@ -24,6 +24,9 @@ import com.rlabdevs.unifymobile.common.Functions;
 import com.rlabdevs.unifymobile.models.CuisineTypeModel;
 import com.rlabdevs.unifymobile.models.CurrencyModel;
 import com.rlabdevs.unifymobile.models.LocationModel;
+import com.rlabdevs.unifymobile.models.master.NewCuisineTypeModel;
+import com.rlabdevs.unifymobile.models.master.NewCurrencyModel;
+import com.rlabdevs.unifymobile.models.master.NewLocationModel;
 
 import java.util.List;
 
@@ -33,9 +36,9 @@ public class UserHomeActivity extends AppCompatActivity implements View.OnClickL
     private ImageView imgViewAccount;
     private EditText txtSearch;
 
-    public static List<CurrencyModel> currencyList;
-    public static List<LocationModel> locationList;
-    public static List<CuisineTypeModel> cuisineTypeList;
+    public static List<NewCurrencyModel> currencyList;
+    public static List<NewLocationModel> locationList;
+    public static List<NewCuisineTypeModel> cuisineTypeList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,9 +46,9 @@ public class UserHomeActivity extends AppCompatActivity implements View.OnClickL
         setContentView(R.layout.activity_user_home);
         InitUI();
 
-        Functions.getCurrencyTypeList();
-        Functions.getLocationList();
-        Functions.getCuisineTypeList();
+        Functions.getCurrencyTypeList(UserHomeActivity.this);
+        Functions.getLocationList(UserHomeActivity.this);
+        Functions.getCuisineTypeList(UserHomeActivity.this);
 
         txtSearch = findViewById(R.id.txtSearch);
         txtSearch.setOnEditorActionListener(new TextView.OnEditorActionListener() {

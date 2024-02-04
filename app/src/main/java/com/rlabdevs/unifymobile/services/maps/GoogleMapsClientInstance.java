@@ -1,9 +1,9 @@
-package com.rlabdevs.unifymobile.services;
+package com.rlabdevs.unifymobile.services.maps;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class RetrofitClientInstance {
+public class GoogleMapsClientInstance {
     private static Retrofit retrofit;
     private static final String BASE_URL = "https://maps.googleapis.com/maps/";
 

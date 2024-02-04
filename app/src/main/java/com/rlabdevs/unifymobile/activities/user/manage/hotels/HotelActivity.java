@@ -55,6 +55,7 @@ import com.rlabdevs.unifymobile.models.CurrencyModel;
 import com.rlabdevs.unifymobile.models.HotelModel;
 import com.rlabdevs.unifymobile.models.IndexModel;
 import com.rlabdevs.unifymobile.models.SelectorItemModel;
+import com.rlabdevs.unifymobile.models.master.NewCurrencyModel;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
 
@@ -240,7 +241,7 @@ public class HotelActivity extends AppCompatActivity implements View.OnClickList
                 chkParking.setChecked(myHotelModel.isParking());
 
                 locationCode = myHotelModel.getLocationCode();
-                locationName = UserHomeActivity.locationList.stream().filter(c -> c.getLocationCode().equals(locationCode)).findFirst().get().getLocationName();
+                locationName = UserHomeActivity.locationList.stream().filter(c -> c.getLocationId().equals(locationCode)).findFirst().get().getName();
 
                 latitude = myHotelModel.getLatitude();
                 longitude = myHotelModel.getLongitude();
@@ -249,7 +250,7 @@ public class HotelActivity extends AppCompatActivity implements View.OnClickList
                 txtCheckOut.setText(myHotelModel.getCheckOut());
 
                 currencyCode = myHotelModel.getCurrencyCode();
-                String currencySymbol = UserHomeActivity.currencyList.stream().filter(c -> c.getCurrencyCode().equals(currencyCode)).findFirst().get().getSymbol();
+                String currencySymbol = UserHomeActivity.currencyList.stream().filter(c -> c.getCurrencyId().equals(currencyCode)).findFirst().get().getSymbol();
                 tvCurrency.setText(currencySymbol);
 
                 hotelActivity.runOnUiThread(new Runnable() {
@@ -662,8 +663,8 @@ public class HotelActivity extends AppCompatActivity implements View.OnClickList
 
     private void SelectCurrencyUnit() {
         List<SelectorItemModel> itemList = new ArrayList<>();
-        for (CurrencyModel currencyModel : UserHomeActivity.currencyList) {
-            itemList.add(new SelectorItemModel(currencyModel.getCurrencyCode(), currencyModel.getSymbol()));
+        for (NewCurrencyModel currencyModel : UserHomeActivity.currencyList) {
+            itemList.add(new SelectorItemModel(currencyModel.getCurrencyId().toString(), currencyModel.getCode()));
         }
         new Functions().ShowItemSelector("Select Currency Unit", itemList, hotelActivity, tvCurrency, null);
     }

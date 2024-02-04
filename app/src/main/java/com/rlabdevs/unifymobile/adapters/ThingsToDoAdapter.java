@@ -17,7 +17,7 @@ import com.google.gson.Gson;
 import com.rlabdevs.unifymobile.R;
 import com.rlabdevs.unifymobile.activities.UserHomeActivity;
 import com.rlabdevs.unifymobile.activities.thingstodo.ThingsToDoViewActivity;
-import com.rlabdevs.unifymobile.models.ThingsToDoModel;
+import com.rlabdevs.unifymobile.models.master.NewThingsToDoModel;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
@@ -26,9 +26,9 @@ import java.util.List;
 public class ThingsToDoAdapter extends RecyclerView.Adapter<ThingsToDoAdapter.ThingsToDoFilterViewHolder> {
 
     private Activity activity;
-    private List<ThingsToDoModel> thingsToDoList;
+    private List<NewThingsToDoModel> thingsToDoList;
 
-    public ThingsToDoAdapter(Activity activity, List<ThingsToDoModel> thingsToDoList) {
+    public ThingsToDoAdapter(Activity activity, List<NewThingsToDoModel> thingsToDoList) {
         this.activity = activity;
         this.thingsToDoList = thingsToDoList;
     }
@@ -42,9 +42,9 @@ public class ThingsToDoAdapter extends RecyclerView.Adapter<ThingsToDoAdapter.Th
 
     @Override
     public void onBindViewHolder(@NonNull ThingsToDoAdapter.ThingsToDoFilterViewHolder holder, int position) {
-        ThingsToDoModel thingsToDo = thingsToDoList.get(position);
+        NewThingsToDoModel thingsToDo = thingsToDoList.get(position);
 
-        holder.tvTaskID.setText(thingsToDo.getTaskID());
+        holder.tvTaskID.setText(thingsToDo.getThingsToDoId().toString());
         holder.tvTaskTitle.setText(thingsToDo.getTaskTitle());
         holder.tvTaskDescription.setText(thingsToDo.getTaskDescription());
 

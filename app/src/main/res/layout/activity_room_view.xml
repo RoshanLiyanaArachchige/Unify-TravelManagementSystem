@@ -139,7 +139,6 @@
                 android:id="@+id/tvRoomPrice"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:layout_below="@id/txtRoomDescription"
                 android:background="@drawable/edit_text_bg_light_rad_10_no_stroke"
                 android:enabled="false"
                 android:gravity="center_vertical"

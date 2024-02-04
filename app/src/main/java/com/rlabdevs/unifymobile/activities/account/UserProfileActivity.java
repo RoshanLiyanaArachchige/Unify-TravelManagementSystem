@@ -1,16 +1,7 @@
 package com.rlabdevs.unifymobile.activities.account;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.app.Activity;
-import android.app.Dialog;
 import android.os.Bundle;
-import android.os.Handler;
-import android.view.Gravity;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -18,24 +9,24 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.rlabdevs.unifymobile.R;
 import com.rlabdevs.unifymobile.activities.MainActivity;
 import com.rlabdevs.unifymobile.activities.UserHomeActivity;
 import com.rlabdevs.unifymobile.common.Functions;
 import com.rlabdevs.unifymobile.common.Regex;
-import com.rlabdevs.unifymobile.common.enums.StatusCode;
-import com.rlabdevs.unifymobile.common.enums.UserRole;
-import com.rlabdevs.unifymobile.models.IndexModel;
-import com.rlabdevs.unifymobile.models.LoginModel;
-import com.rlabdevs.unifymobile.models.UserDetailsModel;
+import com.rlabdevs.unifymobile.common.enums.ApiResponse;
+import com.rlabdevs.unifymobile.common.enums.IndexReference;
+import com.rlabdevs.unifymobile.models.account.NewLoginDetailModel;
+import com.rlabdevs.unifymobile.models.account.NewUserModel;
+import com.rlabdevs.unifymobile.services.RetrofitClient;
+import com.rlabdevs.unifymobile.services.account.IUserService;
+import com.rlabdevs.unifymobile.services.other.IMasterService;
 
-import java.util.List;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class UserProfileActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -47,28 +38,22 @@ public class UserProfileActivity extends AppCompatActivity implements View.OnCli
     private TextView tvLogin, tvUserProfileTitle, tvRegisterContinue;
     private ImageView imgViewIconShowPassword;
 
-    private CollectionReference indexReference, userDetailsReference, loginDetailsReference;
-
-    private UserDetailsModel userDetailModel;
-    private LoginModel loginModel;
-    private IndexModel userDetailsIndex, loginDetailsIndex;
-
-    private String userDetailsCode, loginCode;
+    private Integer userDetailsID;
+    private String userDetailsCode;
     private boolean isPasswordVisible, isUserLoggedIn;
+
+    private IUserService userService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_profile);
+        userService = RetrofitClient.getClient().create(IUserService.class);
         userProfileActivity = this;
-        indexReference = MainActivity.firestoreDB.collection("Index");
-        userDetailsReference = MainActivity.firestoreDB.collection("UserDetails");
-        loginDetailsReference = MainActivity.firestoreDB.collection("LoginDetails");
         InitUI();
     }
 
     private void InitUI() {
-
         linearLytLogoHaveAccount = findViewById(R.id.linearLytLogoHaveAccount);
 
         tvUserProfileTitle = findViewById(R.id.tvUserProfileTitle);
@@ -99,166 +84,47 @@ public class UserProfileActivity extends AppCompatActivity implements View.OnCli
     }
 
     private void InitUserProfile() {
-
         linearLytLogoHaveAccount.setVisibility(View.GONE);
         tvRegisterContinue.setVisibility(View.GONE);
         tvUserProfileTitle.setText("My Profile");
         btnUpdateRegister.setText("Update");
 
-        userDetailsCode = MainActivity.sharedPref.getString("UserDetailsCode", "").toString();
-        loginCode = MainActivity.sharedPref.getString("LoginCode", "").toString();
-
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-
-                userProfileActivity.runOnUiThread(new Runnable() {
-                    public void run() {
-                        new Functions().ShowProgressBar(UserProfileActivity.this, "Connecting to server...", "Please wait !");
-                    }
-                });
-
-                userDetailsReference.whereEqualTo("userDetailsCode", userDetailsCode).get()
-                        .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-                            @Override
-                            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                                if (!queryDocumentSnapshots.isEmpty()) {
-                                    List<DocumentSnapshot> documentSnapshotList = queryDocumentSnapshots.getDocuments();
-                                    userDetailModel = documentSnapshotList.get(0).toObject(UserDetailsModel.class);
-                                    userDetailModel.setID(documentSnapshotList.get(0).getId());
-
-                                    if (userDetailModel != null) {
-                                        txtUserDetailsCode.setText(userDetailModel.getUserDetailsCode());
-                                        txtFirstName.setText(userDetailModel.getFirstName());
-                                        txtLastName.setText(userDetailModel.getLastName());
-                                        txtAddress.setText(userDetailModel.getAddress());
-                                        txtNIC.setText(userDetailModel.getNIC());
-                                        txtMobilePhone.setText(userDetailModel.getMobileNo());
-                                        txtEmail.setText(userDetailModel.getEmail());
-                                    }
-
-                                    loginDetailsReference.whereEqualTo("loginCode", loginCode).get()
-                                            .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-                                                @Override
-                                                public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                                                    if (!queryDocumentSnapshots.isEmpty()) {
-                                                        List<DocumentSnapshot> documentSnapshotList = queryDocumentSnapshots.getDocuments();
-                                                        loginModel = documentSnapshotList.get(0).toObject(LoginModel.class);
-                                                        loginModel.setID(documentSnapshotList.get(0).getId());
-
-                                                        if (loginModel != null) {
-                                                            txtUsername.setText(loginModel.getUserName());
-                                                            txtPassword.setText(loginModel.getPassword());
-                                                        }
-
-                                                        userProfileActivity.runOnUiThread(new Runnable() {
-                                                            public void run() {
-                                                                Functions.HideProgressBar();
-                                                            }
-                                                        });
-                                                    }
-                                                }
-                                            })
-                                            .addOnFailureListener(new OnFailureListener() {
-                                                @Override
-                                                public void onFailure(@NonNull Exception e) {
-                                                    userProfileActivity.runOnUiThread(new Runnable() {
-                                                        public void run() {
-                                                            Functions.HideProgressBar();
-                                                            new Functions().ShowErrorDialog("Profile Load Error !", "Try Again", UserProfileActivity.this);
-                                                        }
-                                                    });
-                                                }
-                                            });
-                                }
-                            }
-                        })
-                        .addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                userProfileActivity.runOnUiThread(new Runnable() {
-                                    public void run() {
-                                        Functions.HideProgressBar();
-                                        new Functions().ShowErrorDialog("Profile Load Error !", "Try Again", UserProfileActivity.this);
-                                    }
-                                });
-                            }
-                        });
-            }
-        }).start();
-
+        userDetailsID = MainActivity.sharedPref.getInt("UserDetailsID", 0);
+        txtUserDetailsCode.setText((userDetailsCode = MainActivity.sharedPref.getString("UserDetailsCode", "")) + " (Registration Code)");
+        txtFirstName.setText(MainActivity.sharedPref.getString("FirstName", ""));
+        txtLastName.setText(MainActivity.sharedPref.getString("LastName", ""));
+        txtAddress.setText(MainActivity.sharedPref.getString("Address", ""));
+        txtNIC.setText(MainActivity.sharedPref.getString("NIC", ""));
+        txtMobilePhone.setText(MainActivity.sharedPref.getString("MobileNo", ""));
+        txtEmail.setText(MainActivity.sharedPref.getString("Email", ""));
+        txtUsername.setText(MainActivity.sharedPref.getString("UserName", ""));
+        txtPassword.setText(MainActivity.sharedPref.getString("Password", ""));
     }
 
     private void InitRegistration() {
+        new Functions().ShowProgressBar(UserProfileActivity.this, "Connecting to server...", "Please wait !");
 
-        new Thread(new Runnable() {
+        IMasterService masterService = RetrofitClient.getClient().create(IMasterService.class);
+        Call<String> indexReferenceRequest = masterService.getIndexReferenceCode(IndexReference.Users.getValue());
+        indexReferenceRequest.enqueue(new Callback<String>() {
             @Override
-            public void run() {
-
-                userProfileActivity.runOnUiThread(new Runnable() {
-                    public void run() {
-                        new Functions().ShowProgressBar(UserProfileActivity.this, "Connecting to server...", "Please wait !");
-                    }
-                });
-
-                indexReference.whereEqualTo("indexName", "LoginDetails").get()
-                        .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-                            @Override
-                            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                                if (!queryDocumentSnapshots.isEmpty()) {
-                                    List<DocumentSnapshot> documentSnapshotList = queryDocumentSnapshots.getDocuments();
-                                    loginDetailsIndex = documentSnapshotList.get(0).toObject(IndexModel.class);
-                                    loginDetailsIndex.setID(documentSnapshotList.get(0).getId());
-                                    if (loginDetailsIndex != null) {
-                                        loginCode = loginDetailsIndex.getPrefix() + (loginDetailsIndex.getCurrentCount() + 1);
-                                    }
-
-                                    indexReference.whereEqualTo("indexName", "UserDetails").get()
-                                            .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-                                                @Override
-                                                public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                                                    if (!queryDocumentSnapshots.isEmpty()) {
-                                                        List<DocumentSnapshot> documentSnapshotList = queryDocumentSnapshots.getDocuments();
-                                                        userDetailsIndex = documentSnapshotList.get(0).toObject(IndexModel.class);
-                                                        userDetailsIndex.setID(documentSnapshotList.get(0).getId());
-                                                        if (userDetailsIndex != null) {
-                                                            userDetailsCode = userDetailsIndex.getPrefix() + (userDetailsIndex.getCurrentCount() + 1);
-                                                            txtUserDetailsCode.setText(userDetailsCode + " (Registration Code)");
-                                                        }
-
-                                                        userProfileActivity.runOnUiThread(new Runnable() {
-                                                            public void run() {
-                                                                Functions.HideProgressBar();
-                                                            }
-                                                        });
-                                                    }
-                                                }
-                                            })
-                                            .addOnFailureListener(new OnFailureListener() {
-                                                @Override
-                                                public void onFailure(@NonNull Exception e) {
-                                                    userProfileActivity.runOnUiThread(new Runnable() {
-                                                        public void run() {
-                                                            Functions.HideProgressBar();
-                                                        }
-                                                    });
-                                                }
-                                            });
-                                }
-                            }
-                        })
-                        .addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                userProfileActivity.runOnUiThread(new Runnable() {
-                                    public void run() {
-                                        Functions.HideProgressBar();
-                                    }
-                                });
-                            }
-                        });
+            public void onResponse(Call<String> call, Response<String> response) {
+                Functions.HideProgressBar();
+                if(response.isSuccessful()) {
+                    userDetailsCode = response.body();
+                    txtUserDetailsCode.setText(userDetailsCode + " (Registration Code)");
+                } else {
+                    Toast.makeText(userProfileActivity, "An error occurred while getting registration code.", Toast.LENGTH_SHORT).show();
+                }
             }
-        }).start();
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+                Functions.HideProgressBar();
+                Toast.makeText(userProfileActivity, "An error occurred while getting registration code.", Toast.LENGTH_SHORT).show();
+                t.printStackTrace();
+            }
+        });
     }
 
     @Override
@@ -282,226 +148,101 @@ public class UserProfileActivity extends AppCompatActivity implements View.OnCli
     }
 
     private void SaveUserProfile() {
-        if (ValidateRegistration()) {
-            if(isUserLoggedIn)
-            {
-                loginModel.setUserName(txtUsername.getText().toString().trim());
-                loginModel.setPassword(txtPassword.getText().toString().trim());
+        if (ValidateUserDetails()) {
+            String username, password, firstName, lastName, address, nic, mobileNo, email;
+
+            NewLoginDetailModel newLoginDetailModel = new NewLoginDetailModel();
+            newLoginDetailModel.setUsername(username = txtUsername.getText().toString().trim());
+            newLoginDetailModel.setPassword(password = txtPassword.getText().toString().trim());
+
+            NewUserModel newUserModel = new NewUserModel();
+            newUserModel.setUserDetailId(userDetailsID);
+            newUserModel.setRegistrationCode(userDetailsCode);
+            newUserModel.setFirstName(firstName = txtFirstName.getText().toString().trim());
+            newUserModel.setLastName(lastName = txtLastName.getText().toString().trim());
+            newUserModel.setAddress(address = txtAddress.getText().toString().trim());
+            newUserModel.setNIC(nic = txtNIC.getText().toString().trim());
+            newUserModel.setMobileNo(mobileNo = txtMobilePhone.getText().toString().trim());
+            newUserModel.setEmail(email = txtEmail.getText().toString().trim());
+            newUserModel.setLoginDetail(newLoginDetailModel);
+
+            if(isUserLoggedIn) {
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
-
                         userProfileActivity.runOnUiThread(new Runnable() {
                             public void run() {
                                 new Functions().ShowProgressBar(UserProfileActivity.this, "Connecting to server...", "Please wait !");
                             }
                         });
 
-                        loginDetailsReference.document(loginModel.getID()).set(loginModel)
-                                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                    @Override
-                                    public void onSuccess(Void unused) {
-                                        userDetailModel.setFirstName(txtFirstName.getText().toString().trim());
-                                        userDetailModel.setLastName(txtLastName.getText().toString().trim());
-                                        userDetailModel.setAddress(txtAddress.getText().toString().trim());
-                                        userDetailModel.setNIC(txtNIC.getText().toString().trim());
-                                        userDetailModel.setMobileNo(txtMobilePhone.getText().toString().trim());
-                                        userDetailModel.setEmail(txtEmail.getText().toString().trim());
+                        Call<NewUserModel> updateProfileRequest = userService.updateProfile(newUserModel);
+                        updateProfileRequest.enqueue(new Callback<NewUserModel>() {
+                            @Override
+                            public void onResponse(Call<NewUserModel> call, Response<NewUserModel> response) {
+                                NewUserModel apiResponse = response.body();
+                                if(apiResponse.getApiResponseStatus().equals(ApiResponse.Success.getValue())) {
+                                    Functions.HideProgressBar();
+                                    setUserProfileSharedPreferences(username, password, firstName, lastName, address, nic, mobileNo, email);
+                                    new Functions().StartActivityAndFinishCurrent(UserProfileActivity.this, UserHomeActivity.class);
+                                    Toast.makeText(UserProfileActivity.this, "User profile updated successfully.", Toast.LENGTH_SHORT).show();
+                                } else {
+                                    Functions.HideProgressBar();
+                                    Toast.makeText(userProfileActivity, apiResponse.getStatusMessage(), Toast.LENGTH_SHORT).show();
+                                }
+                            }
 
-                                        userDetailsReference.document(userDetailModel.getID()).set(userDetailModel)
-                                                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                                    @Override
-                                                    public void onSuccess(Void unused) {
-                                                        userProfileActivity.runOnUiThread(new Runnable() {
-                                                            public void run() {
-                                                                Functions.HideProgressBar();
-                                                                new Functions().StartActivityAndFinishCurrent(UserProfileActivity.this, UserHomeActivity.class);
-                                                                Toast.makeText(UserProfileActivity.this, "Profile Updated !", Toast.LENGTH_SHORT).show();
-                                                            }
-                                                        });
-                                                    }
-                                                })
-                                                .addOnFailureListener(new OnFailureListener() {
-                                                    @Override
-                                                    public void onFailure(@NonNull Exception e) {
-                                                        userProfileActivity.runOnUiThread(new Runnable() {
-                                                            public void run() {
-                                                                Functions.HideProgressBar();
-                                                                new Functions().ShowErrorDialog("Profile Update Failure !", "Try Again", UserProfileActivity.this);
-                                                            }
-                                                        });
-                                                    }
-                                                });
-                                    }
-                                })
-                                .addOnFailureListener(new OnFailureListener() {
-                                    @Override
-                                    public void onFailure(@NonNull Exception e) {
-                                        userProfileActivity.runOnUiThread(new Runnable() {
-                                            public void run() {
-                                                Functions.HideProgressBar();
-                                                new Functions().ShowErrorDialog("Profile Update Failure !", "Try Again", UserProfileActivity.this);
-                                            }
-                                        });
-                                    }
-                                });
+                            @Override
+                            public void onFailure(Call<NewUserModel> call, Throwable t) {
+                                Functions.HideProgressBar();
+                                Toast.makeText(userProfileActivity, "An error occurred while updating the profile.", Toast.LENGTH_SHORT).show();
+                                t.printStackTrace();
+                            }
+                        });
                     }
                 }).start();
             }
-            else
-            {
-                String username = txtUsername.getText().toString().trim();
-
+            else {
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
-
                         userProfileActivity.runOnUiThread(new Runnable() {
                             public void run() {
                                 new Functions().ShowProgressBar(UserProfileActivity.this, "Connecting to server...", "Please wait !");
                             }
                         });
 
-                        loginDetailsReference.whereEqualTo("userName", username).whereEqualTo("statusCode", StatusCode.Active.getStatusCode()).get()
-                                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-                                    @Override
-                                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                                        if (!queryDocumentSnapshots.isEmpty()) {
-                                            List<DocumentSnapshot> documentSnapshotList = queryDocumentSnapshots.getDocuments();
-                                            loginModel = documentSnapshotList.get(0).toObject(LoginModel.class);
+                        Call<NewUserModel> registerRequest = userService.register(newUserModel);
+                        registerRequest.enqueue(new Callback<NewUserModel>() {
+                            @Override
+                            public void onResponse(Call<NewUserModel> call, Response<NewUserModel> response) {
+                                NewUserModel apiResponse = response.body();
+                                if(apiResponse.getApiResponseStatus().equals(ApiResponse.Success.getValue())) {
+                                    Functions.HideProgressBar();
+                                    userDetailsID = apiResponse.getUserDetailId();
+                                    setUserProfileSharedPreferences(username, password, firstName, lastName, address, nic, mobileNo, email);
+                                    Toast.makeText(UserProfileActivity.this, "Logged in as " + username, Toast.LENGTH_SHORT).show();
+                                    new Functions().StartActivityAndFinishCurrent(UserProfileActivity.this, UserHomeActivity.class);
+                                } else {
+                                    Functions.HideProgressBar();
+                                    Toast.makeText(userProfileActivity, apiResponse.getStatusMessage(), Toast.LENGTH_SHORT).show();
+                                }
+                            }
 
-                                            if (loginModel != null) {
-                                                userProfileActivity.runOnUiThread(new Runnable() {
-                                                    public void run() {
-                                                        Functions.HideProgressBar();
-                                                        new Functions().ShowErrorDialog("Username Already Exists !", "Try Again", UserProfileActivity.this);
-                                                    }
-                                                });
-                                            }
-                                        } else {
-                                            String password = txtPassword.getText().toString().trim();
-
-                                            LoginModel loginDetail = new LoginModel(loginCode, userDetailsCode, username, password,
-                                                    UserRole.User.getUserRole(), StatusCode.Active.getStatusCode());
-
-                                            loginDetailsReference.add(loginDetail)
-                                                    .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                                                        @Override
-                                                        public void onSuccess(DocumentReference documentReference) {
-
-                                                            //UserDetailsCode;
-                                                            String firstName = txtFirstName.getText().toString().trim();
-                                                            String lastName = txtLastName.getText().toString().trim();
-                                                            String address = txtAddress.getText().toString().trim();
-                                                            String nic = txtNIC.getText().toString().trim();
-                                                            String mobileNo = txtMobilePhone.getText().toString().trim();
-                                                            String email = txtEmail.getText().toString().trim();
-
-                                                            userDetailModel = new UserDetailsModel(userDetailsCode, firstName, lastName, address, nic, mobileNo, email, StatusCode.Active.getStatusCode());
-                                                            userDetailsReference.add(userDetailModel)
-                                                                    .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                                                                        @Override
-                                                                        public void onSuccess(DocumentReference documentReference) {
-                                                                            MainActivity.sharedPrefEditor.putString("UserName", username);
-                                                                            MainActivity.sharedPrefEditor.putString("FLName", firstName + " " + lastName);
-                                                                            MainActivity.sharedPrefEditor.putString("Email", email);
-                                                                            MainActivity.sharedPrefEditor.putString("UserDetailsCode", userDetailsCode);
-                                                                            MainActivity.sharedPrefEditor.putString("LoginCode", loginCode);
-                                                                            MainActivity.sharedPrefEditor.putBoolean("IsUserLoggedIn", true);
-                                                                            MainActivity.sharedPrefEditor.commit();
-
-                                                                            loginDetailsIndex.setCurrentCount(loginDetailsIndex.getCurrentCount()+1);
-                                                                            indexReference.document(loginDetailsIndex.getID()).set(loginDetailsIndex)
-                                                                                    .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                                                                        @Override
-                                                                                        public void onSuccess(Void unused) {
-                                                                                            userDetailsIndex.setCurrentCount(userDetailsIndex.getCurrentCount()+1);
-                                                                                            indexReference.document(userDetailsIndex.getID()).set(userDetailsIndex)
-                                                                                                    .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                                                                                        @Override
-                                                                                                        public void onSuccess(Void unused) {
-                                                                                                            userProfileActivity.runOnUiThread(new Runnable() {
-                                                                                                                public void run() {
-                                                                                                                    Functions.HideProgressBar();
-                                                                                                                    Toast.makeText(UserProfileActivity.this, "Logged in as " + username, Toast.LENGTH_SHORT).show();
-                                                                                                                }
-                                                                                                            });
-
-                                                                                                            new Functions().StartActivityAndFinishCurrent(UserProfileActivity.this, UserHomeActivity.class);
-                                                                                                        }
-                                                                                                    })
-                                                                                                    .addOnFailureListener(new OnFailureListener() {
-                                                                                                        @Override
-                                                                                                        public void onFailure(@NonNull Exception e) {
-                                                                                                            userProfileActivity.runOnUiThread(new Runnable() {
-                                                                                                                public void run() {
-                                                                                                                    Functions.HideProgressBar();
-                                                                                                                    new Functions().ShowErrorDialog("Error Occurred !", "Try Again", UserProfileActivity.this);
-                                                                                                                }
-                                                                                                            });
-                                                                                                        }
-                                                                                                    });
-                                                                                        }
-                                                                                    })
-                                                                                    .addOnFailureListener(new OnFailureListener() {
-                                                                                        @Override
-                                                                                        public void onFailure(@NonNull Exception e) {
-                                                                                            userProfileActivity.runOnUiThread(new Runnable() {
-                                                                                                public void run() {
-                                                                                                    Functions.HideProgressBar();
-                                                                                                    new Functions().ShowErrorDialog("Error Occurred !", "Try Again", UserProfileActivity.this);
-                                                                                                }
-                                                                                            });
-                                                                                        }
-                                                                                    });
-                                                                        }
-                                                                    })
-                                                                    .addOnFailureListener(new OnFailureListener() {
-                                                                        @Override
-                                                                        public void onFailure(@NonNull Exception e) {
-                                                                            userProfileActivity.runOnUiThread(new Runnable() {
-                                                                                public void run() {
-                                                                                    Functions.HideProgressBar();
-                                                                                    new Functions().ShowErrorDialog("Registration Error Occurred !", "Try Again", UserProfileActivity.this);
-                                                                                }
-                                                                            });
-                                                                        }
-                                                                    });
-                                                        }
-                                                    })
-                                                    .addOnFailureListener(new OnFailureListener() {
-                                                        @Override
-                                                        public void onFailure(@NonNull Exception e) {
-                                                            userProfileActivity.runOnUiThread(new Runnable() {
-                                                                public void run() {
-                                                                    Functions.HideProgressBar();
-                                                                    new Functions().ShowErrorDialog("Registration Error Occurred !", "Try Again", UserProfileActivity.this);
-                                                                }
-                                                            });
-                                                        }
-                                                    });
-                                        }
-                                    }
-                                })
-                                .addOnFailureListener(new OnFailureListener() {
-                                    @Override
-                                    public void onFailure(@NonNull Exception e) {
-                                        userProfileActivity.runOnUiThread(new Runnable() {
-                                            public void run() {
-                                                Functions.HideProgressBar();
-                                                new Functions().ShowErrorDialog("Error Occurred !", "Try Again", UserProfileActivity.this);
-                                            }
-                                        });
-                                    }
-                                });
+                            @Override
+                            public void onFailure(Call<NewUserModel> call, Throwable t) {
+                                Functions.HideProgressBar();
+                                Toast.makeText(userProfileActivity, "An error occurred while registering the user.", Toast.LENGTH_SHORT).show();
+                                t.printStackTrace();
+                            }
+                        });
                     }
                 }).start();
             }
         }
     }
 
-    private boolean ValidateRegistration() {
-
+    private boolean ValidateUserDetails() {
         String firstName = txtFirstName.getText().toString().trim();
         if (firstName.equals("")) {
             new Functions().ShowErrorDialog("First Name Required !", "Okay", this);
@@ -575,5 +316,21 @@ public class UserProfileActivity extends AppCompatActivity implements View.OnCli
         }
 
         return true;
+    }
+
+    private void setUserProfileSharedPreferences(String username, String password, String firstName, String lastName, String address, String nic, String mobileNo, String email) {
+        MainActivity.sharedPrefEditor.putString("UserName", username);
+        MainActivity.sharedPrefEditor.putString("Password", password);
+        MainActivity.sharedPrefEditor.putString("FLName", firstName + " " + lastName);
+        MainActivity.sharedPrefEditor.putString("FirstName", firstName);
+        MainActivity.sharedPrefEditor.putString("LastName", lastName);
+        MainActivity.sharedPrefEditor.putString("Address", address);
+        MainActivity.sharedPrefEditor.putString("NIC", nic);
+        MainActivity.sharedPrefEditor.putString("MobileNo", mobileNo);
+        MainActivity.sharedPrefEditor.putString("Email", email);
+        MainActivity.sharedPrefEditor.putInt("UserDetailsID", userDetailsID);
+        MainActivity.sharedPrefEditor.putString("UserDetailsCode", userDetailsCode);
+        MainActivity.sharedPrefEditor.putBoolean("IsUserLoggedIn", true);
+        MainActivity.sharedPrefEditor.commit();
     }
 }

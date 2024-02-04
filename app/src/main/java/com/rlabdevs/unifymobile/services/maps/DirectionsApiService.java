@@ -1,4 +1,4 @@
-package com.rlabdevs.unifymobile.services;
+package com.rlabdevs.unifymobile.services.maps;
 
 import com.rlabdevs.unifymobile.models.DirectionsResponseModel;
 

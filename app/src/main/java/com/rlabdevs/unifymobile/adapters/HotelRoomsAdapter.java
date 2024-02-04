@@ -79,7 +79,7 @@ public class HotelRoomsAdapter extends RecyclerView.Adapter<HotelRoomsAdapter.Ho
 
         holder.tvRoomCapacity.setText("Max: " + Functions.RoomCapacityText(room.getNoOfAdults(), room.getNoOfChildren()));
 
-        String currencySymbol = UserHomeActivity.currencyList.stream().filter(c -> c.getCurrencyCode().equals(hotel.getCurrencyCode())).findFirst().get().getSymbol();
+        String currencySymbol = UserHomeActivity.currencyList.stream().filter(c -> c.getCurrencyId().equals(hotel.getCurrencyCode())).findFirst().get().getSymbol();
         holder.tvRoomPrice.setText(String.valueOf(room.getRoomPrice()) + " " + currencySymbol);
 
         //Score and no of reviews

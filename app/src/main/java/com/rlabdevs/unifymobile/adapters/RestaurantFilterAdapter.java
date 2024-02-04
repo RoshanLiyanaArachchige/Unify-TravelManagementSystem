@@ -46,7 +46,7 @@ public class RestaurantFilterAdapter extends RecyclerView.Adapter<RestaurantFilt
         RestaurantModel restaurant = restaurantList.get(position);
         holder.tvRestaurantName.setText(restaurant.getRestaurantName());
         holder.tvRestaurantRating.setText(String.valueOf(restaurant.getRestaurantRating()));
-        String currencySymbol = UserHomeActivity.currencyList.stream().filter(c -> c.getCurrencyCode().equals(restaurant.getCurrencyCode())).findFirst().get().getSymbol();
+        String currencySymbol = UserHomeActivity.currencyList.stream().filter(c -> c.getCurrencyId().equals(restaurant.getCurrencyCode())).findFirst().get().getSymbol();
         holder.tvBudgetRestaurantClass.setText("~" + restaurant.getAveragePrice() + currencySymbol + " ("+ restaurant.getRestaurantClass() + " Star)");
         holder.lnrLytFreeWIFI.setVisibility(restaurant.isFreeWIFI() ? View.VISIBLE : View.GONE);
         holder.lnrLytBeverages.setVisibility(restaurant.isBeverages() ? View.VISIBLE : View.GONE);

@@ -4,6 +4,7 @@ import static com.rlabdevs.unifymobile.activities.MainActivity.firestoreDB;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.text.InputType;
@@ -43,11 +44,20 @@ import com.rlabdevs.unifymobile.models.HotelModel;
 import com.rlabdevs.unifymobile.models.IndexModel;
 import com.rlabdevs.unifymobile.models.LocationModel;
 import com.rlabdevs.unifymobile.models.SelectorItemModel;
+import com.rlabdevs.unifymobile.models.master.NewCuisineTypeModel;
+import com.rlabdevs.unifymobile.models.master.NewCurrencyModel;
+import com.rlabdevs.unifymobile.models.master.NewLocationModel;
+import com.rlabdevs.unifymobile.services.RetrofitClient;
+import com.rlabdevs.unifymobile.services.other.IMasterService;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.EnumSet;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class Functions implements DialogInterface.OnDismissListener {
 
@@ -335,73 +345,76 @@ public class Functions implements DialogInterface.OnDismissListener {
             txtPassword.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD | InputType.TYPE_CLASS_TEXT);
     }
 
-    public static void getCurrencyTypeList() {
-        CollectionReference currencyReference = firestoreDB.collection("Currency");
+    public static void getCurrencyTypeList(Activity activity) {
+        new Thread(() -> {
+            IMasterService masterService = RetrofitClient.getClient().create(IMasterService.class);
+            masterService.getCurrencies().enqueue(new Callback<List<NewCurrencyModel>>() {
+                @Override
+                public void onResponse(Call<List<NewCurrencyModel>> call, Response<List<NewCurrencyModel>> response) {
+                    if(response.isSuccessful()) {
+                        UserHomeActivity.currencyList = response.body();
+                    }
+                }
 
-        currencyReference.get()
-                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-                    @Override
-                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                        if (!queryDocumentSnapshots.isEmpty()) {
-                            UserHomeActivity.currencyList = new ArrayList<>();
-                            List<DocumentSnapshot> documentSnapshotList = queryDocumentSnapshots.getDocuments();
-                            for (DocumentSnapshot documentSnapshot : documentSnapshotList) {
-                                UserHomeActivity.currencyList.add(documentSnapshot.toObject(CurrencyModel.class));
-                            }
+                @Override
+                public void onFailure(Call<List<NewCurrencyModel>> call, Throwable t) {
+                    activity.runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(activity, "An error occurred while getting currencies.", Toast.LENGTH_SHORT).show();
                         }
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                    }
-                });
+                    });
+                }
+            });
+        }).start();
     }
 
-    public static void getLocationList() {
-        CollectionReference locationReference = firestoreDB.collection("Location");
+    public static void getLocationList(Activity activity) {
+        new Thread(() -> {
+            IMasterService masterService = RetrofitClient.getClient().create(IMasterService.class);
+            masterService.getLocations().enqueue(new Callback<List<NewLocationModel>>() {
+                @Override
+                public void onResponse(Call<List<NewLocationModel>> call, Response<List<NewLocationModel>> response) {
+                    if(response.isSuccessful()) {
+                        UserHomeActivity.locationList = response.body();
+                    }
+                }
 
-        locationReference.get()
-                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-                    @Override
-                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                        if (!queryDocumentSnapshots.isEmpty()) {
-                            UserHomeActivity.locationList = new ArrayList<>();
-                            List<DocumentSnapshot> documentSnapshotList = queryDocumentSnapshots.getDocuments();
-                            for (DocumentSnapshot documentSnapshot : documentSnapshotList) {
-                                UserHomeActivity.locationList.add(documentSnapshot.toObject(LocationModel.class));
-                            }
+                @Override
+                public void onFailure(Call<List<NewLocationModel>> call, Throwable t) {
+                    activity.runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(activity, "An error occurred while getting locations.", Toast.LENGTH_SHORT).show();
                         }
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                    }
-                });
+                    });
+                }
+            });
+        }).start();
     }
 
-    public static void getCuisineTypeList() {
-        CollectionReference cuisineTypesReference = firestoreDB.collection("CuisineTypes");
+    public static void getCuisineTypeList(Activity activity) {
+        new Thread(() -> {
+            IMasterService masterService = RetrofitClient.getClient().create(IMasterService.class);
+            masterService.getCuisineTypes().enqueue(new Callback<List<NewCuisineTypeModel>>() {
+                @Override
+                public void onResponse(Call<List<NewCuisineTypeModel>> call, Response<List<NewCuisineTypeModel>> response) {
+                    if(response.isSuccessful()) {
+                        UserHomeActivity.cuisineTypeList = response.body();
+                    }
+                }
 
-        cuisineTypesReference.get()
-                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-                    @Override
-                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                        if (!queryDocumentSnapshots.isEmpty()) {
-                            UserHomeActivity.cuisineTypeList = new ArrayList<>();
-                            List<DocumentSnapshot> documentSnapshotList = queryDocumentSnapshots.getDocuments();
-                            for (DocumentSnapshot documentSnapshot : documentSnapshotList) {
-                                UserHomeActivity.cuisineTypeList.add(documentSnapshot.toObject(CuisineTypeModel.class));
-                            }
+                @Override
+                public void onFailure(Call<List<NewCuisineTypeModel>> call, Throwable t) {
+                    activity.runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(activity, "An error occurred while getting cuisine types.", Toast.LENGTH_SHORT).show();
                         }
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                    }
-                });
+                    });
+                }
+            });
+        }).start();
     }
 
     public static IndexModel GetDocumentIndex(String CollectionName) {

@@ -90,7 +90,7 @@ public class RestaurantMealsAdapter extends RecyclerView.Adapter<RestaurantMeals
             holder.tvMealSize.setText(MessageFormat.format("For {0} Persons", mealSize));
         }
 
-        String currencySymbol = UserHomeActivity.currencyList.stream().filter(c -> c.getCurrencyCode().equals(restaurant.getCurrencyCode())).findFirst().get().getSymbol();
+        String currencySymbol = UserHomeActivity.currencyList.stream().filter(c -> c.getCurrencyId().equals(restaurant.getCurrencyCode())).findFirst().get().getSymbol();
         holder.tvMealPrice.setText(String.valueOf(meal.getMealPrice()) + " " + currencySymbol);
     }
 

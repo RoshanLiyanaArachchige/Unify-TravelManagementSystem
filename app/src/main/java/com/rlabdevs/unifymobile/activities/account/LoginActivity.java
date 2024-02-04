@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -21,11 +22,20 @@ import com.rlabdevs.unifymobile.R;
 import com.rlabdevs.unifymobile.activities.MainActivity;
 import com.rlabdevs.unifymobile.activities.UserHomeActivity;
 import com.rlabdevs.unifymobile.common.Functions;
+import com.rlabdevs.unifymobile.common.enums.ApiResponse;
 import com.rlabdevs.unifymobile.common.enums.UserRole;
 import com.rlabdevs.unifymobile.models.LoginModel;
 import com.rlabdevs.unifymobile.models.UserDetailsModel;
+import com.rlabdevs.unifymobile.models.account.NewLoginDetailModel;
+import com.rlabdevs.unifymobile.models.account.NewUserModel;
+import com.rlabdevs.unifymobile.services.RetrofitClient;
+import com.rlabdevs.unifymobile.services.account.IUserService;
 
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -38,14 +48,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     private boolean isPasswordVisible;
 
-    private CollectionReference loginReference, userDetailsReference;
+    private IUserService userService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        loginReference = firestoreDB.collection("LoginDetails");
-        userDetailsReference = MainActivity.firestoreDB.collection("UserDetails");
+        userService = RetrofitClient.getClient().create(IUserService.class);
         loginActivity = this;
         InitUI();
     }
@@ -60,6 +69,72 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         imgViewIconShowPassword.setOnClickListener(this);
         tvRegister.setOnClickListener(this);
         btnLogin.setOnClickListener(this);
+    }
+
+    private void LoginUser() {
+        String username = txtUsername.getText().toString().trim();
+        String password = txtPassword.getText().toString().trim();
+
+        if(username.equals("")) {
+            new Functions().ShowErrorDialog("Username is required.", "Okay", this);
+            return;
+        }
+
+        if(password.equals("")) {
+            new Functions().ShowErrorDialog("Password is required.", "Okay", this);
+            return;
+        }
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                loginActivity.runOnUiThread(new Runnable() {
+                    public void run() {
+                        new Functions().ShowProgressBar(LoginActivity.this, "Connecting to server...", "Please wait !");
+                    }
+                });
+
+                NewLoginDetailModel loginRequestData = new NewLoginDetailModel();
+                loginRequestData.setUsername(username);
+                loginRequestData.setPassword(password);
+
+                Call<NewUserModel> loginRequest = userService.login(loginRequestData);
+
+                loginRequest.enqueue(new Callback<NewUserModel>() {
+                    @Override
+                    public void onResponse(Call<NewUserModel> call, Response<NewUserModel> response) {
+                        NewUserModel apiResponse = response.body();
+                        if(apiResponse.getApiResponseStatus().equals(ApiResponse.Success.getValue())) {
+                            Functions.HideProgressBar();
+                            MainActivity.sharedPrefEditor.putString("UserName", username);
+                            MainActivity.sharedPrefEditor.putString("Password", password);
+                            MainActivity.sharedPrefEditor.putString("FLName", apiResponse.getFirstName() + " " + apiResponse.getLastName());
+                            MainActivity.sharedPrefEditor.putString("FirstName", apiResponse.getFirstName());
+                            MainActivity.sharedPrefEditor.putString("LastName", apiResponse.getLastName());
+                            MainActivity.sharedPrefEditor.putString("Address", apiResponse.getAddress());
+                            MainActivity.sharedPrefEditor.putString("NIC", apiResponse.getNIC());
+                            MainActivity.sharedPrefEditor.putString("MobileNo", apiResponse.getMobileNo());
+                            MainActivity.sharedPrefEditor.putString("Email", apiResponse.getEmail());
+                            MainActivity.sharedPrefEditor.putInt("UserDetailsID", apiResponse.getUserDetailId());
+                            MainActivity.sharedPrefEditor.putString("UserDetailsCode", apiResponse.getRegistrationCode());
+                            MainActivity.sharedPrefEditor.putBoolean("IsUserLoggedIn", true);
+                            MainActivity.sharedPrefEditor.commit();
+                            new Functions().StartActivityAndFinishCurrent(LoginActivity.this, UserHomeActivity.class);
+                        } else {
+                            Functions.HideProgressBar();
+                            Toast.makeText(loginActivity, apiResponse.getStatusMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<NewUserModel> call, Throwable t) {
+                        Functions.HideProgressBar();
+                        Toast.makeText(loginActivity, "An error occurred while login into your account.", Toast.LENGTH_SHORT).show();
+                        t.printStackTrace();
+                    }
+                });
+            }
+        }).start();
     }
 
     @Override
@@ -77,103 +152,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             case R.id.tvRegister: {
                 new Functions().StartActivityAndFinishCurrent(this, UserProfileActivity.class);
                 break;
-            }
-        }
-    }
-
-    private void LoginUser() {
-
-        String username = txtUsername.getText().toString().trim();
-        String password = txtPassword.getText().toString().trim();
-
-        if (username.equals("")) {
-            new Functions().ShowErrorDialog("Username must enter", "Okay", this);
-        } else {
-            if (password.equals("")) {
-                new Functions().ShowErrorDialog("Password must enter", "Okay", this);
-            } else {
-                new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-
-                        loginActivity.runOnUiThread(new Runnable() {
-                            public void run() {
-                                new Functions().ShowProgressBar(LoginActivity.this, "Connecting to server...", "Please wait !");
-                            }
-                        });
-
-                        loginReference.whereEqualTo("userName", username).get()
-                                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-                                    @Override
-                                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                                        if (!queryDocumentSnapshots.isEmpty()) {
-                                            List<DocumentSnapshot> documentSnapshotList = queryDocumentSnapshots.getDocuments();
-                                            LoginModel loginModel = documentSnapshotList.get(0).toObject(LoginModel.class);
-
-                                            if (loginModel != null) {
-                                                if (loginModel.getPassword().equals(password)) {
-                                                    if (loginModel.getUserRoleCode().equals(UserRole.User.getUserRole())) {
-
-                                                        userDetailsReference.whereEqualTo("userDetailsCode", loginModel.getUserDetailsCode()).get()
-                                                                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-                                                                                          @Override
-                                                                                          public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                                                                                              if (!queryDocumentSnapshots.isEmpty()) {
-                                                                                                  List<DocumentSnapshot> documentSnapshotList = queryDocumentSnapshots.getDocuments();
-                                                                                                  UserDetailsModel userDetailModel = documentSnapshotList.get(0).toObject(UserDetailsModel.class);
-
-                                                                                                  if (userDetailModel != null) {
-                                                                                                      MainActivity.sharedPrefEditor.putString("UserName", username);
-                                                                                                      MainActivity.sharedPrefEditor.putString("FLName", userDetailModel.getFirstName() + " " + userDetailModel.getLastName());
-                                                                                                      MainActivity.sharedPrefEditor.putString("Email", userDetailModel.getEmail());
-                                                                                                      MainActivity.sharedPrefEditor.putString("UserDetailsCode", loginModel.getUserDetailsCode());
-                                                                                                      MainActivity.sharedPrefEditor.putString("LoginCode", loginModel.getLoginCode());
-                                                                                                      MainActivity.sharedPrefEditor.putBoolean("IsUserLoggedIn", true);
-                                                                                                      MainActivity.sharedPrefEditor.commit();
-                                                                                                  }
-                                                                                              }
-                                                                                          }
-                                                                                      });
-                                                        loginActivity.runOnUiThread(new Runnable() {
-                                                            public void run() {
-                                                                Functions.HideProgressBar();
-                                                            }
-                                                        });
-
-                                                        new Functions().StartActivityAndFinishCurrent(LoginActivity.this, UserHomeActivity.class);
-                                                    }
-                                                } else {
-                                                    loginActivity.runOnUiThread(new Runnable() {
-                                                        public void run() {
-                                                            Functions.HideProgressBar();
-                                                            new Functions().ShowErrorDialog("Invalid credentials", "Try Again", LoginActivity.this);
-                                                        }
-                                                    });
-                                                }
-                                            }
-                                        } else {
-                                            loginActivity.runOnUiThread(new Runnable() {
-                                                public void run() {
-                                                    Functions.HideProgressBar();
-                                                    new Functions().ShowErrorDialog("Invalid credentials", "Try Again", LoginActivity.this);
-                                                }
-                                            });
-                                        }
-                                    }
-                                })
-                                .addOnFailureListener(new OnFailureListener() {
-                                    @Override
-                                    public void onFailure(@NonNull Exception e) {
-                                        loginActivity.runOnUiThread(new Runnable() {
-                                            public void run() {
-                                                Functions.HideProgressBar();
-                                                new Functions().ShowErrorDialog("Error occurred", "Try Again", LoginActivity.this);
-                                            }
-                                        });
-                                    }
-                                });
-                    }
-                }).start();
             }
         }
     }

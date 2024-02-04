@@ -8,7 +8,7 @@ android {
 
     defaultConfig {
         applicationId "com.rlabdevs.unifymobile"
-        minSdk 24
+        minSdk 26
         targetSdk 31
         versionCode 1
         versionName "1.0"
@@ -17,10 +17,19 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    signingConfigs {
+        release {
+            storeFile file('C:\\Users\\AFISOL\\Desktop\\FinalProject\\Mobile\\key_store.jks')
+            storePassword 'Afisol@123'
+            keyAlias 'key0'
+            keyPassword 'Afisol@123'
+        }
+    }
+
     buildTypes {
         release {
             minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
         }
     }
     compileOptions {
@@ -37,6 +46,8 @@ dependencies {
     implementation 'com.google.firebase:firebase-firestore:24.9.0'
     implementation 'com.google.android.gms:play-services-maps:18.2.0'
     implementation 'com.google.maps:google-maps-services:0.2.10'
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
     implementation 'com.google.maps.android:android-maps-utils:0.5'
     implementation 'com.google.android.gms:play-services-location:21.0.1'
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
@@ -46,8 +57,8 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
     implementation 'com.github.ybq:Android-SpinKit:1.4.0'
-    implementation 'com.google.code.gson:gson:2.9.0'
-    implementation 'com.google.firebase:firebase-storage:20.2.1'
+    implementation 'com.google.code.gson:gson:2.10.1'
+    implementation 'com.google.firebase:firebase-storage:20.3.0'
     implementation 'com.squareup.picasso:picasso:2.5.2'
     //implementation 'com.github.mohammadatif:Animatoo:master'
 }

@@ -91,26 +91,21 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     @Override
                     public void onResponse(Call<NewUserModel> call, Response<NewUserModel> response) {
                         NewUserModel apiResponse = response.body();
-                        if(apiResponse.getApiResponseStatus().equals(ApiResponse.Success.getValue())) {
-                            Functions.HideProgressBar();
-                            MainActivity.sharedPrefEditor.putString("UserName", username);
-                            MainActivity.sharedPrefEditor.putString("Password", password);
-                            MainActivity.sharedPrefEditor.putString("FLName", apiResponse.getFirstName() + " " + apiResponse.getLastName());
-                            MainActivity.sharedPrefEditor.putString("FirstName", apiResponse.getFirstName());
-                            MainActivity.sharedPrefEditor.putString("LastName", apiResponse.getLastName());
-                            MainActivity.sharedPrefEditor.putString("Address", apiResponse.getAddress());
-                            MainActivity.sharedPrefEditor.putString("NIC", apiResponse.getNIC());
-                            MainActivity.sharedPrefEditor.putString("MobileNo", apiResponse.getMobileNo());
-                            MainActivity.sharedPrefEditor.putString("Email", apiResponse.getEmail());
-                            MainActivity.sharedPrefEditor.putInt("UserDetailsID", apiResponse.getUserDetailId());
-                            MainActivity.sharedPrefEditor.putString("UserDetailsCode", apiResponse.getRegistrationCode());
-                            MainActivity.sharedPrefEditor.putBoolean("IsUserLoggedIn", true);
-                            MainActivity.sharedPrefEditor.commit();
-                            new Functions().StartActivityAndFinishCurrent(LoginActivity.this, UserHomeActivity.class);
-                        } else {
-                            Functions.HideProgressBar();
-                            Toast.makeText(loginActivity, apiResponse.getStatusMessage(), Toast.LENGTH_SHORT).show();
-                        }
+                        Functions.HideProgressBar();
+                        MainActivity.sharedPrefEditor.putString("UserName", username);
+                        MainActivity.sharedPrefEditor.putString("Password", password);
+                        MainActivity.sharedPrefEditor.putString("FLName", apiResponse.getFirstName() + " " + apiResponse.getLastName());
+                        MainActivity.sharedPrefEditor.putString("FirstName", apiResponse.getFirstName());
+                        MainActivity.sharedPrefEditor.putString("LastName", apiResponse.getLastName());
+                        MainActivity.sharedPrefEditor.putString("Address", apiResponse.getAddress());
+                        MainActivity.sharedPrefEditor.putString("NIC", apiResponse.getNIC());
+                        MainActivity.sharedPrefEditor.putString("MobileNo", apiResponse.getMobileNo());
+                        MainActivity.sharedPrefEditor.putString("Email", apiResponse.getEmail());
+                        MainActivity.sharedPrefEditor.putInt("UserDetailsID", apiResponse.getUserDetailId());
+                        MainActivity.sharedPrefEditor.putString("UserDetailsCode", apiResponse.getRegistrationCode());
+                        MainActivity.sharedPrefEditor.putBoolean("IsUserLoggedIn", true);
+                        MainActivity.sharedPrefEditor.commit();
+                        new Functions().StartActivityAndFinishCurrent(LoginActivity.this, UserHomeActivity.class);
                     }
 
                     @Override

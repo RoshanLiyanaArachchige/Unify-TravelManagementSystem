@@ -107,7 +107,7 @@ public class MyHotelsActivity extends AppCompatActivity implements View.OnClickL
                     }
                 });
 
-                hotelReference.whereEqualTo("userDetailsCode", UserDetailsCode).get()
+                /*hotelReference.whereEqualTo("userDetailsCode", UserDetailsCode).get()
                         .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                             @Override
                             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
@@ -151,7 +151,7 @@ public class MyHotelsActivity extends AppCompatActivity implements View.OnClickL
                                     }
                                 });
                             }
-                        });
+                        });*/
             }
         }).start();
     }

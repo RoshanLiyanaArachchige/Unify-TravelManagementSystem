@@ -14,9 +14,6 @@ public class NewUserModel {
     private Integer StatusId;
     private NewLoginDetailModel LoginDetail;
 
-    private Integer ApiResponseStatus;
-    private String StatusMessage;
-
     public NewUserModel() {
     }
 
@@ -111,21 +108,5 @@ public class NewUserModel {
 
     public void setLoginDetail(NewLoginDetailModel loginDetail) {
         LoginDetail = loginDetail;
-    }
-
-    public Integer getApiResponseStatus() {
-        return ApiResponseStatus;
-    }
-
-    public void setApiResponseStatus(Integer apiResponseStatus) {
-        ApiResponseStatus = apiResponseStatus;
-    }
-
-    public String getStatusMessage() {
-        return StatusMessage;
-    }
-
-    public void setStatusMessage(String statusMessage) {
-        StatusMessage = statusMessage;
     }
 }

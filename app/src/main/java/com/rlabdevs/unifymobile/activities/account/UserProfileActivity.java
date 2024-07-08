@@ -35,8 +35,8 @@ public class UserProfileActivity extends AppCompatActivity implements View.OnCli
     private LinearLayout linearLytLogoHaveAccount;
     private EditText txtUserDetailsCode, txtFirstName, txtLastName, txtAddress, txtNIC, txtMobilePhone, txtEmail, txtUsername, txtPassword;
     private Button btnUpdateRegister;
-    private TextView tvLogin, tvUserProfileTitle, tvRegisterContinue;
-    private ImageView imgViewIconShowPassword;
+    private TextView tvUserProfileTitle;
+    private TextView tvRegisterContinue;
 
     private Integer userDetailsID;
     private String userDetailsCode;
@@ -70,8 +70,8 @@ public class UserProfileActivity extends AppCompatActivity implements View.OnCli
         txtPassword = findViewById(R.id.txtPassword);
 
         btnUpdateRegister = findViewById(R.id.btnUpdateRegister);
-        tvLogin = findViewById(R.id.tvLogin);
-        imgViewIconShowPassword = findViewById(R.id.imgViewIconShowPassword);
+        TextView tvLogin = findViewById(R.id.tvLogin);
+        ImageView imgViewIconShowPassword = findViewById(R.id.imgViewIconShowPassword);
 
         btnUpdateRegister.setOnClickListener(this);
         tvLogin.setOnClickListener(this);
@@ -90,15 +90,44 @@ public class UserProfileActivity extends AppCompatActivity implements View.OnCli
         btnUpdateRegister.setText("Update");
 
         userDetailsID = MainActivity.sharedPref.getInt("UserDetailsID", 0);
-        txtUserDetailsCode.setText((userDetailsCode = MainActivity.sharedPref.getString("UserDetailsCode", "")) + " (Registration Code)");
-        txtFirstName.setText(MainActivity.sharedPref.getString("FirstName", ""));
-        txtLastName.setText(MainActivity.sharedPref.getString("LastName", ""));
-        txtAddress.setText(MainActivity.sharedPref.getString("Address", ""));
-        txtNIC.setText(MainActivity.sharedPref.getString("NIC", ""));
-        txtMobilePhone.setText(MainActivity.sharedPref.getString("MobileNo", ""));
-        txtEmail.setText(MainActivity.sharedPref.getString("Email", ""));
-        txtUsername.setText(MainActivity.sharedPref.getString("UserName", ""));
-        txtPassword.setText(MainActivity.sharedPref.getString("Password", ""));
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                userProfileActivity.runOnUiThread(new Runnable() {
+                    public void run() {
+                        new Functions().ShowProgressBar(UserProfileActivity.this, "Connecting to server...", "Please wait !");
+                    }
+                });
+
+                Call<NewUserModel> getProfileDetailsRequest = userService.getProfileDetails(MainActivity.sharedPref.getString("AuthToken", ""));
+                getProfileDetailsRequest.enqueue(new Callback<NewUserModel>() {
+                    @Override
+                    public void onResponse(Call<NewUserModel> call, Response<NewUserModel> response) {
+                        NewUserModel apiResponse = response.body();
+
+                        txtUserDetailsCode.setText(apiResponse.getRegistrationCode() + " (Registration Code)");
+                        txtFirstName.setText(apiResponse.getFirstName());
+                        txtLastName.setText(apiResponse.getLastName());
+                        txtAddress.setText(apiResponse.getAddress());
+                        txtNIC.setText(apiResponse.getNIC());
+                        txtMobilePhone.setText(apiResponse.getMobileNo());
+                        txtEmail.setText(apiResponse.getEmail());
+                        txtUsername.setText(apiResponse.getLoginDetail().getUsername());
+                        txtPassword.setText(MainActivity.sharedPref.getString("Password", ""));
+
+                        Functions.HideProgressBar();
+                    }
+
+                    @Override
+                    public void onFailure(Call<NewUserModel> call, Throwable t) {
+                        Functions.HideProgressBar();
+                        Toast.makeText(userProfileActivity, "An error occurred while retrieving profile details.", Toast.LENGTH_SHORT).show();
+                        t.printStackTrace();
+                    }
+                });
+            }
+        }).start();
     }
 
     private void InitRegistration() {
@@ -110,12 +139,8 @@ public class UserProfileActivity extends AppCompatActivity implements View.OnCli
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
                 Functions.HideProgressBar();
-                if(response.isSuccessful()) {
-                    userDetailsCode = response.body();
-                    txtUserDetailsCode.setText(userDetailsCode + " (Registration Code)");
-                } else {
-                    Toast.makeText(userProfileActivity, "An error occurred while getting registration code.", Toast.LENGTH_SHORT).show();
-                }
+                userDetailsCode = response.body();
+                txtUserDetailsCode.setText(userDetailsCode + " (Registration Code)");
             }
 
             @Override
@@ -181,15 +206,10 @@ public class UserProfileActivity extends AppCompatActivity implements View.OnCli
                             @Override
                             public void onResponse(Call<NewUserModel> call, Response<NewUserModel> response) {
                                 NewUserModel apiResponse = response.body();
-                                if(apiResponse.getApiResponseStatus().equals(ApiResponse.Success.getValue())) {
-                                    Functions.HideProgressBar();
-                                    setUserProfileSharedPreferences(username, password, firstName, lastName, address, nic, mobileNo, email);
-                                    new Functions().StartActivityAndFinishCurrent(UserProfileActivity.this, UserHomeActivity.class);
-                                    Toast.makeText(UserProfileActivity.this, "User profile updated successfully.", Toast.LENGTH_SHORT).show();
-                                } else {
-                                    Functions.HideProgressBar();
-                                    Toast.makeText(userProfileActivity, apiResponse.getStatusMessage(), Toast.LENGTH_SHORT).show();
-                                }
+                                Functions.HideProgressBar();
+                                setUserProfileSharedPreferences(username, password, firstName, lastName, address, nic, mobileNo, email);
+                                new Functions().StartActivityAndFinishCurrent(UserProfileActivity.this, UserHomeActivity.class);
+                                Toast.makeText(UserProfileActivity.this, "User profile updated successfully.", Toast.LENGTH_SHORT).show();
                             }
 
                             @Override
@@ -217,16 +237,11 @@ public class UserProfileActivity extends AppCompatActivity implements View.OnCli
                             @Override
                             public void onResponse(Call<NewUserModel> call, Response<NewUserModel> response) {
                                 NewUserModel apiResponse = response.body();
-                                if(apiResponse.getApiResponseStatus().equals(ApiResponse.Success.getValue())) {
-                                    Functions.HideProgressBar();
-                                    userDetailsID = apiResponse.getUserDetailId();
-                                    setUserProfileSharedPreferences(username, password, firstName, lastName, address, nic, mobileNo, email);
-                                    Toast.makeText(UserProfileActivity.this, "Logged in as " + username, Toast.LENGTH_SHORT).show();
-                                    new Functions().StartActivityAndFinishCurrent(UserProfileActivity.this, UserHomeActivity.class);
-                                } else {
-                                    Functions.HideProgressBar();
-                                    Toast.makeText(userProfileActivity, apiResponse.getStatusMessage(), Toast.LENGTH_SHORT).show();
-                                }
+                                Functions.HideProgressBar();
+                                userDetailsID = apiResponse.getUserDetailId();
+                                setUserProfileSharedPreferences(username, password, firstName, lastName, address, nic, mobileNo, email);
+                                Toast.makeText(UserProfileActivity.this, "Logged in as " + username, Toast.LENGTH_SHORT).show();
+                                new Functions().StartActivityAndFinishCurrent(UserProfileActivity.this, UserHomeActivity.class);
                             }
 
                             @Override

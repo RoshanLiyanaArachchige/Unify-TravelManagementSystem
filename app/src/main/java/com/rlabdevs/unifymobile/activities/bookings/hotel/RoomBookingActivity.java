@@ -11,7 +11,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -33,6 +32,8 @@ import com.rlabdevs.unifymobile.models.RoomBookingModel;
 import com.rlabdevs.unifymobile.models.RoomModel;
 import com.rlabdevs.unifymobile.models.SelectorItemModel;
 import com.rlabdevs.unifymobile.models.UserDetailsModel;
+
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -95,12 +96,10 @@ public class RoomBookingActivity extends AppCompatActivity implements View.OnCli
                                             .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                                                 @Override
                                                 public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                                                    if(!queryDocumentSnapshots.isEmpty())
-                                                    {
+                                                    if(!queryDocumentSnapshots.isEmpty()) {
                                                         roomModel = queryDocumentSnapshots.getDocuments().get(0).toObject(RoomModel.class);
                                                     }
-                                                    else
-                                                    {
+                                                    else {
                                                     }
                                                 }
                                             })
@@ -114,8 +113,7 @@ public class RoomBookingActivity extends AppCompatActivity implements View.OnCli
                                                 }
                                             });
                                 }
-                                else
-                                {
+                                else {
                                 }
                             }
                         })

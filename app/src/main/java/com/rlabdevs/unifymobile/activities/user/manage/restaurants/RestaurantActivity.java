@@ -23,8 +23,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -55,10 +53,14 @@ import com.rlabdevs.unifymobile.models.master.NewCurrencyModel;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
 
+import org.checkerframework.checker.nullness.qual.NonNull;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.annotation.Nullable;
 
 public class RestaurantActivity extends AppCompatActivity implements View.OnClickListener {
     private RestaurantActivity restaurantActivity;

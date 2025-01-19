@@ -21,12 +21,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -42,7 +42,9 @@ import com.rlabdevs.unifymobile.common.Regex;
 import com.rlabdevs.unifymobile.common.enums.ApiResponse;
 import com.rlabdevs.unifymobile.common.enums.IndexReference;
 import com.rlabdevs.unifymobile.common.enums.Status;
+import com.rlabdevs.unifymobile.common.enums.StatusCode;
 import com.rlabdevs.unifymobile.models.HotelModel;
+import com.rlabdevs.unifymobile.models.IndexModel;
 import com.rlabdevs.unifymobile.models.SelectorItemModel;
 import com.rlabdevs.unifymobile.models.master.NewCurrencyModel;
 import com.rlabdevs.unifymobile.models.service.NewServiceAmenityModel;
@@ -55,6 +57,8 @@ import com.rlabdevs.unifymobile.services.interfaces.other.IMasterService;
 import com.rlabdevs.unifymobile.services.interfaces.other.ISystemService;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
+
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -88,9 +92,12 @@ public class HotelActivity extends AppCompatActivity implements View.OnClickList
 
     public static Integer currencyId;
     private Integer serviceId, locationId;
-    private String serviceCode, locationCode, locationName;
+    private String serviceCode, locationCode, locationName, hotelCode, currencyCode;
     private Double latitude, longitude;
     private boolean isHotelCoverSelected, isHotelCoverUpdated, isSetupRoomsConfirmationDialogVisible;
+
+    private IndexModel hotelDetailsIndex;
+    private CollectionReference indexReference, hotelsReference;
 
     private ISystemService systemService;
 
@@ -145,7 +152,7 @@ public class HotelActivity extends AppCompatActivity implements View.OnClickList
         storageReference = firebaseStorage.getReference();
         hotelActivity = this;
 
-        if (myHotelModel != null) InitHotel();
+        if (myHotelModel != null) SetupExistingHotelDetails();
         else InitHotelRegistration();
     }
 
@@ -175,7 +182,7 @@ public class HotelActivity extends AppCompatActivity implements View.OnClickList
         });
     }
 
-    private void InitHotel() {
+    private void SetupExistingHotelDetails() {
         btnSaveHotel.setText("Update Hotel");
 
         new Thread(new Runnable() {
@@ -192,7 +199,6 @@ public class HotelActivity extends AppCompatActivity implements View.OnClickList
 
                             @Override
                             public void onBitmapFailed(Drawable errorDrawable) {
-                                //linearLytImageProgress.setVisibility(View.GONE);
                             }
 
                             @Override
@@ -231,8 +237,7 @@ public class HotelActivity extends AppCompatActivity implements View.OnClickList
                 txtCheckIn.setText(myHotelModel.getCheckIn());
                 txtCheckOut.setText(myHotelModel.getCheckOut());
 
-                //currencyCode = myHotelModel.getC;
-                String currencySymbol = UserHomeActivity.currencyList.stream().filter(c -> c.getCurrencyId().equals("Replace 1232")).findFirst().get().getSymbol();
+                String currencySymbol = UserHomeActivity.currencyList.stream().filter(c -> c.getCurrencyId().equals("")).findFirst().get().getSymbol();
                 tvCurrency.setText(currencySymbol);
 
                 hotelActivity.runOnUiThread(new Runnable() {
@@ -382,15 +387,11 @@ public class HotelActivity extends AppCompatActivity implements View.OnClickList
                 }
             }).start();
 
-
-
-
             if (myHotelModel == null) {
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
-
-                        /*myHotelModel = new HotelModel();
+                        myHotelModel = new HotelModel();
                         myHotelModel.setHotelCode(hotelCode);
                         myHotelModel.setHotelName(txtHotelName.getText().toString().trim());
                         myHotelModel.setHotelDescription(txtHotelDescription.getText().toString().trim());
@@ -509,11 +510,11 @@ public class HotelActivity extends AppCompatActivity implements View.OnClickList
                                                     Functions.UpdateProgress("Uploading Cover " + (int) progress + "%");
                                                 }
                                             });
-                        }*/
+                        }
                     }
                 }).start();
             } else {
-                /*new Thread(new Runnable() {
+                new Thread(new Runnable() {
                     @Override
                     public void run() {
                         hotelActivity.runOnUiThread(new Runnable() {
@@ -646,7 +647,7 @@ public class HotelActivity extends AppCompatActivity implements View.OnClickList
                                     });
                         }
                     }
-                }).start();*/
+                }).start();
             }
         }
     }
@@ -835,14 +836,14 @@ public class HotelActivity extends AppCompatActivity implements View.OnClickList
 
     private void ManageHotelRooms() {
         Intent hotelRoomsIntent = new Intent(HotelActivity.this, HotelRoomsActivity.class);
-        //hotelRoomsIntent.putExtra("HotelID", myHotelModel.getID());
+        hotelRoomsIntent.putExtra("HotelID", myHotelModel.getID());
         hotelRoomsIntent.putExtra("Hotel", new Gson().toJson(myHotelModel));
-        //finish();
+        finish();
         startActivity(hotelRoomsIntent);
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == Constants.HOTEL_COVER_IMAGE_PICK_REQUEST && resultCode == RESULT_OK) {

@@ -21,8 +21,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -48,6 +46,8 @@ import com.rlabdevs.unifymobile.models.SelectorItemModel;
 import com.rlabdevs.unifymobile.models.master.NewCurrencyModel;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
+
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -233,7 +233,7 @@ public class RoomActivity extends AppCompatActivity implements View.OnClickListe
                         })
                         .addOnFailureListener(new OnFailureListener() {
                             @Override
-                            public void onFailure(@NonNull Exception e) {
+                            public void onFailure(Exception e) {
                                 roomActivity.runOnUiThread(new Runnable() {
                                     public void run() {
                                         Functions.HideProgressBar();
@@ -354,7 +354,7 @@ public class RoomActivity extends AppCompatActivity implements View.OnClickListe
     private void ManageRoomTypes() {
         Intent roomTypesIntent = new Intent(RoomActivity.this, RoomTypesActivity.class);
         roomTypesIntent.putExtra("HotelCode", hotelModel.getHotelCode());
-        //finish();
+        finish();
         startActivity(roomTypesIntent);
     }
 
@@ -406,8 +406,7 @@ public class RoomActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void SaveRoom() {
-        if(ValidateRoom())
-        {
+        if(ValidateRoom()) {
             if (roomModel == null) {
                 new Thread(new Runnable() {
                     @Override
@@ -702,7 +701,7 @@ public class RoomActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == ROOM_COVER_IMAGE_PICK_REQUEST && resultCode == RESULT_OK) {
             if (data.getData() != null) {

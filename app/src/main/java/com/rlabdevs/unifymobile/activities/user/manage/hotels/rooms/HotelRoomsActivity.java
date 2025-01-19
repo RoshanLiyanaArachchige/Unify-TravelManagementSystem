@@ -2,7 +2,6 @@ package com.rlabdevs.unifymobile.activities.user.manage.hotels.rooms;
 
 import static com.rlabdevs.unifymobile.activities.MainActivity.firestoreDB;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -144,7 +143,7 @@ public class HotelRoomsActivity extends AppCompatActivity implements View.OnClic
                                             })
                                             .addOnFailureListener(new OnFailureListener() {
                                                 @Override
-                                                public void onFailure(@NonNull Exception e) {
+                                                public void onFailure(Exception e) {
                                                     spinKitProgress.setVisibility(View.GONE);
                                                     Functions.HideProgressBar();
                                                     new Functions().ShowErrorDialog("Rooms Load Failure !", "Try Again", HotelRoomsActivity.this);
@@ -164,7 +163,7 @@ public class HotelRoomsActivity extends AppCompatActivity implements View.OnClic
                         })
                         .addOnFailureListener(new OnFailureListener() {
                             @Override
-                            public void onFailure(@NonNull Exception e) {
+                            public void onFailure(Exception e) {
                                 hotelRoomsActivity.runOnUiThread(new Runnable() {
                                     public void run() {
                                         Functions.HideProgressBar();

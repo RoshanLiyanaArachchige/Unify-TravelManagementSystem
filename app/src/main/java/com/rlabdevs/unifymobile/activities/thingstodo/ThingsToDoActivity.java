@@ -1,6 +1,5 @@
 package com.rlabdevs.unifymobile.activities.thingstodo;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -27,6 +26,8 @@ import com.rlabdevs.unifymobile.common.enums.ApiResponse;
 import com.rlabdevs.unifymobile.models.master.NewThingsToDoFilterModel;
 import com.rlabdevs.unifymobile.services.RetrofitClient;
 import com.rlabdevs.unifymobile.services.interfaces.other.IMasterService;
+
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 import retrofit2.Call;
 import retrofit2.Callback;

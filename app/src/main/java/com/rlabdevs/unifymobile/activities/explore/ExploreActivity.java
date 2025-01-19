@@ -2,7 +2,6 @@ package com.rlabdevs.unifymobile.activities.explore;
 
 import static com.rlabdevs.unifymobile.activities.MainActivity.firestoreDB;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -49,6 +48,8 @@ import com.rlabdevs.unifymobile.common.Constants;
 import com.rlabdevs.unifymobile.common.Functions;
 import com.rlabdevs.unifymobile.models.HotelModel;
 import com.rlabdevs.unifymobile.models.RestaurantModel;
+
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -158,8 +159,6 @@ public class ExploreActivity extends AppCompatActivity implements OnMapReadyCall
         }).start();
     }
 
-
-
     private void initFeaturedRestaurants() {
         if (!isViewsInitialized) {
             relativeLayoutRestaurants = findViewById(R.id.relativeLayoutRestaurants);
@@ -214,7 +213,7 @@ public class ExploreActivity extends AppCompatActivity implements OnMapReadyCall
                         })
                         .addOnFailureListener(new OnFailureListener() {
                             @Override
-                            public void onFailure(@NonNull Exception e) {
+                            public void onFailure(Exception e) {
                                 runOnUiThread(new Runnable() {
                                     public void run() {
                                         spinKitProgressRestaurants.setVisibility(View.GONE);
